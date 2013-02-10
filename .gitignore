@@ -5,9 +5,6 @@
 # files for the dex VM
 *.dex
 
-# Java class files
-*.class
-
 # generated files
 bin/
 gen/
@@ -18,3 +15,8 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+
+# IntlliJ Files
+.idea
+.iml
+idea/
