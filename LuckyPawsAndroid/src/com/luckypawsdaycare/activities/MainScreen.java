@@ -6,9 +6,16 @@ package com.luckypawsdaycare.activities;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class MainScreen extends Activity {
+    Button webCamButton;
+    Button reservationsButton;
+    Button settingsButton;
+
     /**
      * Called when the activity is first created.
      */
@@ -17,4 +24,41 @@ public class MainScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
     }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onResume() {
+        findButtonsAddListeners();
+    }
+
+    private void findButtonsAddListeners() {
+        webCamButton = (Button)findViewById(R.id.web_cam_button);
+        reservationsButton = (Button)findViewById(R.id.reservations_button);
+        settingsButton = (Button)findViewById(R.id.settings_button);
+    }
+
+    protected final Button.OnClickListener launchWebCam = new Button.OnClickListener(){
+        public void onClick(View view){
+            Intent intent = new Intent(MainScreen.this, WebCamViewScreen.class);
+            startActivity(intent);
+        }
+    };
+
+    protected final Button.OnClickListener launchResercations = new Button.OnClickListener(){
+        public void onClick(View view){
+            Intent intent = new Intent(MainScreen.this, ReservationsScreen.class);
+            startActivity(intent);
+        }
+    };
+
+    protected final Button.OnClickListener launchSettings = new Button.OnClickListener(){
+        public void onClick(View view){
+            Intent intent = new Intent(MainScreen.this, SettingsScreen.class);
+            startActivity(intent);
+        }
+    };
 }

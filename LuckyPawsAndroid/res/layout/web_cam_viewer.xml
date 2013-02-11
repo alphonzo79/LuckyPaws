@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/layout_root"
+	>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		>
+
+		<include layout="@layout/standard_header_no_action"/>
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:gravity="center"
+			>
+
+			<ImageView
+				android:id="@+id/web_cam_pic"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:src="@drawable/webcam_off"
+				android:background="@drawable/image_border"
+				android:layout_margin="@dimen/scalable_10_pix"
+				android:scaleType="fitCenter"
+				android:adjustViewBounds="true"
+				/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</FrameLayout>

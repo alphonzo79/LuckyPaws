@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/layout_root"
+	>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		>
+
+		<include layout="@layout/standard_header_no_action"/>
+
+		<TextView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/nothing_here"
+			android:textColor="@color/black"
+			android:gravity="center"
+			android:layout_margin="@dimen/scalable_10_pix"
+			/>
+
+	</LinearLayout>
+
+</FrameLayout>
