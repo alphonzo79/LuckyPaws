@@ -13,7 +13,7 @@
 	<style name="homescreen_button">
 		<item name="android:layout_width">@dimen/no_scale_0_pix</item>
 		<item name="android:layout_height">wrap_content</item>
-		<item name="layout_weight">45</item>
-		<item name="layout_margin">@dimen/scalable_10_pix</item>
+		<item name="android:layout_weight">45</item>
+		<item name="android:layout_margin">@dimen/scalable_10_pix</item>
 	</style>
 </resources>

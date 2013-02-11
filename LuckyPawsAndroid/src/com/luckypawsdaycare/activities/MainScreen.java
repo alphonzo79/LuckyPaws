@@ -27,11 +27,12 @@ public class MainScreen extends Activity {
 
     @Override
     public void onPause() {
-
+        super.onPause();
     }
 
     @Override
     public void onResume() {
+        super.onResume();
         findButtonsAddListeners();
     }
 
@@ -39,6 +40,10 @@ public class MainScreen extends Activity {
         webCamButton = (Button)findViewById(R.id.web_cam_button);
         reservationsButton = (Button)findViewById(R.id.reservations_button);
         settingsButton = (Button)findViewById(R.id.settings_button);
+
+        webCamButton.setOnClickListener(launchWebCam);
+        reservationsButton.setOnClickListener(launchReservations);
+        settingsButton.setOnClickListener(launchSettings);
     }
 
     protected final Button.OnClickListener launchWebCam = new Button.OnClickListener(){
@@ -48,7 +53,7 @@ public class MainScreen extends Activity {
         }
     };
 
-    protected final Button.OnClickListener launchResercations = new Button.OnClickListener(){
+    protected final Button.OnClickListener launchReservations = new Button.OnClickListener(){
         public void onClick(View view){
             Intent intent = new Intent(MainScreen.this, ReservationsScreen.class);
             startActivity(intent);
