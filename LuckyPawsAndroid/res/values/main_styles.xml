@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<resources>
+	<style name="layout_root">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:background">@drawable/main_back_gradient</item>
+	</style>
+
+	<style name="homescreen_button">
+		<item name="android:layout_width">@dimen/no_scale_0_pix</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="layout_weight">45</item>
+		<item name="layout_margin">@dimen/scalable_10_pix</item>
+	</style>
+</resources>
