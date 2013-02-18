@@ -11,9 +11,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.util.ByteArrayBuffer;
 
 import java.io.BufferedInputStream;
@@ -23,8 +30,16 @@ import java.io.InputStream;
 public class WebCamAsync implements Runnable{
     private Handler updateHandler;
     private volatile Boolean keepGoing;
+
     DefaultHttpClient connection;
+    HttpHost httpHost;
+    BasicHttpContext executionContext;
+
     private volatile Bitmap image;
+
+    private final String host = "luckypaws.lorexddns.net";
+    private final String username = "luckypaws";
+    private final String password = "1234";
     private final String imageUrl = "http://luckypaws.lorexddns.net/jpg/image.jpg";
 
     private final String TAG = "WebCamAsync";
@@ -48,6 +63,19 @@ public class WebCamAsync implements Runnable{
 
     public void startThread(DefaultHttpClient connection) {
         this.connection = connection;
+        httpHost = new HttpHost(host, 80, "http");
+        connection.getCredentialsProvider().setCredentials(new AuthScope(host, 80), new UsernamePasswordCredentials(username, password));
+
+        //Create the authCache instance
+        AuthCache authCache = new BasicAuthCache();
+        //Generate the BasicScheme instance and add it to the authcache
+        BasicScheme basicAuth = new BasicScheme();
+        authCache.put(httpHost, basicAuth);
+
+        //Add the auth cache to the execution context
+        executionContext = new BasicHttpContext();
+        executionContext.setAttribute("http.auth.auth-cache", authCache);
+
         new Thread(this).start();
     }
 
@@ -63,7 +91,7 @@ public class WebCamAsync implements Runnable{
         HttpGet request = new HttpGet(imageUrl);
         while(isKeepGoing()) {
             try {
-                HttpResponse response = connection.execute(request);
+                HttpResponse response = connection.execute(httpHost, request, executionContext);
                 HttpEntity entity = response.getEntity();
 
                 InputStream is = entity.getContent();
