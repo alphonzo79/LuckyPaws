@@ -44,9 +44,10 @@ public class WebCamAsync implements Runnable{
 
     private final String TAG = "WebCamAsync";
 
-    public WebCamAsync(Handler updateHandler) {
+    public WebCamAsync(Handler updateHandler, Bitmap defaultImage) {
         this.updateHandler = updateHandler;
         keepGoing = false;
+        image = defaultImage;
     }
 
     public void setKeepGoing(boolean keepOnGoin) {
