@@ -13,6 +13,9 @@ import com.luckypawsdaycare.activities.R;
 import com.luckypawsdaycare.activities.WebCamViewScreen;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class WebCamStreamer {
     private final String TAG = "WebCamStreamer";
 
@@ -35,7 +38,9 @@ public class WebCamStreamer {
             asyncTask.setKeepGoing(true);
             asyncRunning = true;
             asyncTask.startThread(client);
-        } // otherwise do nothing. Keep the default image up.
+        } else {
+            caller.setDefaultImage();
+        }
     }
 
     public void pauseStream() {
@@ -69,8 +74,70 @@ public class WebCamStreamer {
     };
 
     public boolean checkWorkingHours() {
-        //todo
-        return true;
+        boolean webCamOn = false;
+        //Webcam is available from 7:30 a.m. to 6:30 p.m. M-F and 10 a.m to 4:30 p.m. on weekends
+        //Get current local time
+        TimeZone myTimeZone = TimeZone.getDefault();
+        TimeZone lpTimeZone = TimeZone.getTimeZone("US/Eastern");
+        long currentTime = System.currentTimeMillis();
+        int myOffset = myTimeZone.getOffset(currentTime);
+        int lpOffset = lpTimeZone.getOffset(currentTime);
+
+        //convert time to Eastern
+        int diff = lpOffset - myOffset;
+        //If we are west of LP, we will get a negative value here. To convert the time we will need to subtract
+        //the offset diff from current time (subtract the negative diff will add x hours to the time)
+        long lpCurrentTime = currentTime - diff;
+
+        //get the day
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(lpCurrentTime);
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+
+        //Compare the time to the appropriate constraint
+        switch(day) {
+            case Calendar.MONDAY:
+            case Calendar.TUESDAY:
+            case Calendar.WEDNESDAY:
+            case Calendar.THURSDAY:
+            case Calendar.FRIDAY:
+                //simplest case
+                if(hour > WebCamOperatingHours.WEEKDAY_START.getHour() && hour < WebCamOperatingHours.WEEKDAY_END.getHour()) {
+                    webCamOn = true;
+                } else if(hour == WebCamOperatingHours.WEEKDAY_START.getHour()) {
+                    //If we are in the starting hour, make sure we meet the minimum minutes
+                    if(minute >= WebCamOperatingHours.WEEKDAY_START.getMinute()) {
+                        webCamOn = true;
+                    }
+                } else if(hour == WebCamOperatingHours.WEEKDAY_END.getHour()) {
+                    //if we are in the ending hour, make sure we do not exceed the maximum minutes
+                    if(minute <= WebCamOperatingHours.WEEKDAY_END.getMinute()) {
+                        webCamOn = true;
+                    }
+                }
+                break;
+            case Calendar.SATURDAY:
+            case Calendar.SUNDAY:
+            default:
+                //simplest case
+                if(hour > WebCamOperatingHours.WEEKEND_START.getHour() && hour < WebCamOperatingHours.WEEKEND_END.getHour()) {
+                    webCamOn = true;
+                } else if(hour == WebCamOperatingHours.WEEKEND_START.getHour()) {
+                    //If we are in the starting hour, make sure we meet the minimum minutes
+                    if(minute >= WebCamOperatingHours.WEEKEND_START.getMinute()) {
+                        webCamOn = true;
+                    }
+                } else if(hour == WebCamOperatingHours.WEEKEND_END.getHour()) {
+                    //if we are in the ending hour, make sure we do not exceed the maximum minutes
+                    if(minute <= WebCamOperatingHours.WEEKEND_END.getMinute()) {
+                        webCamOn = true;
+                    }
+                }
+                break;
+        }
+        return webCamOn;
     }
 
     public boolean isAsyncRunning() {
