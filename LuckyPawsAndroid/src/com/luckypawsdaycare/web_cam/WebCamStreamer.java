@@ -77,17 +77,8 @@ public class WebCamStreamer {
         boolean webCamOn = false;
         //Webcam is available from 7:30 a.m. to 6:30 p.m. M-F and 10 a.m to 4:30 p.m. on weekends
         //Get current local time
-        TimeZone myTimeZone = TimeZone.getDefault();
-        TimeZone lpTimeZone = TimeZone.getTimeZone("US/Eastern");
         long currentTime = System.currentTimeMillis();
-        int myOffset = myTimeZone.getOffset(currentTime);
-        int lpOffset = lpTimeZone.getOffset(currentTime);
-
-        //convert time to Eastern
-        int diff = lpOffset - myOffset;
-        //If we are west of LP, we will get a negative value here. To convert the time we will need to subtract
-        //the offset diff from current time (subtract the negative diff will add x hours to the time)
-        long lpCurrentTime = currentTime - diff;
+        long lpCurrentTime = convertToEasternTime(currentTime);
 
         //get the day
         Calendar cal = Calendar.getInstance();
@@ -138,6 +129,18 @@ public class WebCamStreamer {
                 break;
         }
         return webCamOn;
+    }
+
+    public long convertToEasternTime(long localTimeInMillis) {
+        TimeZone myTimeZone = TimeZone.getDefault();
+        TimeZone lpTimeZone = TimeZone.getTimeZone("US/Eastern");
+        int myOffset = myTimeZone.getOffset(localTimeInMillis);
+        int lpOffset = lpTimeZone.getOffset(localTimeInMillis);
+        //convert time to Eastern
+        int diff = lpOffset - myOffset;
+        //If we are west of LP, we will get a ositive value here. To convert the time we will need to add
+        //the offset diff from current time
+        return localTimeInMillis + diff;
     }
 
     public boolean isAsyncRunning() {
