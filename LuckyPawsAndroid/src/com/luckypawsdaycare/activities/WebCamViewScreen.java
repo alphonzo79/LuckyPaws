@@ -25,6 +25,14 @@ public class WebCamViewScreen extends Activity {
     public void onPause() {
         super.onPause();
         streamer.pauseStream();
+        //Wait for the async to close gracefully
+        while(streamer.isAsyncRunning()) {
+            try{
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                //Do nothing
+            }
+        }
     }
 
     @Override

@@ -42,6 +42,14 @@ public class WebCamStreamer {
         Log.d(TAG, "pauseStream called");
         if(asyncRunning) {
             asyncTask.setKeepGoing(false);
+            //Wait for the async to stop gracefully
+            while(asyncTask.isRunning()) {
+                try{
+                    Thread.sleep(100);
+                } catch(InterruptedException e) {
+                    //Do nothing, try again
+                }
+            }
             client.getConnectionManager().shutdown();
             client = null;
             asyncRunning = false;
@@ -63,5 +71,9 @@ public class WebCamStreamer {
     public boolean checkWorkingHours() {
         //todo
         return true;
+    }
+
+    public boolean isAsyncRunning() {
+        return asyncRunning;
     }
 }

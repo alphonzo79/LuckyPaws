@@ -30,6 +30,7 @@ import java.io.InputStream;
 public class WebCamAsync implements Runnable{
     private Handler updateHandler;
     private volatile Boolean keepGoing;
+    private volatile Boolean running;
 
     DefaultHttpClient connection;
     HttpHost httpHost;
@@ -48,6 +49,7 @@ public class WebCamAsync implements Runnable{
         this.updateHandler = updateHandler;
         keepGoing = false;
         image = defaultImage;
+        running = false;
     }
 
     public void setKeepGoing(boolean keepOnGoin) {
@@ -56,7 +58,7 @@ public class WebCamAsync implements Runnable{
        }
     }
 
-    private boolean isKeepGoing() {
+    public boolean isKeepGoing() {
         synchronized (keepGoing) {
             return keepGoing;
         }
@@ -86,10 +88,23 @@ public class WebCamAsync implements Runnable{
         }
     }
 
+    private void setRunning(boolean isRunning) {
+        synchronized (running) {
+            running = isRunning;
+        }
+    }
+
+    public boolean isRunning() {
+        synchronized (running) {
+            return running;
+        }
+    }
+
     @Override
     public void run() {
         Log.d(TAG, "Starting the runnable");
         HttpGet request = new HttpGet(imageUrl);
+        setRunning(true);
         while(isKeepGoing()) {
             try {
                 HttpResponse response = connection.execute(httpHost, request, executionContext);
@@ -110,6 +125,9 @@ public class WebCamAsync implements Runnable{
                 synchronized (image) {
                     image = BitmapFactory.decodeByteArray(data, 0, data.length);
                 }
+
+                bis.close();
+                is.close();
 
                 Log.d(TAG, "Built the bitmap, sending the update message");
 
@@ -135,5 +153,6 @@ public class WebCamAsync implements Runnable{
                 //Do Nothing
             }
         }
+        setRunning(false);
     }
 }
