@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<resources><!-- This file contains the creation string for each database. One resource for each database.  -->
+	<string name="create_settings_table">
+		CREATE TABLE IF NOT EXISTS settings (settingName TEXT PRIMARY KEY, settingValue TEXT, visible INTEGER);
+	</string>
+	<string name="create_personal_info_table">
+		CREATE TABLE IF NOT EXISTS personalInfo (_id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip TEXT, phone TEXT, eMail TEXT);
+	</string>
+</resources>
