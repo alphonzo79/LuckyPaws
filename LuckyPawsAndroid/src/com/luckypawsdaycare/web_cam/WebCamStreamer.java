@@ -26,7 +26,7 @@ public class WebCamStreamer {
 
     public WebCamStreamer(WebCamViewScreen callingActivity) {
         caller = callingActivity;
-        Bitmap defaultImage = BitmapFactory.decodeResource(callingActivity.getResources(), R.drawable.webcam_off);
+        Bitmap defaultImage = BitmapFactory.decodeResource(callingActivity.getResources(), R.drawable.webcam_loading);
         asyncTask = new WebCamAsync(updateImage, defaultImage);
     }
 
