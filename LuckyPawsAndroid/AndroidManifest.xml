@@ -6,7 +6,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.luckypawsdaycare.activities"
+    package="com.luckypawsdaycare"
     android:installLocation="preferExternal"
     android:versionCode="1"
     android:versionName="1.0">
@@ -18,7 +18,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application android:label="@string/app_name">
-        <activity android:name="MainScreen"
+        <activity android:name=".activities.MainScreen"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             >
@@ -28,7 +28,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             </intent-filter>
         </activity>
 
-		<activity android:name=".WebCamViewScreen"
+		<activity android:name=".activities.WebCamViewScreen"
 			android:label="@string/app_name"
 			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:configChanges="orientation"
@@ -41,7 +41,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".ReservationsScreen"
+		<activity android:name=".activities.ReservationsScreen"
 			android:label="@string/app_name"
 			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:configChanges="orientation"
@@ -54,7 +54,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".SettingsScreen"
+		<activity android:name=".activities.SettingsScreen"
 			android:label="@string/app_name"
 			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:configChanges="orientation"

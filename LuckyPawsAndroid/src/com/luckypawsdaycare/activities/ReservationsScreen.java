@@ -6,6 +6,7 @@ package com.luckypawsdaycare.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.luckypawsdaycare.R;
 
 public class ReservationsScreen extends Activity {
     @Override

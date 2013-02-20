@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
+import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.web_cam.WebCamStreamer;
 
 public class WebCamViewScreen extends Activity {
