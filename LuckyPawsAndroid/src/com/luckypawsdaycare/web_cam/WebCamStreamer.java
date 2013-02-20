@@ -9,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import com.luckypawsdaycare.activities.R;
+import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.activities.WebCamViewScreen;
 import org.apache.http.impl.client.DefaultHttpClient;
 
