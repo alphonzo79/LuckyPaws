@@ -20,7 +20,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         android:textColor="@color/white"
         android:gravity="center_horizontal"
         android:layout_margin="@dimen/no_scale_5_pix"
-        android:textSize="@dimen/text_14"
+        android:textSize="@dimen/text_18"
         />
 
 </LinearLayout>
