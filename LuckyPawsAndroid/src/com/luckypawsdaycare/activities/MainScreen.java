@@ -12,10 +12,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import com.luckypawsdaycare.R;
 
 public class MainScreen extends Activity {
@@ -46,6 +46,7 @@ public class MainScreen extends Activity {
     public void onResume() {
         super.onResume();
         findButtonsAddListeners();
+        setButtonSizes();
     }
 
     private void findButtonsAddListeners() {
@@ -72,7 +73,7 @@ public class MainScreen extends Activity {
         Log.i(TAG, "Button Size is " + size);
         Button[] buttons = new Button[]{webCamButton, reservationsButton, settingsButton};
         for(Button button : buttons) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)button.getLayoutParams();
+            ViewGroup.LayoutParams params = (ViewGroup.LayoutParams)button.getLayoutParams();
             params.height = size;
             params.width = size;
             button.setLayoutParams(params);
