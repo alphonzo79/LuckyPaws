@@ -6,8 +6,8 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:state_pressed="true"
-		  android:drawable="@drawable/home_button_prefs_down" /> <!-- pressed -->
+		  android:drawable="@drawable/home_button_prefs_wide_down" /> <!-- pressed -->
 	<item android:state_focused="true"
-		  android:drawable="@drawable/home_button_prefs_up" /> <!-- focused -->
-	<item android:drawable="@drawable/home_button_prefs_up" /> <!-- default -->
+		  android:drawable="@drawable/home_button_prefs_wide_up" /> <!-- focused -->
+	<item android:drawable="@drawable/home_button_prefs_wide_up" /> <!-- default -->
 </selector>

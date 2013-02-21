@@ -6,12 +6,12 @@ package com.luckypawsdaycare.web_cam;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.http.AndroidHttpClient;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.activities.WebCamViewScreen;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -21,7 +21,8 @@ public class WebCamStreamer {
 
     private WebCamViewScreen caller;
     private WebCamAsync asyncTask;
-    DefaultHttpClient client;
+    AndroidHttpClient client;
+    String userAgent;
     boolean asyncRunning;
 
     public WebCamStreamer(WebCamViewScreen callingActivity) {
@@ -33,7 +34,8 @@ public class WebCamStreamer {
     public void beginStream() {
         Log.d(TAG, "Begin Stream called");
         if(checkWorkingHours()) {
-            client = new DefaultHttpClient();
+            userAgent = System.getProperty( "http.agent" );
+            client = AndroidHttpClient.newInstance(userAgent);
 
             asyncTask.setKeepGoing(true);
             asyncRunning = true;

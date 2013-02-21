@@ -5,12 +5,17 @@
 
 <resources>
 	<dimen name="no_scale_0_pix">0dp</dimen>
+	<dimen name="no_scale_1_pix">1dp</dimen>
     <dimen name="no_scale_3_pix">3dp</dimen>
     <dimen name="no_scale_5_pix">5dp</dimen>
+	<dimen name="no_scale_125_pix">125dp</dimen>
+	<dimen name="no_scale_150_pix">150dp</dimen>
 
 	<dimen name="scalable_5_pix">5dp</dimen>
 	<dimen name="scalable_10_pix">10dp</dimen>
+	<dimen name="scalable_15_pix">15dp</dimen>
 	<dimen name="scalable_25_pix">25dp</dimen>
+	<dimen name="scalable_125_pix">125dp</dimen>
 
     <dimen name="text_14">14sp</dimen>
 	<dimen name="text_18">18sp</dimen>

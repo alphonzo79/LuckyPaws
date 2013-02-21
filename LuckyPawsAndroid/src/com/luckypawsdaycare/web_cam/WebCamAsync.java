@@ -6,20 +6,16 @@ package com.luckypawsdaycare.web_cam;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.http.AndroidHttpClient;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Base64;
 import android.util.Log;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.AuthCache;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.util.ByteArrayBuffer;
 
@@ -32,7 +28,7 @@ public class WebCamAsync implements Runnable{
     private volatile Boolean keepGoing;
     private volatile Boolean running;
 
-    DefaultHttpClient connection;
+    AndroidHttpClient connection;
     HttpHost httpHost;
     BasicHttpContext executionContext;
 
@@ -64,20 +60,9 @@ public class WebCamAsync implements Runnable{
         }
     }
 
-    public void startThread(DefaultHttpClient connection) {
+    public void startThread(AndroidHttpClient connection) {
         this.connection = connection;
         httpHost = new HttpHost(host, 80, "http");
-        connection.getCredentialsProvider().setCredentials(new AuthScope(host, 80), new UsernamePasswordCredentials(username, password));
-
-        //Create the authCache instance
-        AuthCache authCache = new BasicAuthCache();
-        //Generate the BasicScheme instance and add it to the authcache
-        BasicScheme basicAuth = new BasicScheme();
-        authCache.put(httpHost, basicAuth);
-
-        //Add the auth cache to the execution context
-        executionContext = new BasicHttpContext();
-        executionContext.setAttribute("http.auth.auth-cache", authCache);
 
         new Thread(this).start();
     }
@@ -104,6 +89,7 @@ public class WebCamAsync implements Runnable{
     public void run() {
         Log.d(TAG, "Starting the runnable");
         HttpGet request = new HttpGet(imageUrl);
+        request.addHeader("Authorization", "Basic " + Base64.encodeToString((username+":"+password).getBytes(),Base64.NO_WRAP));
         setRunning(true);
         while(isKeepGoing()) {
             try {
@@ -123,6 +109,7 @@ public class WebCamAsync implements Runnable{
                 byte[] data = buf.toByteArray();
 
                 synchronized (image) {
+                    image.recycle();
                     image = BitmapFactory.decodeByteArray(data, 0, data.length);
                 }
 
