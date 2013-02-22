@@ -60,22 +60,26 @@ public class MainScreen extends Activity {
     }
 
     //Set the buttons to be square based upon slightly less than 1/3 of the longest dimension of the screen
+    //The buttons should be 1.5X wider than they are tall
     private void setButtonSizes() {
         Display display = ((WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         int windowHeight = display.getHeight();
         int windowWidth = display.getWidth();
-        int size = 0;
+        int height = 0;
+        int width = 0;
         if(windowHeight > windowWidth) {
-            size = (int) ((windowHeight / 3) * 0.85);
+            height = (int) ((windowHeight / 3) * 0.72);
+            width = (int) (height * 1.5);
         } else {
-            size = (int) ((windowWidth / 3) * 0.85);
+            width = (int) ((windowWidth / 3) * 0.95);
+            height = (int) (width / 1.5);
         }
-        Log.i(TAG, "Button Size is " + size);
+        Log.i(TAG, String.format("Button Size is %d by %d", width, height));
         Button[] buttons = new Button[]{webCamButton, reservationsButton, settingsButton};
         for(Button button : buttons) {
             ViewGroup.LayoutParams params = (ViewGroup.LayoutParams)button.getLayoutParams();
-            params.height = size;
-            params.width = size;
+            params.height = height;
+            params.width = width;
             button.setLayoutParams(params);
         }
     }
