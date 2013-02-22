@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<resources>
+	<dimen name="scalable_5_pix">6dp</dimen>
+	<dimen name="scalable_10_pix">12dp</dimen>
+	<dimen name="scalable_15_pix">17dp</dimen>
+	<dimen name="scalable_25_pix">29dp</dimen>
+	<dimen name="scalable_125_pix">175dp</dimen>
+
+	<dimen name="text_14">18sp</dimen>
+	<dimen name="text_18">22sp</dimen>
+</resources>
