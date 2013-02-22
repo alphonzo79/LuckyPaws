@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<resources>
+	<string name="settings_default_values">"Keep Webcam Screen On;Yes;1
+Personal Information;NULL;1
+Manage My Pets;NULL;1
+Enrollment Forms;NULL;1
+Information/About;NULL;1
+Contact Lucky Paws;NULL;1
+Star Chart Location;NULL;0"</string>
+</resources>

@@ -8,6 +8,27 @@
 		CREATE TABLE IF NOT EXISTS settings (settingName TEXT PRIMARY KEY, settingValue TEXT, visible INTEGER);
 	</string>
 	<string name="create_personal_info_table">
-		CREATE TABLE IF NOT EXISTS personalInfo (_id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip TEXT, phone TEXT, eMail TEXT);
+		CREATE TABLE IF NOT EXISTS personalInfo (_id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip TEXT, referral TEXT, agreed INTEGER, signed TEXT);
+	</string>
+	<string name="create_emergency_contact_table">
+		CREATE TABLE IF NOT EXISTS emergencyContacts (_id INTEGER PRIMARY KEY AUTOINCREMENT, fullName TEXT, relation TEXT, phone1 TEXT, phone2 TEXT);
+	</string>
+	<string name="create_vet_info_table">
+		CREATE TABLE IF NOT EXISTS vetInfo (_id INTEGER PRIMARY KEY AUTOINCREMENT, vetClinic TEXT, phone TEXT);
+	</string>
+	<string name="create_authorized_for_pickup_table">
+		CREATE TABLE IF NOT EXISTS canPickUp (_id INTEGER PRIMARY KEY AUTOINCREMENT, fullName TEXT);
+	</string>
+	<string name="create_pets_table">
+		CREATE TABLE IF NOT EXISTS pets (_id INTEGER PRIMARY KEY AUTOINCREMENT, petName TEXT, dogCat INTEGER, dateOfBirth TEXT, sex INTEGER, size INTEGER, breed TEXT, color TEXT, fixed INTEGER);
+	</string>
+	<string name="create_dogs_table">
+		CREATE TABLE IF NOT EXISTS dogs (_id INTEGER PRIMARY KEY AUTOINCREMENT, petsId INTEGER, currentVaccs INTEGER, foodAmount TEXT, foodAggression INTEGER, socialized INTEGER, howSocDogs TEXT, howSocHumans TEXT, willDoWell TEXT, healthIssues INTEGER, haveCot INTEGER, comments TEXT, agree INTEGER, signature TEXT, signedDate TEXT, phone TEXT);
+	</string>
+	<string name="create_cats_table">
+		CREATE TABLE IF NOT EXISTS cats (_id INTEGER PRIMARY KEY AUTOINCREMENT, petsId INTEGER, fvrcpGiven TEXT, fvrcpExpires TEXT, leukemiaGiven TEXT, leukemiaExpires TEXT, rabiesGiven TEXT, rabiesExpires TEXT, rabiesTagNum INTEGER, foodAmount TEXT, foodMorn INTEGER, foodEve INTEGER, ourFoodOk INTEGER, addIncentive INTEGER, allowMingle INTEGER, comments TEXT, agree INTEGER, signature TEXT, signedDate TEXT);
+	</string>
+	<string name="create_meds_table">
+		CREATE TABLE IF NOT EXISTS meds (_id INTEGER PRIMARY KEY AUTOINCREMENT, petsId INTEGER, medName TEXT, dose TEXT, frequency INTEGER, withFood INTEGER, notes TEXT, vetOptOut INTEGER, agree INTEGER, signature TEXT, signedDate TEXT);
 	</string>
 </resources>
