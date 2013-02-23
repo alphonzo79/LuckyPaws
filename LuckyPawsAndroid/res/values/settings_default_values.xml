@@ -4,7 +4,7 @@
   -->
 
 <resources>
-	<string name="settings_default_values">"Keep Webcam Screen On;Yes;1
+	<string name="settings_default_values">"Keep Webcam Screen On;No;1
 Personal Information;NULL;1
 Manage My Pets;NULL;0
 Enrollment Forms;NULL;0

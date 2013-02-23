@@ -135,7 +135,7 @@ public class WebCamAsync implements Runnable{
             }
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(750);
             } catch (InterruptedException e) {
                 //Do Nothing
             }
