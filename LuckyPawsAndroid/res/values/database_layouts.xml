@@ -8,7 +8,7 @@
 		CREATE TABLE IF NOT EXISTS settings (settingName TEXT PRIMARY KEY, settingValue TEXT, visible INTEGER);
 	</string>
 	<string name="create_personal_info_table">
-		CREATE TABLE IF NOT EXISTS personalInfo (_id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip TEXT, referral TEXT, agreed INTEGER, signed TEXT);
+		CREATE TABLE IF NOT EXISTS personalInfo (_id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip INTEGER, referral TEXT, agreed INTEGER, signed TEXT);
 	</string>
 	<string name="create_emergency_contact_table">
 		CREATE TABLE IF NOT EXISTS emergencyContacts (_id INTEGER PRIMARY KEY AUTOINCREMENT, fullName TEXT, relation TEXT, phone1 TEXT, phone2 TEXT);
