@@ -34,6 +34,7 @@ public class WebCamViewScreen extends Activity {
     @Override
     public void onPause() {
         super.onPause();
+        webCamView.setImageResource(R.drawable.stream_closing);
         streamer.pauseStream();
         //Wait for the async to close gracefully
         while(streamer.isAsyncRunning()) {
