@@ -32,15 +32,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 			<View
 				android:id="@+id/right_buffer"
-				android:layout_width="fill_parent"
-				android:layout_height="@dimen/no_scale_1_pix"
+				android:layout_height="fill_parent"
+				android:layout_width="@dimen/no_scale_1_pix"
 				android:layout_alignParentRight="true"
 				/>
 
 			<View
 				android:id="@+id/left_buffer"
-				android:layout_width="fill_parent"
-				android:layout_height="@dimen/no_scale_1_pix"
+				android:layout_height="fill_parent"
+				android:layout_width="@dimen/no_scale_1_pix"
 				android:layout_alignParentLeft="true"
 				/>
 
