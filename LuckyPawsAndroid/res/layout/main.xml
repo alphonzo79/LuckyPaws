@@ -30,19 +30,33 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 				android:layout_alignParentBottom="true"
 				/>
 
+			<View
+				android:id="@+id/right_buffer"
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/no_scale_1_pix"
+				android:layout_alignParentRight="true"
+				/>
+
+			<View
+				android:id="@+id/left_buffer"
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/no_scale_1_pix"
+				android:layout_alignParentLeft="true"
+				/>
+
 			<Button
 				android:id="@+id/web_cam_button"
 				style="@style/homescreen_button"
 				android:background="@drawable/home_button_web_cam_state"
 				android:layout_alignParentTop="true"
-				android:layout_alignParentLeft="true"
+				android:layout_toRightOf="@id/left_buffer"
 				/>
 
 			<Button
 				android:id="@+id/reservations_button"
 				style="@style/homescreen_button"
 				android:background="@drawable/home_button_reservations_state"
-				android:layout_alignParentRight="true"
+				android:layout_toLeftOf="@id/right_buffer"
 				android:layout_centerVertical="true"
 				/>
 
@@ -51,7 +65,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 				style="@style/homescreen_button"
 				android:background="@drawable/home_button_prefs_state"
 				android:layout_above="@id/bottom_buffer"
-				android:layout_alignParentLeft="true"
+				android:layout_toRightOf="@id/left_buffer"
 				/>
 
         </RelativeLayout>
