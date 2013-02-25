@@ -53,7 +53,7 @@ public class WebCamViewScreen extends Activity {
         if(lockScreen) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
-        
+
         findLayoutElements();
         streamer.beginStream();
     }

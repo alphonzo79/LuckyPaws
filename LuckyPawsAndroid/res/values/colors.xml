@@ -6,8 +6,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 -->
 
 <resources>
-    <color name="lucky_paws_blue">#3786AE</color>
-	<color name="lucky_paws_light_blue">#DBEAF0</color>
-    <color name="white">#FFFFFF</color>
-	<color name="black">#000000</color>
+    <color name="lucky_paws_blue">#FF3786AE</color>
+	<color name="lucky_paws_light_blue">#FFDBEAF0</color>
+    <color name="white">#FFFFFFFF</color>
+	<color name="black">#FF000000</color>
+	<color name="transparent">#00FFFFFF</color>
 </resources>

@@ -16,13 +16,9 @@
 
 		<include layout="@layout/standard_header_no_action"/>
 
-		<TextView
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/nothing_here"
-			android:textColor="@color/black"
-			android:gravity="center"
-			android:layout_margin="@dimen/scalable_10_pix"
+		<ListView
+			style="@style/list_view"
+			android:id="@android:id/list"
 			/>
 
 	</LinearLayout>

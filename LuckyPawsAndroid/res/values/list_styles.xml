@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<resources>
+	<style name="list_item">
+		<item name="android:background">@drawable/list_back_state</item>
+	</style>
+
+	<style name="list_view">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_margin">@dimen/scalable_25_pix</item>
+		<item name="android:listDivider">@color/lucky_paws_blue</item>
+		<item name="android:listSelector">@drawable/list_back_state</item>
+		<item name="android:cacheColorHint">@color/transparent</item>
+	</style>
+</resources>
