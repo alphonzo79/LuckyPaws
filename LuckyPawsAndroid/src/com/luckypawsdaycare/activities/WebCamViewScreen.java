@@ -23,12 +23,6 @@ public class WebCamViewScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_cam_viewer);
         streamer = new WebCamStreamer(this);
-
-        SettingsDAO db = new SettingsDAO(this);
-        lockScreen = db.getWebCamScreenLockSetting();
-        if(lockScreen) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        }
     }
 
     @Override
@@ -53,6 +47,13 @@ public class WebCamViewScreen extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+
+        SettingsDAO db = new SettingsDAO(this);
+        lockScreen = db.getWebCamScreenLockSetting();
+        if(lockScreen) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+        
         findLayoutElements();
         streamer.beginStream();
     }
