@@ -23,21 +23,14 @@ public class WebCamViewScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_cam_viewer);
         streamer = new WebCamStreamer(this);
+
+        findLayoutElements();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        webCamView.setImageResource(R.drawable.stream_closing);
         streamer.pauseStream();
-        //Wait for the async to close gracefully
-        while(streamer.isAsyncRunning()) {
-            try{
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                //Do nothing
-            }
-        }
 
         if(lockScreen) {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -47,15 +40,27 @@ public class WebCamViewScreen extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+        streamer.beginStream();
 
         SettingsDAO db = new SettingsDAO(this);
         lockScreen = db.getWebCamScreenLockSetting();
         if(lockScreen) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
+    }
 
-        findLayoutElements();
-        streamer.beginStream();
+    @Override
+    public void onStop() {
+        super.onStop();
+        streamer.killStream();
+        //Wait for the async to close gracefully before stopping the activity
+        while(streamer.isAsyncRunning()) {
+            try{
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                //Do nothing
+            }
+        }
     }
 
     private void findLayoutElements() {

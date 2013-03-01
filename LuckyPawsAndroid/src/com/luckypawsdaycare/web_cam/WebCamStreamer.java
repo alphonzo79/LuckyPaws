@@ -35,7 +35,9 @@ public class WebCamStreamer {
         Log.d(TAG, "Begin Stream called");
         if(checkWorkingHours()) {
             userAgent = System.getProperty( "http.agent" );
-            client = AndroidHttpClient.newInstance(userAgent);
+            if(client == null) {
+                client = AndroidHttpClient.newInstance(userAgent);
+            }
 
             asyncTask.setKeepGoing(true);
             asyncRunning = true;
@@ -49,18 +51,21 @@ public class WebCamStreamer {
         Log.d(TAG, "pauseStream called");
         if(asyncRunning) {
             asyncTask.setKeepGoing(false);
-            //Wait for the async to stop gracefully
-            while(asyncTask.isRunning()) {
-                try{
-                    Thread.sleep(100);
-                } catch(InterruptedException e) {
-                    //Do nothing, try again
-                }
-            }
-            client.getConnectionManager().shutdown();
-            client = null;
-            asyncRunning = false;
         } //Otherwise do nothing
+    }
+
+    public void killStream() {
+        //Wait for the async to stop gracefully
+        while(asyncTask.isRunning()) {
+            try{
+                Thread.sleep(100);
+            } catch(InterruptedException e) {
+                //Do nothing, try again
+            }
+        }
+        client.getConnectionManager().shutdown();
+        client = null;
+        asyncRunning = false;
     }
 
     public Handler updateImage = new Handler(){
