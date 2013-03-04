@@ -6,21 +6,26 @@ package com.luckypawsdaycare.database;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 public class SettingsDAO extends DatabaseHelper {
     Context mContext;
+    private final String TAG = "SettingsDAO";
 
     public SettingsDAO(Context context) {
         super(context);
         mContext = context;
     }
 
-    public boolean getWebCamScreenLockSetting() {
+    public boolean getPersistentSetting(String settingName) {
         SQLiteDatabase db = getReadableDatabase();
-        String sqlStatement = "SELECT settingValue FROM settings WHERE settingName = 'Keep Webcam Screen On'";
+        String sqlStatement = "SELECT settingValue FROM settings WHERE settingName = ?";
 
-        Cursor result = db.rawQuery(sqlStatement, null);
+
+        Cursor result = db.rawQuery(sqlStatement, new String[]{settingName});
         result.moveToFirst();
 
         String setting = result.getString(0);
@@ -29,5 +34,46 @@ public class SettingsDAO extends DatabaseHelper {
         db.close();
 
         return setting.equals(DatabaseConstants.YES);
+    }
+
+    public Cursor getVisiblePersistentSettings() {
+        SQLiteDatabase db = getReadableDatabase();
+        String sqlStatement = "SELECT * FROM settings WHERE visible = " + DatabaseConstants.TRUE + ";";
+
+        Cursor result = db.rawQuery(sqlStatement, null);
+        result.moveToFirst();
+
+        db.close();
+        return result;
+    }
+
+    public boolean setPersistentSetting(String settingName, String value) {
+        SQLiteDatabase db = getWritableDatabase();
+        SQLiteStatement stmt = db.compileStatement("UPDATE settings SET settingValue = ? WHERE settingName = ?");
+        stmt.bindString(1, value);
+        stmt.bindString(2, settingName);
+
+        boolean success = false;
+        db.beginTransaction();
+        try
+        {
+            Log.d(TAG, "SqlStatement is " + stmt.toString());
+            stmt.execute();
+            db.setTransactionSuccessful();
+            success = true;
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            db.endTransaction();
+            stmt.close();
+            db.close();
+        }
+
+        return success;
+
     }
 }

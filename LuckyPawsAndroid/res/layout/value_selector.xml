@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@color/translucent_grey"
+	>
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="@dimen/no_scale_250_pix"
+		android:layout_height="@dimen/no_scale_250_pix"
+		android:background="@drawable/black_back_rounded"
+		android:layout_gravity="center"
+		>
+
+		<TextView
+			android:id="@+id/header_text"
+			style="@style/modal_header_text"
+			android:layout_alignParentTop="true"
+			android:layout_centerHorizontal="true"
+			android:layout_marginRight="@dimen/scalable_10_pix"
+			android:layout_marginLeft="@dimen/scalable_10_pix"
+			android:layout_marginTop="@dimen/scalable_4_pix"
+			/>
+
+		<LinearLayout
+			android:id="@+id/button_container"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_marginBottom="@dimen/scalable_3_pix"
+			android:layout_alignParentBottom="true"
+			>
+
+			<Button
+				android:id="@+id/save_button"
+				android:layout_width="@dimen/no_scale_0_pix"
+				android:layout_height="wrap_content"
+				android:layout_weight="50"
+				android:layout_marginLeft="@dimen/scalable_5_pix"
+				android:layout_marginRight="@dimen/scalable_5_pix"
+				android:text="@string/save_button"
+				/>
+
+			<Button
+				android:id="@+id/cancel_button"
+				android:layout_width="@dimen/no_scale_0_pix"
+				android:layout_height="wrap_content"
+				android:layout_weight="50"
+				android:layout_marginLeft="@dimen/scalable_5_pix"
+				android:layout_marginRight="@dimen/scalable_5_pix"
+				android:text="@string/cancel_button"
+				/>
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/line"
+			android:layout_width="fill_parent"
+			android:layout_height="@dimen/no_scale_1_pix"
+			android:background="@color/white"
+			android:layout_marginRight="@dimen/scalable_10_pix"
+			android:layout_marginLeft="@dimen/scalable_10_pix"
+			android:layout_marginTop="@dimen/scalable_3_pix"
+			android:layout_marginBottom="@dimen/scalable_3_pix"
+			android:layout_below="@id/header_text"
+			/>
+
+		<ListView
+			style="@style/modal_list"
+			android:id="@android:id/list"
+			android:layout_below="@id/line"
+			android:layout_above="@id/button_container"
+			/>
+
+
+	</RelativeLayout>
+
+</FrameLayout>

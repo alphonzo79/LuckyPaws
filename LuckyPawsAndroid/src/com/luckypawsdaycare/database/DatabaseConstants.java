@@ -11,4 +11,7 @@ public class DatabaseConstants {
     public static final String NO = "No";
     public static final int MALE_INT = 0;
     public static final int FEMALE_INT = 1;
+
+    //Settings
+    public static final String SETTINGS_SCREEN_LOCK_SETTING = "Keep Webcam Screen On";
 }

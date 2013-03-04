@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	>
+
+	<TextView
+		android:id="@+id/value_label"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:textColor="@color/white"
+		android:textSize="@dimen/text_14"
+		android:textStyle="bold"
+		android:layout_marginLeft="@dimen/scalable_5_pix"
+		android:layout_alignParentLeft="true"
+		android:layout_centerVertical="true"
+		/>
+
+	<ImageView
+		android:id="@+id/value_checkbox"
+		android:layout_width="@dimen/scalable_25_pix"
+		android:layout_height="@dimen/scalable_25_pix"
+		android:src="@drawable/unchecked"
+		android:layout_marginRight="@dimen/scalable_5_pix"
+		android:layout_marginTop="@dimen/scalable_7_pix"
+		android:layout_marginBottom="@dimen/scalable_7_pix"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		/>
+
+</RelativeLayout>

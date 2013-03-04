@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+	<solid android:color="@color/black"/>
+	<corners android:radius="@dimen/scalable_5_pix"/>
+	<stroke
+		android:color="@color/white"
+		android:width="@dimen/no_scale_1_pix"
+		/>
+</shape>

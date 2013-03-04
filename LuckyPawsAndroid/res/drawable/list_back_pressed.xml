@@ -7,4 +7,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
 	   android:shape="rectangle">
 	<solid android:color="@color/lucky_paws_blue" />
+	<corners android:radius="@dimen/scalable_5_pix" />
 </shape>

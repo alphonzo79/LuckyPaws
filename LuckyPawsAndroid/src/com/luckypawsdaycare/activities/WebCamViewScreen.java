@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import com.luckypawsdaycare.R;
+import com.luckypawsdaycare.database.DatabaseConstants;
 import com.luckypawsdaycare.database.SettingsDAO;
 import com.luckypawsdaycare.web_cam.WebCamStreamer;
 
@@ -43,7 +44,7 @@ public class WebCamViewScreen extends Activity {
         streamer.beginStream();
 
         SettingsDAO db = new SettingsDAO(this);
-        lockScreen = db.getWebCamScreenLockSetting();
+        lockScreen = db.getPersistentSetting(DatabaseConstants.SETTINGS_SCREEN_LOCK_SETTING);
         if(lockScreen) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }

@@ -33,12 +33,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:configChanges="orientation"
 			>
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<action android:name="android.intent.action.EDIT" />
-				<action android:name="android.intent.action.PICK" />
-				<category android:name="android.intent.category.DEFAULT" />
-			</intent-filter>
 		</activity>
 
 		<activity android:name=".activities.ReservationsScreen"
@@ -46,12 +40,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:configChanges="orientation"
 			>
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<action android:name="android.intent.action.EDIT" />
-				<action android:name="android.intent.action.PICK" />
-				<category android:name="android.intent.category.DEFAULT" />
-			</intent-filter>
 		</activity>
 
 		<activity android:name=".activities.SettingsScreen"
@@ -59,12 +47,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:configChanges="orientation"
 			>
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<action android:name="android.intent.action.EDIT" />
-				<action android:name="android.intent.action.PICK" />
-				<category android:name="android.intent.category.DEFAULT" />
-			</intent-filter>
 		</activity>
+
+		<activity android:name=".activities.ValueSelector"
+				  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+				  android:configChanges="orientation"
+				  >
+	  	</activity>
     </application>
 </manifest> 

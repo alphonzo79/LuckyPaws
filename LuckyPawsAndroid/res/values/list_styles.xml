@@ -6,14 +6,30 @@
 <resources>
 	<style name="list_item">
 		<item name="android:background">@drawable/list_back_state</item>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:padding">@dimen/scalable_10_pix</item>
+		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:layout_marginTop">@dimen/scalable_1_pix</item>
+		<item name="android:layout_marginBottom">@dimen/scalable_1_pix</item>
 	</style>
 
 	<style name="list_view">
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">fill_parent</item>
 		<item name="android:layout_margin">@dimen/scalable_25_pix</item>
-		<item name="android:listDivider">@color/lucky_paws_blue</item>
+		<item name="android:listDivider">@color/transparent</item>
 		<item name="android:listSelector">@drawable/list_back_state</item>
+		<item name="android:cacheColorHint">@color/transparent</item>
+	</style>
+
+	<style name="modal_list">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_marginLeft">@dimen/scalable_10_pix</item>
+		<item name="android:layout_marginRight">@dimen/scalable_10_pix</item>
+		<item name="android:listDivider">@color/white</item>
+		<item name="android:listSelector">@drawable/modal_list_selector</item>
 		<item name="android:cacheColorHint">@color/transparent</item>
 	</style>
 </resources>

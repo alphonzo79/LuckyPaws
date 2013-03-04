@@ -6,10 +6,11 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 	<gradient
-		android:angle="-90"
-		android:startColor="@color/lucky_paws_light_blue"
-		android:centerColor="@color/lucky_paws_blue"
-		android:endColor="@color/white"
+		android:angle="90"
+		android:startColor="@color/lucky_paws_blue"
+		android:endColor="@color/lucky_paws_light_blue"
 		android:type="linear"
+		android:centerX="5"
 		/>
+	<corners android:radius="@dimen/scalable_5_pix" />
 </shape>

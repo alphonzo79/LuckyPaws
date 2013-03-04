@@ -11,4 +11,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="reservations">Make Reservations</string>
 	<string name="preferences">Preferences</string>
 	<string name="nothing_here">Bob? Bob ain\'t here, man!</string>
+
+	<string name="save_button">Save</string>
+	<string name="cancel_button">Cancel</string>
 </resources>

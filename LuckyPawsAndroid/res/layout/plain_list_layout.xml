@@ -6,11 +6,7 @@
 
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
 		  style="@style/list_item"
-		  android:layout_width="fill_parent"
-		  android:layout_height="fill_parent"
-		  android:padding="@dimen/scalable_10_pix"
-		  android:gravity="left|center_vertical"
 		  android:textSize="@dimen/text_14"
-		  android:textColor="@color/black"
+		  android:textColor="@color/white"
 		  android:textStyle="bold" >
 </TextView>

@@ -11,4 +11,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <color name="white">#FFFFFFFF</color>
 	<color name="black">#FF000000</color>
 	<color name="transparent">#00FFFFFF</color>
+	<color name="translucent_grey">#aa000000</color>
 </resources>
