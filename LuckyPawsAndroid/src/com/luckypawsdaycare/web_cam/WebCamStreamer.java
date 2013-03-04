@@ -63,8 +63,10 @@ public class WebCamStreamer {
                 //Do nothing, try again
             }
         }
-        client.getConnectionManager().shutdown();
-        client = null;
+        if(client != null) {
+            client.getConnectionManager().shutdown();
+            client = null;
+        }
         asyncRunning = false;
     }
 
