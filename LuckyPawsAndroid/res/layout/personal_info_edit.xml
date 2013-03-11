@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	style="@style/layout_root"
+	>
+
+	<include layout="@layout/standard_header_no_action"
+		 android:id="@+id/header_bar"
+		 android:layout_alignParentTop="true"
+		/>
+
+	<LinearLayout
+		android:id="@+id/button_container"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="@dimen/scalable_10_pix"
+		android:paddingBottom="@dimen/scalable_10_pix"
+		android:paddingRight="@dimen/scalable_5_pix"
+		android:paddingLeft="@dimen/scalable_5_pix"
+		android:orientation="horizontal"
+		android:layout_alignParentBottom="true"
+		>
+
+		<Button
+			android:id="@+id/save_button"
+			style="@style/blue_button"
+			android:text="@string/save_button"
+			/>
+
+		<Button
+			android:id="@+id/cancel_button"
+			style="@style/blue_button"
+			android:text="@string/cancel_button"
+			/>
+
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/header_label"
+		style="@style/form_header"
+		android:text="@string/personal_info_heading"
+		android:layout_below="@id/header_bar"
+		/>
+
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_below="@id/header_label"
+		android:layout_above="@id/button_container"
+		>
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			>
+
+			<LinearLayout
+				android:id="@+id/first_name_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/header_label"
+				>
+
+				<TextView
+					style="@style/form_label"
+					android:text="@string/first_name_label"
+					/>
+
+				<View
+					android:id="@+id/line"
+					style="@style/form_label_underline"
+					/>
+
+			</LinearLayout>
+
+			<EditText
+				android:id="@+id/first_name_input"
+				style="@style/form_edit_text"
+				android:hint="@string/first_name_label"
+				android:layout_below="@id/first_name_labels"
+				/>
+
+			<LinearLayout
+				android:id="@+id/last_name_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/first_name_input"
+				>
+
+				<TextView
+					style="@style/form_label"
+					android:text="@string/last_name_label"
+					/>
+
+				<View
+					android:id="@+id/line"
+					style="@style/form_label_underline"
+					/>
+
+			</LinearLayout>
+
+			<EditText
+				android:id="@+id/last_name_input"
+				style="@style/form_edit_text"
+				android:hint="@string/last_name_label"
+				android:layout_below="@id/last_name_labels"
+				/>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</RelativeLayout>

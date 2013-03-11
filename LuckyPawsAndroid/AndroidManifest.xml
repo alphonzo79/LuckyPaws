@@ -49,6 +49,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			>
 		</activity>
 
+		<activity android:name=".activities.PersonalInfoEdit"
+				  android:label="@string/app_name"
+				  android:theme="@android:style/Theme.Light.NoTitleBar"
+				  android:configChanges="orientation"
+			>
+		</activity>
+
+		<activity android:name=".activities.PersonalInfoDisplay"
+				  android:label="@string/app_name"
+				  android:theme="@android:style/Theme.Light.NoTitleBar"
+				  android:configChanges="orientation"
+			>
+		</activity>
+
 		<activity android:name=".activities.ValueSelector"
 				  android:theme="@android:style/Theme.Translucent.NoTitleBar"
 				  android:configChanges="orientation"

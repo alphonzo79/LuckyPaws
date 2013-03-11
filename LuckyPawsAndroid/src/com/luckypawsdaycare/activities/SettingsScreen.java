@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.DatabaseConstants;
+import com.luckypawsdaycare.database.PersonalInfoDAO;
 import com.luckypawsdaycare.database.SettingsDAO;
 
 import java.util.ArrayList;
@@ -71,6 +72,15 @@ public class SettingsScreen extends ListActivity {
             selector.putExtra("valuesArray", valuesArray);
             selector.putExtra("header", "Keep Screen On While Streaming Webcam?");
             startActivityForResult(selector, SCREEN_LOCK_REQUEST);
+        } else if(itemText.contains("Personal Information")) {
+            PersonalInfoDAO db = new PersonalInfoDAO(this);
+            if(db.getPersonalInfoIsSet()) {
+                Intent intent = new Intent(this, PersonalInfoDisplay.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, PersonalInfoEdit.class);
+                startActivity(intent);
+            }
         }
     }
 

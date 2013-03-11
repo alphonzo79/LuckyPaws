@@ -15,4 +15,54 @@
 		<item name="android:layout_height">@dimen/no_scale_150_pix</item>
 		<item name="android:layout_margin">@dimen/scalable_10_pix</item>
 	</style>
+
+	<style name="blue_button">
+		<item name="android:layout_width">@dimen/no_scale_0_pix</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_weight">50</item>
+		<item name="android:layout_marginLeft">@dimen/scalable_10_pix</item>
+		<item name="android:layout_marginRight">@dimen/scalable_10_pix</item>
+		<item name="android:padding">@dimen/scalable_5_pix</item>
+		<item name="android:textColor">@color/white</item>
+		<item name="android:textSize">@dimen/text_14</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:background">@drawable/blue_button_state</item>
+	</style>
+
+	<style name="form_header">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginTop">@dimen/scalable_10_pix</item>
+		<item name="android:layout_marginBottom">@dimen/scalable_5_pix</item>
+		<item name="android:gravity">center_horizontal</item>
+		<item name="android:textSize">@dimen/text_24</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">@color/lucky_paws_blue</item>
+	</style>
+
+	<style name="form_label">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">@dimen/scalable_30_pix</item>
+		<item name="android:textSize">@dimen/text_16</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">@color/lucky_paws_blue</item>
+	</style>
+
+	<style name="form_label_underline">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">@dimen/scalable_1_pix</item>
+		<item name="android:layout_marginLeft">@dimen/scalable_30_pix</item>
+		<item name="android:background">@color/lucky_paws_blue</item>
+	</style>
+
+	<style name="form_edit_text">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">@dimen/scalable_25_pix</item>
+		<item name="android:layout_marginRight">@dimen/scalable_25_pix</item>
+		<item name="android:layout_marginTop">@dimen/scalable_5_pix</item>
+		<item name="android:layout_marginBottom">@dimen/scalable_7_pix</item>
+		<item name="android:background">@drawable/edit_text_state</item>
+	</style>
 </resources>

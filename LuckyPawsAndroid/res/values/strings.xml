@@ -14,4 +14,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 	<string name="save_button">Save</string>
 	<string name="cancel_button">Cancel</string>
+
+	<string name="personal_info_heading">Personal Info</string>
+	<string name="first_name_label">First Name</string>
+	<string name="last_name_label">Last Name</string>
+	<string name="address_street_label">Street</string>
+	<string name="address_city_label">City</string>
+	<string name="address_state_label">State</string>
+	<string name="address_zip_label">ZIP</string>
+	<string name="phone1_label">Phone (Home)</string>
+	<string name="phone2_label">Phone (Mobile)</string>
+	<string name="phone3_label">Phone(Work)</string>
+	<string name="email_label">E-mail</string>
 </resources>
