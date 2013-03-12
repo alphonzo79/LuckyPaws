@@ -22,8 +22,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="address_city_label">City</string>
 	<string name="address_state_label">State</string>
 	<string name="address_zip_label">ZIP</string>
-	<string name="phone1_label">Phone (Home)</string>
-	<string name="phone2_label">Phone (Mobile)</string>
-	<string name="phone3_label">Phone(Work)</string>
+	<string name="phone1_label">Home</string>
+	<string name="phone2_label">Mobile</string>
+	<string name="phone3_label">Work</string>
 	<string name="email_label">E-mail</string>
 </resources>
