@@ -65,4 +65,8 @@
 		<item name="android:layout_marginBottom">@dimen/scalable_7_pix</item>
 		<item name="android:background">@drawable/edit_text_state</item>
 	</style>
+
+	<style name="form_value_display" parent="form_label">
+		<item name="android:textSize">@dimen/text_18</item>
+	</style>
 </resources>

@@ -29,8 +29,8 @@ public class PersonalInfoDAO extends DatabaseHelper {
         //firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT,
         // addressState TEXT, addressZip TEXT, referral TEXT, agreed INTEGER, signed TEXT
         String stmt = "SELECT count(*) FROM personalInfo WHERE firstName = '' AND lastName = '' AND eMail = '' AND phone1 = ''" +
-                " AND phone2 = '' AND phone3 = ''AND addressStreet = '' AND addressCity = '' AND addressState = '' AND" +
-                " addressZip = '' AND referral = '' AND agreed = '' AND signed = ''";
+                " AND phone2 = '' AND phone3 = '' AND addressStreet = '' AND addressCity = '' AND addressState = '' AND" +
+                " addressZip = '' AND referral = '' AND agreed = '' AND signed = '';";
 
         Cursor rs = db.rawQuery(stmt, null);
         boolean result = false;
@@ -79,15 +79,15 @@ public class PersonalInfoDAO extends DatabaseHelper {
         keys.addAll(updateValues.keySet());
         StringBuilder sb = new StringBuilder("");
         for(int i = 0; i < keys.size(); i++) {
-            sb.append(keys.get(i) + " = '?', ");
+            sb.append(keys.get(i) + " = ?, ");
         }
         String updateArgs = sb.toString();
         //Remove the last comma
         updateArgs = updateArgs.substring(0, updateArgs.length() - 2);
 
-        SQLiteStatement stmt = db.compileStatement("UPDATE personalInfo set " + updateArgs + "WHERE _id = 1;");
+        SQLiteStatement stmt = db.compileStatement("UPDATE personalInfo SET " + updateArgs + " WHERE _id = 1;");
         for(int i = 0; i < keys.size(); i++) {
-            stmt.bindString(i + 1, keys.get(i));
+            stmt.bindString(i + 1, updateValues.get(keys.get(i)));
         }
 
         boolean result = false;
