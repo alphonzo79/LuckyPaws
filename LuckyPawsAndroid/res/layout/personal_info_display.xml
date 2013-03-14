@@ -63,7 +63,7 @@
 
 				<TextView
 					style="@style/form_label"
-					android:text="@string/first_name_label"
+					android:text="@string/full_name_label"
 					/>
 
 				<View
@@ -73,35 +73,9 @@
 			</LinearLayout>
 
 			<TextView
-				android:id="@+id/first_name_input"
+				android:id="@+id/first_name_display"
 				style="@style/form_value_display"
 				android:text="@string/first_name_label"
-				/>
-
-			<LinearLayout
-				android:id="@+id/last_name_labels"
-				android:orientation="vertical"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				>
-
-				<TextView
-					style="@style/form_label"
-					android:text="@string/last_name_label"
-					/>
-
-				<View
-					style="@style/form_label_underline"
-					/>
-
-			</LinearLayout>
-
-			<EditText
-				android:id="@+id/last_name_input"
-				style="@style/form_edit_text"
-				android:hint="@string/last_name_label"
-				android:inputType="textCapWords"
-				android:maxLines="1"
 				/>
 
 			<LinearLayout
@@ -127,6 +101,7 @@
 						>
 
 						<TextView
+							android:id="@+id/phone_one_label"
 							style="@style/form_label"
 							android:text="@string/phone1_label"
 							/>
@@ -137,14 +112,11 @@
 
 					</LinearLayout>
 
-					<EditText
-						android:id="@+id/phone_one_input"
-						style="@style/form_edit_text"
-						android:hint="@string/phone1_label"
-						android:inputType="phone"
+					<TextView
+						android:id="@+id/phone_one_display"
+						style="@style/form_value_display"
+						android:text="@string/phone1_label"
 						android:layout_marginRight="@dimen/scalable_10_pix"
-						android:maxLines="1"
-						android:phoneNumber="true"
 						/>
 
 				</LinearLayout>
@@ -165,6 +137,7 @@
 						>
 
 						<TextView
+							android:id="@+id/phone_two_label"
 							style="@style/form_label"
 							android:text="@string/phone2_label"
 							android:layout_marginLeft="@dimen/scalable_15_pix"
@@ -177,14 +150,11 @@
 
 					</LinearLayout>
 
-					<EditText
-						android:id="@+id/phone_two_input"
-						style="@style/form_edit_text"
-						android:hint="@string/phone2_label"
-						android:inputType="phone"
+					<TextView
+						android:id="@+id/phone_two_display"
+						style="@style/form_value_display"
+						android:text="@string/phone2_label"
 						android:layout_marginLeft="@dimen/scalable_10_pix"
-						android:maxLines="1"
-						android:phoneNumber="true"
 						/>
 
 				</LinearLayout>
@@ -209,13 +179,10 @@
 
 			</LinearLayout>
 
-			<EditText
-				android:id="@+id/phone_three_input"
-				style="@style/form_edit_text"
-				android:hint="@string/phone3_label"
-				android:inputType="phone"
-				android:maxLines="1"
-				android:phoneNumber="true"
+			<TextView
+				android:id="@+id/phone_three_display"
+				style="@style/form_value_display"
+				android:text="@string/phone3_label"
 				/>
 
 			<LinearLayout
@@ -236,12 +203,10 @@
 
 			</LinearLayout>
 
-			<EditText
-				android:id="@+id/address_street_input"
-				style="@style/form_edit_text"
-				android:hint="@string/address_street_label"
-				android:inputType="textCapWords"
-				android:maxLines="1"
+			<TextView
+				android:id="@+id/address_street_display"
+				style="@style/form_value_display"
+				android:text="@string/address_street_label"
 				/>
 
 			<LinearLayout
@@ -267,6 +232,7 @@
 						>
 
 						<TextView
+							android:id="@+id/address_city_label"
 							style="@style/form_label"
 							android:text="@string/address_city_label"
 							/>
@@ -277,13 +243,11 @@
 
 					</LinearLayout>
 
-					<EditText
-						android:id="@+id/address_city_input"
-						style="@style/form_edit_text"
-						android:hint="@string/address_city_label"
-						android:inputType="textCapWords"
+					<TextView
+						android:id="@+id/address_city_display"
+						style="@style/form_value_display"
+						android:text="@string/address_city_label"
 						android:layout_marginRight="@dimen/scalable_10_pix"
-						android:maxLines="1"
 						/>
 
 				</LinearLayout>
@@ -304,6 +268,7 @@
 						>
 
 						<TextView
+							android:id="@+id/address_state_label"
 							style="@style/form_label"
 							android:text="@string/address_state_label"
 							android:layout_marginLeft="@dimen/scalable_15_pix"
@@ -316,14 +281,12 @@
 
 					</LinearLayout>
 
-					<EditText
-						android:id="@+id/address_state_input"
-						style="@style/form_edit_text"
-						android:hint="@string/address_state_label"
-						android:inputType="textCapWords"
+					<TextView
+						android:id="@+id/address_state_display"
+						style="@style/form_value_display"
+						android:text="@string/address_state_label"
 						android:layout_marginRight="@dimen/scalable_10_pix"
 						android:layout_marginLeft="@dimen/scalable_10_pix"
-						android:maxLines="1"
 						/>
 
 				</LinearLayout>
@@ -356,13 +319,11 @@
 
 					</LinearLayout>
 
-					<EditText
-						android:id="@+id/address_zip_input"
-						style="@style/form_edit_text"
-						android:hint="@string/address_zip_label"
-						android:inputType="number"
+					<TextView
+						android:id="@+id/address_zip_display"
+						style="@style/form_value_display"
+						android:text="@string/address_zip_label"
 						android:layout_marginLeft="@dimen/scalable_10_pix"
-						android:maxLines="1"
 						/>
 
 				</LinearLayout>
@@ -387,12 +348,10 @@
 
 			</LinearLayout>
 
-			<EditText
-				android:id="@+id/email_input"
-				style="@style/form_edit_text"
-				android:hint="@string/email_label"
-				android:inputType="textEmailAddress"
-				android:maxLines="1"
+			<TextView
+				android:id="@+id/email_display"
+				style="@style/form_value_display"
+				android:text="@string/email_label"
 				/>
 
 		</LinearLayout>

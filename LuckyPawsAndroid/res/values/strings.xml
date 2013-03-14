@@ -11,12 +11,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="reservations">Make Reservations</string>
 	<string name="preferences">Preferences</string>
 	<string name="nothing_here">Bob? Bob ain\'t here, man!</string>
+	<string name="not_set">Press Edit Info To Set</string>
 
 	<string name="save_button">Save</string>
 	<string name="cancel_button">Cancel</string>
 	<string name="edit_info_button">Edit Info</string>
 
 	<string name="personal_info_heading">Personal Info</string>
+	<string name="full_name_label">Pet Owner</string>
 	<string name="first_name_label">First Name</string>
 	<string name="last_name_label">Last Name</string>
 	<string name="address_street_label">Street</string>

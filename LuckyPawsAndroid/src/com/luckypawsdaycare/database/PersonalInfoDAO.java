@@ -30,14 +30,14 @@ public class PersonalInfoDAO extends DatabaseHelper {
         // addressState TEXT, addressZip TEXT, referral TEXT, agreed INTEGER, signed TEXT
         String stmt = "SELECT count(*) FROM personalInfo WHERE firstName = '' AND lastName = '' AND eMail = '' AND phone1 = ''" +
                 " AND phone2 = '' AND phone3 = '' AND addressStreet = '' AND addressCity = '' AND addressState = '' AND" +
-                " addressZip = '' AND referral = '' AND agreed = '' AND signed = '';";
+                " addressZip = '' AND referral = '' AND agreed = 0 AND signed = '';";
 
         Cursor rs = db.rawQuery(stmt, null);
         boolean result = false;
         try {
             rs.moveToFirst();
             int count = rs.getInt(0);
-            result = (count == 1);
+            result = (count == 0);
         } catch(SQLiteException e) {
             e.printStackTrace();
         } finally {

@@ -370,6 +370,7 @@
 						android:inputType="number"
 						android:layout_marginLeft="@dimen/scalable_10_pix"
 						android:maxLines="1"
+						android:maxLength="5"
 						/>
 
 				</LinearLayout>

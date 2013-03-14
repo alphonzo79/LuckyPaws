@@ -66,7 +66,13 @@
 		<item name="android:background">@drawable/edit_text_state</item>
 	</style>
 
-	<style name="form_value_display" parent="form_label">
+	<style name="form_value_display">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
 		<item name="android:textSize">@dimen/text_18</item>
+		<item name="android:textColor">@color/black</item>
+		<item name="android:layout_marginBottom">@dimen/scalable_12_pix</item>
+		<item name="android:layout_marginLeft">@dimen/scalable_27_pix</item>
+		<item name="android:layout_marginRight">@dimen/scalable_27_pix</item>
 	</style>
 </resources>

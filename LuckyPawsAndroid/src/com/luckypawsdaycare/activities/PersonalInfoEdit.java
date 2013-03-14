@@ -11,7 +11,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.PersonalInfoDAO;
@@ -21,16 +21,16 @@ import java.util.Map;
 public class PersonalInfoEdit extends Activity {
     Map<String, String> dbValues;
 
-    TextView firstName;
-    TextView lastName;
-    TextView phone1;
-    TextView phone2;
-    TextView phone3;
-    TextView addressStreet;
-    TextView addressCity;
-    TextView addressState;
-    TextView addressZip;
-    TextView eMail;
+    EditText firstName;
+    EditText lastName;
+    EditText phone1;
+    EditText phone2;
+    EditText phone3;
+    EditText addressStreet;
+    EditText addressCity;
+    EditText addressState;
+    EditText addressZip;
+    EditText eMail;
 
     Button saveButton;
     Button cancelButton;
@@ -52,16 +52,16 @@ public class PersonalInfoEdit extends Activity {
     }
 
     private void findAndWireElement() {
-        firstName = (TextView)findViewById(R.id.first_name_input);
-        lastName = (TextView)findViewById(R.id.last_name_input);
-        phone1 = (TextView)findViewById(R.id.phone_one_input);
-        phone2 = (TextView)findViewById(R.id.phone_two_input);
-        phone3 = (TextView)findViewById(R.id.phone_three_input);
-        addressStreet = (TextView)findViewById(R.id.address_street_input);
-        addressCity = (TextView)findViewById(R.id.address_city_input);
-        addressState = (TextView)findViewById(R.id.address_state_input);
-        addressZip = (TextView)findViewById(R.id.address_zip_input);
-        eMail = (TextView)findViewById(R.id.email_input);
+        firstName = (EditText)findViewById(R.id.first_name_input);
+        lastName = (EditText)findViewById(R.id.last_name_input);
+        phone1 = (EditText)findViewById(R.id.phone_one_input);
+        phone2 = (EditText)findViewById(R.id.phone_two_input);
+        phone3 = (EditText)findViewById(R.id.phone_three_input);
+        addressStreet = (EditText)findViewById(R.id.address_street_input);
+        addressCity = (EditText)findViewById(R.id.address_city_input);
+        addressState = (EditText)findViewById(R.id.address_state_input);
+        addressZip = (EditText)findViewById(R.id.address_zip_input);
+        eMail = (EditText)findViewById(R.id.email_input);
 
         saveButton = (Button)findViewById(R.id.save_button);
         saveButton.setOnClickListener(saveInfo);
