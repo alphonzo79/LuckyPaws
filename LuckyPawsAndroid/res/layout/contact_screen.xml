@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="vertical"
+				style="@style/layout_root"
+	>
+
+	<include layout="@layout/standard_header_no_action"
+			 android:id="@+id/header_bar"
+			 android:layout_alignParentTop="true"
+		/>
+
+	<LinearLayout
+		android:id="@+id/button_container"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="@dimen/scalable_10_pix"
+		android:paddingBottom="@dimen/scalable_10_pix"
+		android:paddingRight="@dimen/scalable_5_pix"
+		android:paddingLeft="@dimen/scalable_5_pix"
+		android:orientation="horizontal"
+		android:layout_alignParentBottom="true"
+		android:layout_marginTop="@dimen/scalable_15_pix"
+		>
+
+		<Button
+			android:id="@+id/exit_button"
+			style="@style/blue_button"
+			android:text="@string/call_lp"
+			/>
+
+		<Button
+			android:id="@+id/exit_button"
+			style="@style/blue_button"
+			android:text="@string/email_lp"
+			/>
+
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/lp_name_display"
+		style="@style/form_label_centered"
+		android:text="@string/lucky_paws_inc"
+		android:layout_above="@id/button_container"
+		android:layout_centerHorizontal="true"
+		/>
+
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_below="@id/header_bar"
+		android:layout_above="@id/lp_name_display"
+		>
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			>
+
+			<TextView
+				android:id="@+id/header_label"
+				style="@style/form_header"
+				android:text="@string/contact_header"
+				android:layout_marginBottom="@dimen/scalable_25_pix"
+				/>
+
+			<LinearLayout
+				android:id="@+id/address_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				>
+
+				<TextView
+					style="@style/form_label_centered"
+					android:text="@string/address_label"
+					/>
+
+				<View
+					style="@style/form_label_underline_centered"
+					/>
+
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/address_display"
+				style="@style/form_value_display_centered"
+				android:text="@string/lucky_paws_address"
+				/>
+
+			<LinearLayout
+				android:id="@+id/phone_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				>
+
+				<TextView
+					style="@style/form_label_centered"
+					android:text="@string/phone_label"
+					/>
+
+				<View
+					style="@style/form_label_underline_centered"
+					/>
+
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/phone_display"
+				style="@style/form_value_display_centered"
+				android:text="@string/lucky_paws_phone"
+				/>
+
+			<LinearLayout
+				android:id="@+id/email_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				>
+
+				<TextView
+					style="@style/form_label_centered"
+					android:text="@string/email_label"
+					/>
+
+				<View
+					style="@style/form_label_underline_centered"
+					/>
+
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/email_display"
+				style="@style/form_value_display_centered"
+				android:text="@string/lucky_paws_email"
+				/>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</RelativeLayout>

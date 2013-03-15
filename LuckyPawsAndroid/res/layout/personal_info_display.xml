@@ -31,6 +31,8 @@
 			style="@style/blue_button"
 			android:layout_width="wrap_content"
 			android:text="@string/edit_info_button"
+			android:layout_marginLeft="@dimen/scalable_45_pix"
+			android:layout_marginRight="@dimen/scalable_45_pix"
 			/>
 
 	</LinearLayout>

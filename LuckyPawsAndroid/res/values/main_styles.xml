@@ -49,11 +49,21 @@
 		<item name="android:textColor">@color/lucky_paws_blue</item>
 	</style>
 
+	<style name="form_label_centered" parent="form_label">
+		<item name="android:layout_gravity">center_horizontal</item>
+		<item name="android:layout_marginLeft">@dimen/no_scale_0_pix</item>
+	</style>
+
 	<style name="form_label_underline">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">@dimen/scalable_1_pix</item>
 		<item name="android:layout_marginLeft">@dimen/scalable_30_pix</item>
 		<item name="android:background">@color/lucky_paws_blue</item>
+	</style>
+
+	<style name="form_label_underline_centered" parent="form_label_underline">
+		<item name="android:layout_gravity">center_horizontal</item>
+		<item name="android:layout_marginLeft">@dimen/no_scale_0_pix</item>
 	</style>
 
 	<style name="form_edit_text">
@@ -74,5 +84,11 @@
 		<item name="android:layout_marginBottom">@dimen/scalable_12_pix</item>
 		<item name="android:layout_marginLeft">@dimen/scalable_27_pix</item>
 		<item name="android:layout_marginRight">@dimen/scalable_27_pix</item>
+	</style>
+
+	<style name="form_value_display_centered" parent="form_value_display">
+		<item name="android:layout_gravity">center_horizontal</item>
+		<item name="android:layout_marginLeft">@dimen/no_scale_0_pix</item>
+		<item name="android:layout_marginRight">@dimen/no_scale_0_pix</item>
 	</style>
 </resources>

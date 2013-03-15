@@ -81,6 +81,12 @@ public class SettingsScreen extends ListActivity {
                 Intent intent = new Intent(this, PersonalInfoEdit.class);
                 startActivity(intent);
             }
+        } else if(itemText.contains("Information/About")) {
+            Intent info = new Intent(this, InfoAboutScreen.class);
+            startActivity(info);
+        } else if(itemText.contains("Contact")) {
+            Intent contact = new Intent(this, ContactScreen.class);
+            startActivity(contact);
         }
     }
 
