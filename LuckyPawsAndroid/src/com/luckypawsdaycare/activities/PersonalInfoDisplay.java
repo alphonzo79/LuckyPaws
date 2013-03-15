@@ -147,7 +147,7 @@ public class PersonalInfoDisplay extends Activity {
         }
 
         String addressZipValue = dbValues.get("addressZip");
-        if(!TextUtils.isEmpty(addressZipValue)) {
+        if(!TextUtils.isEmpty(addressZipValue) && !addressZipValue.equals("0")) {
             addressZip.setText(addressZipValue);
             //shuffle things if we need to
             if(TextUtils.isEmpty(addressCityValue) && TextUtils.isEmpty(addressStateValue)) {

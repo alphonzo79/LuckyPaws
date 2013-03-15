@@ -127,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         Log.d(TAG, "Starting populatePersonalInfo");
         SQLiteStatement sqlStatement;
-//firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip TEXT,
+//firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip INTEGER,
 // referral TEXT, agreed INTEGER, signed TEXT
         sqlStatement = db.compileStatement("INSERT INTO personalInfo (_id, firstName, lastName, eMail, phone1, phone2, phone3, addressStreet, addressCity," +
                 " addressState, addressZip, referral, agreed, signed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
