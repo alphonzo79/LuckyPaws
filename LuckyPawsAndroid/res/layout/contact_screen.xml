@@ -28,15 +28,15 @@
 		>
 
 		<Button
-			android:id="@+id/exit_button"
+			android:id="@+id/email_button"
 			style="@style/blue_button"
-			android:text="@string/call_lp"
+			android:text="@string/email_lp"
 			/>
 
 		<Button
-			android:id="@+id/exit_button"
+			android:id="@+id/directions_button"
 			style="@style/blue_button"
-			android:text="@string/email_lp"
+			android:text="@string/drive_to_lp"
 			/>
 
 	</LinearLayout>
@@ -66,7 +66,7 @@
 				android:id="@+id/header_label"
 				style="@style/form_header"
 				android:text="@string/contact_header"
-				android:layout_marginBottom="@dimen/scalable_25_pix"
+				android:layout_marginBottom="@dimen/scalable_15_pix"
 				/>
 
 			<LinearLayout
@@ -142,6 +142,31 @@
 				android:id="@+id/email_display"
 				style="@style/form_value_display_centered"
 				android:text="@string/lucky_paws_email"
+				/>
+
+			<LinearLayout
+				android:id="@+id/hours_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				>
+
+				<TextView
+					style="@style/form_label_centered"
+					android:text="@string/hours_label"
+					/>
+
+				<View
+					style="@style/form_label_underline_centered"
+					/>
+
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/hours_display"
+				style="@style/form_value_display_centered"
+				android:text="@string/lucky_paws_hours"
 				/>
 
 		</LinearLayout>

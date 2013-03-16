@@ -34,14 +34,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="error_info_save">There was an error saving your info. Please try again.</string>
 
 	<string name="info_about_header">About Lucky Paws</string>
-	<string name="lucky_paws_inc">Lucky Paws, Inc — Clinton, NC</string>
+	<string name="lucky_paws_inc">Lucky Paws, Inc — Clayton, NC</string>
 
 	<string name="contact_header">Lucky Paws Contact Information</string>
 	<string name="call_lp">Call Lucky Paws</string>
 	<string name="email_lp">E-mail Lucky Paws</string>
+	<string name="drive_to_lp">Driving Directions</string>
 	<string name="address_label">Address</string>
 	<string name="phone_label">Phone</string>
+	<string name="hours_label">Hours</string>
 	<string name="lucky_paws_address">2900 HWY 70 E\nClayton, NC 27576</string>
 	<string name="lucky_paws_phone">(919) 550-8400</string>
-	<string name="lucky_paws_email">luckypawsanimalrescue@gmail.com</string>
+	<string name="lucky_paws_email">staff@myluckypaws.com</string>
+	<string name="lucky_paws_hours">Mon-Fri 7-11am &amp; 3-7pm\nSat, Sun, Holidays 10-12noon &amp; 4-5pm</string>
+
+	<string name="lucky_paws_location_uri">geo:35.6737044,-78.4982985</string>
 </resources>
