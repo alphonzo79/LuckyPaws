@@ -48,5 +48,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="lucky_paws_email">staff@myluckypaws.com</string>
 	<string name="lucky_paws_hours">Mon-Fri 7-11am &amp; 3-7pm\nSat, Sun, Holidays 10-12noon &amp; 4-5pm</string>
 
-	<string name="lucky_paws_location_uri">geo:35.6737044,-78.4982985</string>
+	<string name="lucky_paws_location_uri">35.6737044,-78.4982985</string>
 </resources>
