@@ -12,8 +12,10 @@
 					  android:angle="270" android:centerX="0.5" android:centerY="0.5" />
 			<stroke android:width="@dimen/scalable_1_pix" android:color="@color/lucky_paws_light_blue" />
 			<corners android:radius="@dimen/scalable_5_pix" />
-			<padding android:left="10dp" android:top="6dp" android:right="10dp"
-					 android:bottom="6dp" />
+			<padding android:left="@dimen/scalable_10_pix"
+					 android:top="@dimen/scalable_6_pix"
+					 android:right="@dimen/scalable_10_pix"
+					 android:bottom="@dimen/scalable_6_pix" />
 		</shape>
 	</item>
 	<item android:state_focused="true">
@@ -21,8 +23,10 @@
 			<solid android:color="@color/white" />
 			<stroke android:width="@dimen/scalable_1_pix" android:color="@color/lucky_paws_blue" />
 			<corners android:radius="@dimen/scalable_5_pix" />
-			<padding android:left="10dp" android:top="6dp" android:right="10dp"
-					 android:bottom="6dp" />
+			<padding android:left="@dimen/scalable_10_pix"
+					 android:top="@dimen/scalable_6_pix"
+					 android:right="@dimen/scalable_10_pix"
+					 android:bottom="@dimen/scalable_6_pix" />
 		</shape>
 	</item>
 	<item>
@@ -30,8 +34,10 @@
 			<solid android:color="@color/white" />
 			<stroke android:width="@dimen/scalable_1_pix" android:color="@color/lucky_paws_light_blue" />
 			<corners android:radius="@dimen/scalable_5_pix" />
-			<padding android:left="10dp" android:top="6dp" android:right="10dp"
-					 android:bottom="6dp" />
+			<padding android:left="@dimen/scalable_10_pix"
+					 android:top="@dimen/scalable_6_pix"
+					 android:right="@dimen/scalable_10_pix"
+					 android:bottom="@dimen/scalable_6_pix" />
 		</shape>
 	</item>
 </selector>

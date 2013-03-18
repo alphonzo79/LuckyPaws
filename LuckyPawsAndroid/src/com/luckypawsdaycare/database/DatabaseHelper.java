@@ -79,6 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         db.execSQL(mContext.getString(R.string.create_settings_table));
         db.execSQL(mContext.getString(R.string.create_personal_info_table));
+        db.execSQL(mContext.getString(R.string.create_pets_table));
     }
 
     /**

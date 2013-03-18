@@ -6,9 +6,8 @@
 <resources>
 	<string name="settings_default_values">"Keep Webcam Screen On;No;1
 Personal Information;NULL;1
-Manage My Pets;NULL;0
+Manage My Pets;NULL;1
 Enrollment Forms;NULL;0
 Information/About;NULL;1
-Contact Lucky Paws;NULL;1
-Star Chart Location;NULL;0"</string>
+Contact Lucky Paws;NULL;1"</string>
 </resources>

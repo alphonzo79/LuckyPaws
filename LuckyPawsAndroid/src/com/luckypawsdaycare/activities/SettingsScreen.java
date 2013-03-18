@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.DatabaseConstants;
 import com.luckypawsdaycare.database.PersonalInfoDAO;
+import com.luckypawsdaycare.database.PetsDAO;
 import com.luckypawsdaycare.database.SettingsDAO;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class SettingsScreen extends ListActivity {
     {
         String itemText = (String) l.getItemAtPosition(position);
 
-        if(itemText.contains("Keep Webcam Screen On")) {
+        if(itemText.equals(DatabaseConstants.SETTINGS_SCREEN_LOCK_SETTING)) {
             String value = itemText.split(":")[1].trim();
 
             String[] valuesArray = new String[]{DatabaseConstants.YES, DatabaseConstants.NO};
@@ -72,7 +73,7 @@ public class SettingsScreen extends ListActivity {
             selector.putExtra("valuesArray", valuesArray);
             selector.putExtra("header", "Keep Screen On While Streaming Webcam?");
             startActivityForResult(selector, SCREEN_LOCK_REQUEST);
-        } else if(itemText.contains("Personal Information")) {
+        } else if(itemText.equals(DatabaseConstants.SETTINGS_PERSONAL_INFO_SETTING)) {
             PersonalInfoDAO db = new PersonalInfoDAO(this);
             if(db.getPersonalInfoIsSet()) {
                 Intent intent = new Intent(this, PersonalInfoDisplay.class);
@@ -81,10 +82,19 @@ public class SettingsScreen extends ListActivity {
                 Intent intent = new Intent(this, PersonalInfoEdit.class);
                 startActivity(intent);
             }
-        } else if(itemText.contains("Information/About")) {
+        } else if(itemText.equals(DatabaseConstants.SETTINGS_MANAGE_PETS_SETTINGS)) {
+            PetsDAO db = new PetsDAO(this);
+            if(db.countPets() > 0) {
+                Intent showPets = new Intent(this, ListMyPets.class);
+                startActivity(showPets);
+            } else {
+                Intent addPet = new Intent(this, EditMyPets.class);
+                startActivity(addPet);
+            }
+        } else if(itemText.equals(DatabaseConstants.SETTINGS_INFO_ABOUT_SETTING)) {
             Intent info = new Intent(this, InfoAboutScreen.class);
             startActivity(info);
-        } else if(itemText.contains("Contact")) {
+        } else if(itemText.equals(DatabaseConstants.SETTINGS_CONTACT_SETTING)) {
             Intent contact = new Intent(this, ContactScreen.class);
             startActivity(contact);
         }

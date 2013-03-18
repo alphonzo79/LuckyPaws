@@ -19,6 +19,7 @@
 	<dimen name="scalable_3_pix">3dp</dimen>
 	<dimen name="scalable_4_pix">4dp</dimen>
 	<dimen name="scalable_5_pix">5dp</dimen>
+	<dimen name="scalable_6_pix">6dp</dimen>
 	<dimen name="scalable_7_pix">7dp</dimen>
 	<dimen name="scalable_9_pix">9dp</dimen>
 	<dimen name="scalable_10_pix">10dp</dimen>
