@@ -96,10 +96,10 @@
 	<style name="spinner">
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_marginLeft">@dimen/scalable_25_pix</item>
+		<item name="android:layout_marginLeft">@dimen/scalable_22_pix</item>
 		<item name="android:layout_marginRight">@dimen/scalable_25_pix</item>
-		<item name="android:layout_marginTop">@dimen/scalable_5_pix</item>
-		<item name="android:layout_marginBottom">@dimen/scalable_7_pix</item>
+		<item name="android:layout_marginTop">@dimen/scalable_4_pix</item>
+		<item name="android:layout_marginBottom">@dimen/scalable_6_pix</item>
 		<item name="android:background">@drawable/spinner_state</item>
 	</style>
 </resources>

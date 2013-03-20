@@ -21,10 +21,13 @@
 	<dimen name="scalable_5_pix">5dp</dimen>
 	<dimen name="scalable_6_pix">6dp</dimen>
 	<dimen name="scalable_7_pix">7dp</dimen>
+	<dimen name="scalable_8_pix">8dp</dimen>
 	<dimen name="scalable_9_pix">9dp</dimen>
 	<dimen name="scalable_10_pix">10dp</dimen>
 	<dimen name="scalable_12_pix">12dp</dimen>
 	<dimen name="scalable_15_pix">15dp</dimen>
+	<dimen name="scalable_20_pix">20dp</dimen>
+	<dimen name="scalable_22_pix">22dp</dimen>
 	<dimen name="scalable_25_pix">25dp</dimen>
 	<dimen name="scalable_27_pix">27dp</dimen>
 	<dimen name="scalable_30_pix">30dp</dimen>
