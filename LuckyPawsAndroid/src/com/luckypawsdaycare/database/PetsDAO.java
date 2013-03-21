@@ -44,7 +44,7 @@ public class PetsDAO extends DatabaseHelper {
 
     public Map<String, String> getPetData(int id) {
         SQLiteDatabase db = getReadableDatabase();
-        String stmt = "SELECT * FROM pets WHERE _id = ?;";
+        String stmt = "SELECT * FROM pets WHERE " + PetsTableColumnNames.ID.getString() + " = ?;";
 
         Cursor rs = db.rawQuery(stmt, new String[]{Integer.toString(id)});
         Map<String, String> result = new HashMap<String, String>();
@@ -86,7 +86,10 @@ public class PetsDAO extends DatabaseHelper {
         SQLiteStatement stmt = db.compileStatement(String.format("INSERT INTO pets (%s) VALUES (%s);", keyArgs, valueArgs));
         for(int i = 0; i < keys.size(); i++) {
             String column = keys.get(i);
-            if(column.equals("petName") || column.equals("dateOfBirth") || column.equals("breed") || column.equals("color")) {
+            if(column.equals(PetsTableColumnNames.NAME.getString())
+                    || column.equals(PetsTableColumnNames.BIRTHDAY.getString())
+                    || column.equals(PetsTableColumnNames.BREED.getString())
+                    || column.equals(PetsTableColumnNames.COLOR.getString())) {
                 stmt.bindString(i + 1, args.get(column));
             } else {
                 stmt .bindLong(i + 1, Integer.parseInt(args.get(column)));
@@ -124,10 +127,14 @@ public class PetsDAO extends DatabaseHelper {
         updateArgs = updateArgs.substring(0, updateArgs.length() - 2);
 
         SQLiteDatabase db = getWritableDatabase();
-        SQLiteStatement stmt = db.compileStatement(String.format("UPDATE pets SET %s WHERE _id = %d;", updateArgs, id));
+        SQLiteStatement stmt = db.compileStatement(String.format("UPDATE pets SET %s WHERE " +
+                PetsTableColumnNames.ID.getString() + " = %d;", updateArgs, id));
         for(int i = 0; i < keys.size(); i++) {
             String column = keys.get(i);
-            if(column.equals("petName") || column.equals("dateOfBirth") || column.equals("breed") || column.equals("color")) {
+            if(column.equals(PetsTableColumnNames.NAME.getString())
+                    || column.equals(PetsTableColumnNames.BIRTHDAY.getString())
+                    || column.equals(PetsTableColumnNames.BREED.getString())
+                    || column.equals(PetsTableColumnNames.COLOR.getString())) {
                 stmt.bindString(i + 1, args.get(column));
             } else {
                 stmt .bindLong(i + 1, Integer.parseInt(args.get(column)));

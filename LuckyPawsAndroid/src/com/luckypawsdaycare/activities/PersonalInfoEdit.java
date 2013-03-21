@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.PersonalInfoDAO;
+import com.luckypawsdaycare.database.PersonalInfoTableColumns;
 
 import java.util.Map;
 
@@ -70,52 +71,52 @@ public class PersonalInfoEdit extends Activity {
     }
 
     private void bindValues() {
-        String firstNameValue = dbValues.get("firstName");
+        String firstNameValue = dbValues.get(PersonalInfoTableColumns.FIRST_NAME.getString());
         if(!TextUtils.isEmpty(firstNameValue)) {
             firstName.setText(firstNameValue);
         }
 
-        String lastNameValue = dbValues.get("lastName");
+        String lastNameValue = dbValues.get(PersonalInfoTableColumns.LAST_NAME.getString());
         if(!TextUtils.isEmpty(lastNameValue)) {
             lastName.setText(lastNameValue);
         }
 
-        String phone1Value = dbValues.get("phone1");
+        String phone1Value = dbValues.get(PersonalInfoTableColumns.PHONE_ONE.getString());
         if(!TextUtils.isEmpty(phone1Value)) {
             phone1.setText(phone1Value);
         }
 
-        String phone2Value = dbValues.get("phone2");
+        String phone2Value = dbValues.get(PersonalInfoTableColumns.PHONE_TWO.getString());
         if(!TextUtils.isEmpty(phone2Value)) {
             phone2.setText(phone2Value);
         }
 
-        String phone3Value = dbValues.get("phone3");
+        String phone3Value = dbValues.get(PersonalInfoTableColumns.PHONE_THREE.getString());
         if(!TextUtils.isEmpty(phone3Value)) {
             phone3.setText(phone3Value);
         }
 
-        String addressStreetValue = dbValues.get("addressStreet");
+        String addressStreetValue = dbValues.get(PersonalInfoTableColumns.STREET.getString());
         if(!TextUtils.isEmpty(addressStreetValue)) {
             addressStreet.setText(addressStreetValue);
         }
 
-        String addressCityValue = dbValues.get("addressCity");
+        String addressCityValue = dbValues.get(PersonalInfoTableColumns.CITY.getString());
         if(!TextUtils.isEmpty(addressCityValue)) {
             addressCity.setText(addressCityValue);
         }
 
-        String addressStateValue = dbValues.get("addressState");
+        String addressStateValue = dbValues.get(PersonalInfoTableColumns.STATE.getString());
         if(!TextUtils.isEmpty(addressStateValue)) {
             addressState.setText(addressStateValue);
         }
 
-        String addressZipValue = dbValues.get("addressZip");
-        if(!TextUtils.isEmpty(addressZipValue)) {
+        String addressZipValue = dbValues.get(PersonalInfoTableColumns.ZIP.getString());
+        if(!TextUtils.isEmpty(addressZipValue) || !addressZipValue.equals("0")) {
             addressZip.setText(addressZipValue);
         }
 
-        String emailValue = dbValues.get("eMail");
+        String emailValue = dbValues.get(PersonalInfoTableColumns.EMAIL.getString());
         if(!TextUtils.isEmpty(emailValue)) {
             eMail.setText(emailValue);
         }
@@ -125,72 +126,72 @@ public class PersonalInfoEdit extends Activity {
         public void onClick(View v) {
             String firstNameValue = firstName.getText().toString();
             if(!TextUtils.isEmpty(firstNameValue)) {
-                dbValues.put("firstName", firstNameValue);
+                dbValues.put(PersonalInfoTableColumns.FIRST_NAME.getString(), firstNameValue);
             } else {
-                dbValues.put("firstName", "");
+                dbValues.put(PersonalInfoTableColumns.FIRST_NAME.getString(), "");
             }
 
             String lastNameValue = lastName.getText().toString();
             if(!TextUtils.isEmpty(lastNameValue)) {
-                dbValues.put("lastName", lastNameValue);
+                dbValues.put(PersonalInfoTableColumns.LAST_NAME.getString(), lastNameValue);
             } else {
-                dbValues.put("lastName", "");
+                dbValues.put(PersonalInfoTableColumns.LAST_NAME.getString(), "");
             }
 
             String phone1Value = phone1.getText().toString();
             if(!TextUtils.isEmpty(phone1Value)) {
-                dbValues.put("phone1", phone1Value);
+                dbValues.put(PersonalInfoTableColumns.PHONE_ONE.getString(), phone1Value);
             } else {
-                dbValues.put("phone1", "");
+                dbValues.put(PersonalInfoTableColumns.PHONE_ONE.getString(), "");
             }
 
             String phone2Value = phone2.getText().toString();
             if(!TextUtils.isEmpty(phone2Value)) {
-                dbValues.put("phone2", phone2Value);
+                dbValues.put(PersonalInfoTableColumns.PHONE_TWO.getString(), phone2Value);
             } else {
-                dbValues.put("phone2", "");
+                dbValues.put(PersonalInfoTableColumns.PHONE_TWO.getString(), "");
             }
 
             String phone3Value = phone3.getText().toString();
             if(!TextUtils.isEmpty(phone3Value)) {
-                dbValues.put("phone3", phone3Value);
+                dbValues.put(PersonalInfoTableColumns.PHONE_THREE.getString(), phone3Value);
             } else {
-                dbValues.put("phone3", "");
+                dbValues.put(PersonalInfoTableColumns.PHONE_THREE.getString(), "");
             }
 
             String addressStreetValue = addressStreet.getText().toString();
             if(!TextUtils.isEmpty(addressStreetValue)) {
-                dbValues.put("addressStreet", addressStreetValue);
+                dbValues.put(PersonalInfoTableColumns.STREET.getString(), addressStreetValue);
             } else {
-                dbValues.put("addressStreet", "");
+                dbValues.put(PersonalInfoTableColumns.STREET.getString(), "");
             }
 
             String addressCityValue = addressCity.getText().toString();
             if(!TextUtils.isEmpty(addressCityValue)) {
-                dbValues.put("addressCity", addressCityValue);
+                dbValues.put(PersonalInfoTableColumns.CITY.getString(), addressCityValue);
             } else {
-                dbValues.put("addressCity", "");
+                dbValues.put(PersonalInfoTableColumns.CITY.getString(), "");
             }
 
             String addressStateValue = addressState.getText().toString();
             if(!TextUtils.isEmpty(addressStateValue)) {
-                dbValues.put("addressState", addressStateValue);
+                dbValues.put(PersonalInfoTableColumns.STATE.getString(), addressStateValue);
             } else {
-                dbValues.put("addressState", "");
+                dbValues.put(PersonalInfoTableColumns.STATE.getString(), "");
             }
 
             String addressZipValue = addressZip.getText().toString();
             if(!TextUtils.isEmpty(addressZipValue) && !addressZipValue.equals("0")) {
-                dbValues.put("addressZip", addressZipValue);
+                dbValues.put(PersonalInfoTableColumns.ZIP.getString(), addressZipValue);
             } else {
-                dbValues.put("addressZip", "");
+                dbValues.put(PersonalInfoTableColumns.ZIP.getString(), "");
             }
 
             String emailValue = eMail.getText().toString();
             if(!TextUtils.isEmpty(emailValue)) {
-                dbValues.put("eMail", emailValue);
+                dbValues.put(PersonalInfoTableColumns.EMAIL.getString(), emailValue);
             } else {
-                dbValues.put("eMail", "");
+                dbValues.put(PersonalInfoTableColumns.EMAIL.getString(), "");
             }
 
             PersonalInfoDAO db = new PersonalInfoDAO(PersonalInfoEdit.this);

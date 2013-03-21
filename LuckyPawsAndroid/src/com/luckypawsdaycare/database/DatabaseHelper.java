@@ -103,7 +103,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //There are three columns to fill in this table
             if (rowData.length == SETTINGS_TABLE_COLUMN_COUNT)
             {
-                sqlStatement = db.compileStatement("INSERT INTO settings (settingName, settingValue, visible) VALUES (?, ?, ?)");
+                sqlStatement = db.compileStatement(String.format("INSERT INTO settings (%s, %s, %s) VALUES (?, ?, ?)",
+                        SettingsTableColumnNames.NAME.getString(), SettingsTableColumnNames.VALUE.getString(),
+                        SettingsTableColumnNames.VISIBLE.getString()));
                 sqlStatement.bindString(1, rowData[0]);
                 sqlStatement.bindString(2, rowData[1]);
                 sqlStatement.bindLong(3, Integer.parseInt(rowData[2]));
@@ -130,8 +132,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteStatement sqlStatement;
 //firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip INTEGER,
 // referral TEXT, agreed INTEGER, signed TEXT
-        sqlStatement = db.compileStatement("INSERT INTO personalInfo (_id, firstName, lastName, eMail, phone1, phone2, phone3, addressStreet, addressCity," +
-                " addressState, addressZip, referral, agreed, signed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        sqlStatement = db.compileStatement(String.format("INSERT INTO personalInfo (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s," +
+                " %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", PersonalInfoTableColumns.ID.getString(),
+                PersonalInfoTableColumns.FIRST_NAME.getString(), PersonalInfoTableColumns.LAST_NAME.getString(),
+                PersonalInfoTableColumns.EMAIL.getString(), PersonalInfoTableColumns.PHONE_ONE.getString(),
+                PersonalInfoTableColumns.PHONE_TWO.getString(), PersonalInfoTableColumns.PHONE_THREE.getString(),
+                PersonalInfoTableColumns.STREET.getString(), PersonalInfoTableColumns.CITY.getString(),
+                PersonalInfoTableColumns.STATE.getString(), PersonalInfoTableColumns.ZIP.getString(),
+                PersonalInfoTableColumns.REFERRAL.getString(), PersonalInfoTableColumns.AGREED.getString(),
+                PersonalInfoTableColumns.SIGNED.getString()));
         sqlStatement.bindLong(1, 1); //id
         sqlStatement.bindString(2, ""); //firstName
         sqlStatement.bindString(3, ""); //lastName

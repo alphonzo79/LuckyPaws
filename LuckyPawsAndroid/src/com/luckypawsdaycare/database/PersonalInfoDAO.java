@@ -28,9 +28,15 @@ public class PersonalInfoDAO extends DatabaseHelper {
 
         //firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT,
         // addressState TEXT, addressZip TEXT, referral TEXT, agreed INTEGER, signed TEXT
-        String stmt = "SELECT count(*) FROM personalInfo WHERE firstName = '' AND lastName = '' AND eMail = '' AND phone1 = ''" +
-                " AND phone2 = '' AND phone3 = '' AND addressStreet = '' AND addressCity = '' AND addressState = '' AND" +
-                " (addressZip = '' OR addressZip = 0) AND referral = '' AND agreed = 0 AND signed = '';";
+        String stmt = String.format("SELECT count(*) FROM personalInfo WHERE %s = '' AND %s = '' AND %s = '' AND %s = ''" +
+                " AND %s = '' AND %s = '' AND %s = '' AND %s = '' AND %s = '' AND (%s = '' OR %s = 0) AND %s = '' AND %s" +
+                " = 0 AND %s = '';", PersonalInfoTableColumns.FIRST_NAME.getString(),
+                PersonalInfoTableColumns.LAST_NAME.getString(), PersonalInfoTableColumns.EMAIL.getString(),
+                PersonalInfoTableColumns.PHONE_ONE.getString(), PersonalInfoTableColumns.PHONE_TWO.getString(),
+                PersonalInfoTableColumns.PHONE_THREE.getString(), PersonalInfoTableColumns.STREET.getString(),
+                PersonalInfoTableColumns.CITY.getString(), PersonalInfoTableColumns.STATE.getString(),
+                PersonalInfoTableColumns.ZIP.getString(), PersonalInfoTableColumns.REFERRAL.getString(),
+                PersonalInfoTableColumns.AGREED.getString(), PersonalInfoTableColumns.SIGNED.getString());
 
         Cursor rs = db.rawQuery(stmt, null);
         boolean result = false;
@@ -51,8 +57,13 @@ public class PersonalInfoDAO extends DatabaseHelper {
     public Map<String, String> getPersonalInfo() {
         SQLiteDatabase db = getReadableDatabase();
 
-        String stmt = "SELECT firstName, lastName, eMail, phone1, phone2, phone3, addressStreet, addressCity, addressState, " +
-                "addressZip FROM personalInfo WHERE _id = 1;";
+        String stmt = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %sFROM personalInfo WHERE %s = 1;",
+                PersonalInfoTableColumns.FIRST_NAME.getString(), PersonalInfoTableColumns.LAST_NAME.getString(),
+                PersonalInfoTableColumns.EMAIL.getString(), PersonalInfoTableColumns.PHONE_ONE.getString(),
+                PersonalInfoTableColumns.PHONE_TWO.getString(), PersonalInfoTableColumns.PHONE_THREE.getString(),
+                PersonalInfoTableColumns.STREET.getString(), PersonalInfoTableColumns.CITY.getString(),
+                PersonalInfoTableColumns.STATE.getString(), PersonalInfoTableColumns.ZIP.getString(),
+                PersonalInfoTableColumns.ID.getString());
 
         Cursor rs = db.rawQuery(stmt, null);
         Map<String, String> result = new HashMap<String, String>(10);
@@ -85,7 +96,8 @@ public class PersonalInfoDAO extends DatabaseHelper {
         //Remove the last comma
         updateArgs = updateArgs.substring(0, updateArgs.length() - 2);
 
-        SQLiteStatement stmt = db.compileStatement("UPDATE personalInfo SET " + updateArgs + " WHERE _id = 1;");
+        SQLiteStatement stmt = db.compileStatement("UPDATE personalInfo SET " + updateArgs + " WHERE " +
+                PersonalInfoTableColumns.ID.getString() + " = 1;");
         for(int i = 0; i < keys.size(); i++) {
             stmt.bindString(i + 1, updateValues.get(keys.get(i)));
         }

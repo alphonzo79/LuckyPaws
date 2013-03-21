@@ -22,7 +22,8 @@ public class SettingsDAO extends DatabaseHelper {
 
     public boolean getPersistentSetting(String settingName) {
         SQLiteDatabase db = getReadableDatabase();
-        String sqlStatement = "SELECT settingValue FROM settings WHERE settingName = ?";
+        String sqlStatement = String.format("SELECT %s FROM settings WHERE %s = ?",
+                SettingsTableColumnNames.VALUE.getString(), SettingsTableColumnNames.NAME.getString());
 
 
         Cursor result = db.rawQuery(sqlStatement, new String[]{settingName});
@@ -38,7 +39,8 @@ public class SettingsDAO extends DatabaseHelper {
 
     public Cursor getVisiblePersistentSettings() {
         SQLiteDatabase db = getReadableDatabase();
-        String sqlStatement = "SELECT * FROM settings WHERE visible = " + DatabaseConstants.TRUE + ";";
+        String sqlStatement = "SELECT * FROM settings WHERE " + SettingsTableColumnNames.VISIBLE.getString() + " = "
+                + DatabaseConstants.TRUE + ";";
 
         Cursor result = db.rawQuery(sqlStatement, null);
         result.moveToFirst();
@@ -49,7 +51,8 @@ public class SettingsDAO extends DatabaseHelper {
 
     public boolean setPersistentSetting(String settingName, String value) {
         SQLiteDatabase db = getWritableDatabase();
-        SQLiteStatement stmt = db.compileStatement("UPDATE settings SET settingValue = ? WHERE settingName = ?");
+        SQLiteStatement stmt = db.compileStatement("UPDATE settings SET " + SettingsTableColumnNames.VALUE.getString() +
+                " = ? WHERE " + SettingsTableColumnNames.NAME.getString() + " = ?");
         stmt.bindString(1, value);
         stmt.bindString(2, settingName);
 

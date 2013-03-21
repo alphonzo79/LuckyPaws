@@ -14,7 +14,9 @@ import com.luckypawsdaycare.support.DateUtilities;
 import com.luckypawsdaycare.support.SimpleSpinnerValue;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EditMyPets extends Activity {
     List<SimpleSpinnerValue> dogCatOptions;
@@ -112,7 +114,8 @@ public class EditMyPets extends Activity {
 
     Button.OnClickListener saveInfo = new Button.OnClickListener() {
         public void onClick(View v) {
-            //todo
+            Map<String, String> updateArgs = new HashMap<String, String>();
+
         }
     };
 }

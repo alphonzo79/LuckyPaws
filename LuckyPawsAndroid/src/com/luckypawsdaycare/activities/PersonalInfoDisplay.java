@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.PersonalInfoDAO;
+import com.luckypawsdaycare.database.PersonalInfoTableColumns;
 
 import java.util.Map;
 
@@ -66,11 +67,11 @@ public class PersonalInfoDisplay extends Activity {
 
     private void bindValues() {
         String fullNameValue = "";
-        String firstNameValue = dbValues.get("firstName");
+        String firstNameValue = dbValues.get(PersonalInfoTableColumns.FIRST_NAME.getString());
         if(!TextUtils.isEmpty(firstNameValue)) {
             fullNameValue = fullNameValue.concat(firstNameValue + " ");
         }
-        String lastNameValue = dbValues.get("lastName");
+        String lastNameValue = dbValues.get(PersonalInfoTableColumns.LAST_NAME.getString());
         if(!TextUtils.isEmpty(lastNameValue)) {
             fullNameValue = fullNameValue.concat(lastNameValue);
         }
@@ -80,14 +81,14 @@ public class PersonalInfoDisplay extends Activity {
             fullName.setText(R.string.not_set);
         }
 
-        String phone1Value = dbValues.get("phone1");
+        String phone1Value = dbValues.get(PersonalInfoTableColumns.PHONE_ONE.getString());
         if(!TextUtils.isEmpty(phone1Value)) {
             phone1.setText(phone1Value);
         } else {
             findViewById(R.id.phone_one_container).setVisibility(View.GONE);
         }
 
-        String phone2Value = dbValues.get("phone2");
+        String phone2Value = dbValues.get(PersonalInfoTableColumns.PHONE_TWO.getString());
         if(!TextUtils.isEmpty(phone2Value)) {
             phone2.setText(phone2Value);
             //Shuffle the display if phone1 is gone
@@ -101,7 +102,7 @@ public class PersonalInfoDisplay extends Activity {
             findViewById(R.id.phone_two_container).setVisibility(View.GONE);
         }
 
-        String phone3Value = dbValues.get("phone3");
+        String phone3Value = dbValues.get(PersonalInfoTableColumns.PHONE_THREE.getString());
         if(!TextUtils.isEmpty(phone3Value)) {
             phone3.setText(phone3Value);
             //shuffle things if we need to
@@ -117,7 +118,7 @@ public class PersonalInfoDisplay extends Activity {
             findViewById(R.id.phone_three_display).setVisibility(View.GONE);
         }
 
-        String addressStreetValue = dbValues.get("addressStreet");
+        String addressStreetValue = dbValues.get(PersonalInfoTableColumns.STREET.getString());
         if(!TextUtils.isEmpty(addressStreetValue)) {
             addressStreet.setText(addressStreetValue);
         } else {
@@ -125,14 +126,14 @@ public class PersonalInfoDisplay extends Activity {
             findViewById(R.id.address_street_display).setVisibility(View.GONE);
         }
 
-        String addressCityValue = dbValues.get("addressCity");
+        String addressCityValue = dbValues.get(PersonalInfoTableColumns.CITY.getString());
         if(!TextUtils.isEmpty(addressCityValue)) {
             addressCity.setText(addressCityValue);
         } else {
             findViewById(R.id.address_city_container).setVisibility(View.GONE);
         }
 
-        String addressStateValue = dbValues.get("addressState");
+        String addressStateValue = dbValues.get(PersonalInfoTableColumns.STATE.getString());
         if(!TextUtils.isEmpty(addressStateValue)) {
             addressState.setText(addressStateValue);
             //Shuffle things if we need to
@@ -146,7 +147,7 @@ public class PersonalInfoDisplay extends Activity {
             findViewById(R.id.address_state_container).setVisibility(View.GONE);
         }
 
-        String addressZipValue = dbValues.get("addressZip");
+        String addressZipValue = dbValues.get(PersonalInfoTableColumns.ZIP.getString());
         if(!TextUtils.isEmpty(addressZipValue) && !addressZipValue.equals("0")) {
             addressZip.setText(addressZipValue);
             //shuffle things if we need to
@@ -160,7 +161,7 @@ public class PersonalInfoDisplay extends Activity {
             findViewById(R.id.address_zip_container).setVisibility(View.GONE);
         }
 
-        String emailValue = dbValues.get("eMail");
+        String emailValue = dbValues.get(PersonalInfoTableColumns.EMAIL.getString());
         if(!TextUtils.isEmpty(emailValue)) {
             eMail.setText(emailValue);
         } else {
