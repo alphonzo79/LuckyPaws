@@ -15,6 +15,12 @@ public class DatabaseConstants {
     public static final int CAT = 1;
     public static final int NOT_FIXED = 0;
     public static final int FIXED = 1;
+    public static final int LESS_THAN_TEN_POUNDS = 1;
+    public static final int TEN_TO_TWENTY_FIVE_POUNDS = 2;
+    public static final int TWENTY_FIVE_TO_FIFTY_POUNDS = 3;
+    public static final int FIFTY_TO_SEVENTY_FIVE_POUNDS = 4;
+    public static final int SEVENTY_FIVE_TO_ONE_HUNDRED_POUNDS = 5;
+    public static final int MORE_THAN_ONE_HUNDRED_POUNDS = 6;
 
     //Settings
     public static final String SETTINGS_SCREEN_LOCK_SETTING = "Keep Webcam Screen On";

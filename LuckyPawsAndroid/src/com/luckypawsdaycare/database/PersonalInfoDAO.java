@@ -35,8 +35,9 @@ public class PersonalInfoDAO extends DatabaseHelper {
                 PersonalInfoTableColumns.PHONE_ONE.getString(), PersonalInfoTableColumns.PHONE_TWO.getString(),
                 PersonalInfoTableColumns.PHONE_THREE.getString(), PersonalInfoTableColumns.STREET.getString(),
                 PersonalInfoTableColumns.CITY.getString(), PersonalInfoTableColumns.STATE.getString(),
-                PersonalInfoTableColumns.ZIP.getString(), PersonalInfoTableColumns.REFERRAL.getString(),
-                PersonalInfoTableColumns.AGREED.getString(), PersonalInfoTableColumns.SIGNED.getString());
+                PersonalInfoTableColumns.ZIP.getString(), PersonalInfoTableColumns.ZIP.getString(),
+                PersonalInfoTableColumns.REFERRAL.getString(), PersonalInfoTableColumns.AGREED.getString(),
+                PersonalInfoTableColumns.SIGNED.getString());
 
         Cursor rs = db.rawQuery(stmt, null);
         boolean result = false;
@@ -57,7 +58,7 @@ public class PersonalInfoDAO extends DatabaseHelper {
     public Map<String, String> getPersonalInfo() {
         SQLiteDatabase db = getReadableDatabase();
 
-        String stmt = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %sFROM personalInfo WHERE %s = 1;",
+        String stmt = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s FROM personalInfo WHERE %s = 1;",
                 PersonalInfoTableColumns.FIRST_NAME.getString(), PersonalInfoTableColumns.LAST_NAME.getString(),
                 PersonalInfoTableColumns.EMAIL.getString(), PersonalInfoTableColumns.PHONE_ONE.getString(),
                 PersonalInfoTableColumns.PHONE_TWO.getString(), PersonalInfoTableColumns.PHONE_THREE.getString(),

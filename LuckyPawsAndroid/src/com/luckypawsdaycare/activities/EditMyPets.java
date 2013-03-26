@@ -7,19 +7,27 @@ package com.luckypawsdaycare.activities;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.luckypawsdaycare.R;
+import com.luckypawsdaycare.database.DatabaseConstants;
+import com.luckypawsdaycare.database.PetsDAO;
+import com.luckypawsdaycare.database.PetsTableColumnNames;
 import com.luckypawsdaycare.support.DateUtilities;
-import com.luckypawsdaycare.support.SimpleSpinnerValue;
 
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class EditMyPets extends Activity {
-    List<SimpleSpinnerValue> dogCatOptions;
+    private final String TAG = "EditMyPets";
+
+    Map<String, String> petData;
+    boolean isEditing;
 
     int day;
     int month;
@@ -51,6 +59,12 @@ public class EditMyPets extends Activity {
         super.onCreate(savedInstance);
         setContentView(R.layout.my_pets_add_edit);
 
+        isEditing = getIntent().getBooleanExtra("com.luckypawsdaycare.isEditing", false);
+        if(isEditing) {
+            id = getIntent().getIntExtra("con.luckypawsdaycare.petId", -1);
+            getOriginalValues();
+        }
+
         findAndWireElements();
         setDisplayValues();
     }
@@ -77,12 +91,109 @@ public class EditMyPets extends Activity {
         cancel.setOnClickListener(cancelClick);
     }
 
+    public void getOriginalValues() {
+        PetsDAO db = new PetsDAO(this);
+        if(id > -1) {
+            petData = db.getPetData(id);
+            name = petData.get(PetsTableColumnNames.NAME.getString());
+            dogCat = Integer.parseInt(petData.get(PetsTableColumnNames.DOG_CAT.getString()));
+            sex = Integer.parseInt(petData.get(PetsTableColumnNames.SEX.getString()));
+            breed = petData.get(PetsTableColumnNames.BREED.getString());
+            birthdate = petData.get(PetsTableColumnNames.BIRTHDAY.getString());
+            size = Integer.parseInt(petData.get(PetsTableColumnNames.SIZE.getString()));
+            fixed = Integer.parseInt(petData.get(PetsTableColumnNames.FIXED.getString()));
+        }
+    }
+
     private void setDisplayValues() {
-        //todo if this is an edit intent
-        //todo otherwise
-        year = 2013;
-        day = 1;
-        month = 1;
+        if(isEditing && id < 1) {
+            if(!TextUtils.isEmpty(name)) {
+                nameInput.setText(name);
+            }
+
+            switch (dogCat) {
+                case DatabaseConstants.DOG:
+                    dogCatSpinner.setSelection(1);
+                    break;
+                case DatabaseConstants.CAT:
+                    dogCatSpinner.setSelection(2);
+                    break;
+                default:
+                    dogCatSpinner.setSelection(0);
+            }
+
+            switch (sex) {
+                case DatabaseConstants.MALE_INT:
+                    sexSpinner.setSelection(1);
+                    break;
+                case DatabaseConstants.FEMALE_INT:
+                    sexSpinner.setSelection(2);
+                    break;
+                default:
+                    sexSpinner.setSelection(0);
+            }
+
+            if(!TextUtils.isEmpty(breed)) {
+                breedInput.setText(breed);
+            }
+            if(!TextUtils.isEmpty(birthdate)) {
+                birthdateInput.setText(birthdate);
+                try {
+                    Date date = DateUtilities.appDateFormat().parse(birthdate);
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(date);
+                    year = cal.get(Calendar.YEAR);
+                    month = cal.get(Calendar.MONTH);
+                    day = cal.get(Calendar.DAY_OF_MONTH);
+                } catch (ParseException e) {
+                    Log.d(TAG, "Caught ParseException while parsing the birthdate " + birthdate);
+                }
+            } else {
+                Calendar cal = Calendar.getInstance();
+                year = cal.get(Calendar.YEAR);
+                day = cal.get(Calendar.DAY_OF_MONTH);
+                month = cal.get(Calendar.MONTH);
+            }
+
+            switch(size) {
+                case DatabaseConstants.LESS_THAN_TEN_POUNDS:
+                    sizeSpinner.setSelection(1);
+                    break;
+                case DatabaseConstants.TEN_TO_TWENTY_FIVE_POUNDS:
+                    sizeSpinner.setSelection(2);
+                    break;
+                case DatabaseConstants.TWENTY_FIVE_TO_FIFTY_POUNDS:
+                    sizeSpinner.setSelection(3);
+                    break;
+                case DatabaseConstants.FIFTY_TO_SEVENTY_FIVE_POUNDS:
+                    sizeSpinner.setSelection(4);
+                    break;
+                case DatabaseConstants.SEVENTY_FIVE_TO_ONE_HUNDRED_POUNDS:
+                    sizeSpinner.setSelection(5);
+                    break;
+                case DatabaseConstants.MORE_THAN_ONE_HUNDRED_POUNDS:
+                    sizeSpinner.setSelection(6);
+                    break;
+                default:
+                    sizeSpinner.setSelection(0);
+            }
+
+            switch (fixed) {
+                case DatabaseConstants.TRUE:
+                    fixedSpinner.setSelection(1);
+                    break;
+                case DatabaseConstants.FALSE:
+                    fixedSpinner.setSelection(2);
+                    break;
+                default:
+                    fixedSpinner.setSelection(0);
+            }
+        } else {
+            Calendar cal = Calendar.getInstance();
+            year = cal.get(Calendar.YEAR);
+            day = cal.get(Calendar.DAY_OF_MONTH);
+            month = cal.get(Calendar.MONTH);
+        }
     }
 
     TextView.OnClickListener launchDatePicker = new TextView.OnClickListener(){
@@ -116,6 +227,93 @@ public class EditMyPets extends Activity {
         public void onClick(View v) {
             Map<String, String> updateArgs = new HashMap<String, String>();
 
+            String newName = nameInput.getText().toString();
+            if(!TextUtils.isEmpty(newName)) {
+                updateArgs.put(PetsTableColumnNames.NAME.getString(), newName);
+            }
+
+            int newDogCat = dogCatSpinner.getSelectedItemPosition();
+            switch(newDogCat) {
+                case 1:
+                    updateArgs.put(PetsTableColumnNames.DOG_CAT.getString(), Integer.toString(DatabaseConstants.DOG));
+                    break;
+                case 2:
+                    updateArgs.put(PetsTableColumnNames.DOG_CAT.getString(), Integer.toString(DatabaseConstants.CAT));
+                    break;
+                default:
+                    //do nothing
+            }
+
+            int newSex = sexSpinner.getSelectedItemPosition();
+            switch(newSex) {
+                case 1:
+                    updateArgs.put(PetsTableColumnNames.SEX.getString(), Integer.toString(DatabaseConstants.MALE_INT));
+                    break;
+                case 2:
+                    updateArgs.put(PetsTableColumnNames.SEX.getString(), Integer.toString(DatabaseConstants.FEMALE_INT));
+                    break;
+                default:
+                    //do nothing
+            }
+
+            String newBreed = breedInput.getText().toString();
+            if(!TextUtils.isEmpty(newBreed)) {
+                updateArgs.put(PetsTableColumnNames.BREED.getString(), newBreed);
+            }
+
+            String newBirthdate = birthdateInput.getText().toString();
+            if(!TextUtils.isEmpty(newBirthdate)) {
+                updateArgs.put(PetsTableColumnNames.BIRTHDAY.getString(), newBirthdate);
+            }
+
+            int newSize = sizeSpinner.getSelectedItemPosition();
+            switch(newSize) {
+                case 1:
+                    updateArgs.put(PetsTableColumnNames.SIZE.getString(),
+                            Integer.toString(DatabaseConstants.LESS_THAN_TEN_POUNDS));
+                    break;
+                case 2:
+                    updateArgs.put(PetsTableColumnNames.SIZE.getString(),
+                            Integer.toString(DatabaseConstants.TEN_TO_TWENTY_FIVE_POUNDS));
+                    break;
+                case 3:
+                    updateArgs.put(PetsTableColumnNames.SIZE.getString(),
+                            Integer.toString(DatabaseConstants.TWENTY_FIVE_TO_FIFTY_POUNDS));
+                    break;
+                case 4:
+                    updateArgs.put(PetsTableColumnNames.SIZE.getString(),
+                            Integer.toString(DatabaseConstants.FIFTY_TO_SEVENTY_FIVE_POUNDS));
+                    break;
+                case 5:
+                    updateArgs.put(PetsTableColumnNames.SIZE.getString(),
+                            Integer.toString(DatabaseConstants.SEVENTY_FIVE_TO_ONE_HUNDRED_POUNDS));
+                    break;
+                case 6:
+                    updateArgs.put(PetsTableColumnNames.SIZE.getString(),
+                            Integer.toString(DatabaseConstants.MORE_THAN_ONE_HUNDRED_POUNDS));
+                    break;
+                default:
+                    //Do Nothing
+            }
+
+            int newFixed = fixedSpinner.getSelectedItemPosition();
+            switch (newFixed) {
+                case 1:
+                    updateArgs.put(PetsTableColumnNames.FIXED.getString(), Integer.toString(DatabaseConstants.TRUE));
+                    break;
+                case 2:
+                    updateArgs.put(PetsTableColumnNames.FIXED.getString(), Integer.toString(DatabaseConstants.FALSE));
+                    break;
+                default:
+                    //do nothing
+            }
+
+            PetsDAO db = new PetsDAO(EditMyPets.this);
+            if(isEditing) {
+                db.updatePetData(id, updateArgs);
+            } else {
+                db.addPetData(updateArgs);
+            }
         }
     };
 }

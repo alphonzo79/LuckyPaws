@@ -63,7 +63,7 @@ public class SettingsScreen extends ListActivity {
     {
         String itemText = (String) l.getItemAtPosition(position);
 
-        if(itemText.equals(DatabaseConstants.SETTINGS_SCREEN_LOCK_SETTING)) {
+        if(itemText.contains(DatabaseConstants.SETTINGS_SCREEN_LOCK_SETTING)) {
             String value = itemText.split(":")[1].trim();
 
             String[] valuesArray = new String[]{DatabaseConstants.YES, DatabaseConstants.NO};
