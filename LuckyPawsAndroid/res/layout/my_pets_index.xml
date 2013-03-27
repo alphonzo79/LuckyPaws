@@ -4,9 +4,42 @@
   ~ Copyright (c) 2013. Lucky Paws, Inc
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	style="@style/layout_root"
+	>
 
-</LinearLayout>
+	<include layout="@layout/standard_header_no_action"
+		android:id="@+id/header_bar"
+		android:layout_alignParentTop="true"
+		/>
+
+	<LinearLayout
+		android:id="@+id/button_container"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="@dimen/scalable_10_pix"
+		android:paddingBottom="@dimen/scalable_10_pix"
+		android:paddingRight="@dimen/scalable_5_pix"
+		android:paddingLeft="@dimen/scalable_5_pix"
+		android:orientation="horizontal"
+		android:layout_alignParentBottom="true"
+		>
+
+		<Button
+			android:id="@+id/add_pet_button"
+			style="@style/blue_button"
+			android:layout_width="wrap_content"
+			android:text="@string/edit_info_button"
+			android:layout_marginLeft="@dimen/scalable_45_pix"
+			android:layout_marginRight="@dimen/scalable_45_pix"
+			/>
+
+	</LinearLayout>
+
+	<ListView
+		style="@style/list_view"
+		android:id="@android:id/list"
+		/>
+
+</RelativeLayout>

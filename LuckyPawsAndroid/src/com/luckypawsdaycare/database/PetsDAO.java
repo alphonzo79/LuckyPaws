@@ -156,4 +156,26 @@ public class PetsDAO extends DatabaseHelper {
 
         return success;
     }
+
+    public Map<String, Integer> getPetsIndex() {
+        Map<String, Integer> result = new HashMap<String, Integer>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        String stmt = "SELECT _id, petName FROM pets;";
+
+        Cursor rs = db.rawQuery(stmt, null);
+        try {
+            rs.moveToFirst();
+            do {
+                result.put(rs.getString(1), rs.getInt(0));
+            } while (rs.moveToNext());
+        } catch(SQLiteException e) {
+            e.printStackTrace();
+        } finally {
+            rs.close();
+            db.close();
+        }
+
+        return result;
+    }
 }
