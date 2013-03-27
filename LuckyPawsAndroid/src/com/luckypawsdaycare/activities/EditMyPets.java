@@ -6,6 +6,7 @@ package com.luckypawsdaycare.activities;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -61,7 +62,7 @@ public class EditMyPets extends Activity {
 
         isEditing = getIntent().getBooleanExtra("com.luckypawsdaycare.isEditing", false);
         if(isEditing) {
-            id = getIntent().getIntExtra("con.luckypawsdaycare.petId", -1);
+            id = getIntent().getIntExtra("com.luckypawsdaycare.petId", -1);
             getOriginalValues();
         }
 
@@ -311,8 +312,16 @@ public class EditMyPets extends Activity {
             PetsDAO db = new PetsDAO(EditMyPets.this);
             if(isEditing) {
                 db.updatePetData(id, updateArgs);
+                Intent display = new Intent(EditMyPets.this, ViewMyPet.class);
+                display.putExtra("com.luckypawsdaycare.petId", id);
+                startActivity(display);
+                EditMyPets.this.finish();
             } else {
                 db.addPetData(updateArgs);
+                //We don't have an id, so we'll just show the list
+                Intent list = new Intent(EditMyPets.this, ListMyPets.class);
+                startActivity(list);
+                EditMyPets.this.finish();
             }
         }
     };

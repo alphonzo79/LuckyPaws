@@ -112,7 +112,7 @@ public class PersonalInfoEdit extends Activity {
         }
 
         String addressZipValue = dbValues.get(PersonalInfoTableColumns.ZIP.getString());
-        if(!TextUtils.isEmpty(addressZipValue) || !addressZipValue.equals("0")) {
+        if(!TextUtils.isEmpty(addressZipValue) && !addressZipValue.equals("0")) {
             addressZip.setText(addressZipValue);
         }
 
