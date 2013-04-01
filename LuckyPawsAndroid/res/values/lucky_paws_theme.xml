@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="lucky_paws_theme" parent="@android:Theme.Light.NoTitleBar">
+		<item name="android:radioButtonStyle">@style/lucky_paws_radio</item>
+		<item name="android:spinnerDropDownItemStyle">@style/lp_spinner_dropdown</item>
+		<item name="android:dropDownItemStyle">@style/lp_dropdown_item</item>
+	</style>
+
+	<style name="lucky_paws_radio" parent="@android:style/Widget.CompoundButton.RadioButton">
+		<item name="android:background">@drawable/btn_radio_label_background</item>
+		<item name="android:button">@drawable/lp_radio_button_state</item>
+	</style>
+
+	<style name="lp_spinner_dropdown" parent="android:Widget.DropDownItem.Spinner">
+		<item name="android:checkMark">@drawable/lp_radio_button_state</item>
+		<item name="android:textAppearance">@style/lp_spinner_text_appearance</item>
+	</style>
+
+	<style name="lp_spinner_text_appearance" parent="android:TextAppearance.Widget.DropDownItem">
+		<item name="android:textColor">@color/lucky_paws_blue</item>
+		<item name="android:textSize">@dimen/text_18</item>
+	</style>
+
+	<style name="lp_dropdown_item">
+		<item name="android:textAppearance">@style/lp_spinner_text_appearance</item>
+		<item name="android:paddingLeft">6dip</item>
+		<item name="android:paddingRight">6dip</item>
+		<item name="android:gravity">center_vertical</item>
+	</style>
+</resources>
