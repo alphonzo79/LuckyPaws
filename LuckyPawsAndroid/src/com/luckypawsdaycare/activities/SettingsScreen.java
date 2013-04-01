@@ -85,7 +85,7 @@ public class SettingsScreen extends ListActivity {
         } else if(itemText.equals(DatabaseConstants.SETTINGS_MANAGE_PETS_SETTINGS)) {
             PetsDAO db = new PetsDAO(this);
             if(db.countPets() > 0) {
-                Intent showPets = new Intent(this, EditMyPets.class);
+                Intent showPets = new Intent(this, ListMyPets.class);
                 startActivity(showPets);
             } else {
                 Intent addPet = new Intent(this, EditMyPets.class);
