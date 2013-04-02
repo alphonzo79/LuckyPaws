@@ -4,6 +4,8 @@
 		<item name="android:radioButtonStyle">@style/lucky_paws_radio</item>
 		<item name="android:spinnerDropDownItemStyle">@style/lp_spinner_dropdown</item>
 		<item name="android:dropDownItemStyle">@style/lp_dropdown_item</item>
+		<item name="android:listViewStyle">@style/lp_list_selector</item>
+		<!--<item name="alertDialogStyle">@style/lp_alert_dialog</item>-->
 	</style>
 
 	<style name="lucky_paws_radio" parent="@android:style/Widget.CompoundButton.RadioButton">
@@ -21,10 +23,18 @@
 		<item name="android:textSize">@dimen/text_18</item>
 	</style>
 
-	<style name="lp_dropdown_item">
+	<style name="lp_dropdown_item" parent="android:Widget.DropDownItem">
 		<item name="android:textAppearance">@style/lp_spinner_text_appearance</item>
 		<item name="android:paddingLeft">6dip</item>
 		<item name="android:paddingRight">6dip</item>
 		<item name="android:gravity">center_vertical</item>
 	</style>
+
+	<style name="lp_list_selector" parent="android:Widget.ListView">
+		<item name="android:listSelector">@drawable/spinner_dropdown_background</item>
+	</style>
+
+	<!--<style name="lp_alert_dialog" parent="android:AlertDialog">-->
+		<!--<item name="windowTitleStyle">@android:style/DialogWindowTitle</item>-->
+	<!--</style>-->
 </resources>
