@@ -17,6 +17,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="cancel_button">Cancel</string>
 	<string name="edit_info_button">Edit Info</string>
 	<string name="close_button">Close</string>
+	<string name="delete_pet_button">Delete Pet</string>
 
 	<string name="personal_info_heading">Personal Info</string>
 	<string name="full_name_label">Pet Owner</string>

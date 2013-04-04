@@ -10,10 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteStatement;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PetsDAO extends DatabaseHelper {
     Context mContext;
@@ -158,7 +155,7 @@ public class PetsDAO extends DatabaseHelper {
     }
 
     public Map<String, Integer> getPetsIndex() {
-        Map<String, Integer> result = new HashMap<String, Integer>();
+        Map<String, Integer> result = new TreeMap<String, Integer>();
 
         SQLiteDatabase db = getReadableDatabase();
         String stmt = "SELECT _id, petName FROM pets;";

@@ -79,6 +79,7 @@ public class EditMyPets extends Activity {
         nameInput = (EditText)findViewById(R.id.name_input);
         dogCatSpinner = (Spinner)findViewById(R.id.dog_cat_spinner);
         sexSpinner = (Spinner)findViewById(R.id.sex_spinner);
+        sexSpinner.setOnItemSelectedListener(sexSelected);
         breedInput = (EditText)findViewById(R.id.breed_input);
         birthdateInput = (TextView)findViewById(R.id.dob_picker);
         birthdateInput.setOnClickListener(launchDatePicker);
@@ -323,6 +324,28 @@ public class EditMyPets extends Activity {
                 startActivity(list);
                 EditMyPets.this.finish();
             }
+        }
+    };
+
+    Spinner.OnItemSelectedListener sexSelected = new Spinner.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+            int newSex = sexSpinner.getSelectedItemPosition();
+            switch(newSex) {
+                case 1:
+                    fixedLabel.setText(R.string.neutered_label);
+                    break;
+                case 2:
+                    fixedLabel.setText(R.string.spayed_label);
+                    break;
+                default:
+                    fixedLabel.setText(R.string.neutered_spayed_label);
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+            //Do Nothing
         }
     };
 }
