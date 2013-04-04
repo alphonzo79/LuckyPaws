@@ -6,6 +6,7 @@
 		<item name="android:dropDownItemStyle">@style/lp_dropdown_item</item>
 		<item name="android:listViewStyle">@style/lp_list_selector</item>
 		<item name="android:alertDialogStyle">@style/lp_popup_window</item>
+		<item name="android:windowSoftInputMode">stateHidden</item>
 	</style>
 
 	<style name="lucky_paws_radio" parent="@android:style/Widget.CompoundButton.RadioButton">
@@ -39,5 +40,11 @@
 		<item name="android:topDark">@drawable/popup_top_dark</item>
 		<item name="android:centerDark">@drawable/popup_center_dark</item>
 		<item name="android:bottomDark">@drawable/popup_bottom_dark</item>
+		<item name="android:fullBright">@drawable/popup_full_bright</item>
+		<item name="android:topBright">@drawable/popup_top_bright</item>
+		<item name="android:centerBright">@drawable/popup_center_bright</item>
+		<item name="android:bottomBright">@drawable/popup_bottom_bright</item>
+		<item name="android:bottomMedium">@drawable/popup_bottom_medium</item>
+		<item name="android:centerMedium">@drawable/popup_center_medium</item>
 	</style>
 </resources>
