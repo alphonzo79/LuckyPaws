@@ -6,6 +6,7 @@ package com.luckypawsdaycare.database;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteStatement;
@@ -174,5 +175,33 @@ public class PetsDAO extends DatabaseHelper {
         }
 
         return result;
+    }
+
+    public boolean deletePet(int id) {
+        boolean success = false;
+
+        SQLiteDatabase db = getWritableDatabase();
+        SQLiteStatement stmt = db.compileStatement("DELETE from pets WHERE _id = ?");
+        stmt.bindLong(1, id);
+
+        db.beginTransaction();
+        try
+        {
+            stmt.execute();
+            db.setTransactionSuccessful();
+            success = true;
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            db.endTransaction();
+            stmt.close();
+            db.close();
+        }
+
+        return success;
     }
 }

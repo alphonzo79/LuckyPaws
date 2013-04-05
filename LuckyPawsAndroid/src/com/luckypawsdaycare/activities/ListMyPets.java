@@ -34,10 +34,11 @@ public class ListMyPets extends ListActivity {
         super.onCreate(savedInstance);
 
         setContentView(R.layout.my_pets_index);
+    }
 
-        PetsDAO db = new PetsDAO(this);
-        petsData = db.getPetsIndex();
-
+    @Override
+    public void onResume() {
+        super.onResume();
         findAndWireElements();
     }
 
@@ -53,11 +54,13 @@ public class ListMyPets extends ListActivity {
         public void onClick(View v) {
             Intent add = new Intent(ListMyPets.this, EditMyPets.class);
             startActivity(add);
-            ListMyPets.this.finish();
         }
     };
 
     private void prepareListView(){
+        PetsDAO db = new PetsDAO(this);
+        petsData = db.getPetsIndex();
+
         myPets = new ArrayList<Pet>();
         for(String name : petsData.keySet()) {
             myPets.add(new Pet(name, petsData.get(name)));

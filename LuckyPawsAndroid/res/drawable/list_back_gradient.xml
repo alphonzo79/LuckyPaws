@@ -14,7 +14,7 @@
 		android:centerColor="@color/lucky_paws_blue"
 		android:endColor="@color/lucky_paws_light_blue"
 		android:type="linear"
-		android:centerY="0.7"
+		android:centerY="0.85"
 		/>
 
 	<corners android:radius="@dimen/scalable_5_pix" />

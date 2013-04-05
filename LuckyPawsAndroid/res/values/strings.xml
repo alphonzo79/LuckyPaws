@@ -12,6 +12,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="preferences">Preferences</string>
 	<string name="nothing_here">Bob? Bob ain\'t here, man!</string>
 	<string name="not_set">Press Edit Info To Set</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
 
 	<string name="save_button">Save</string>
 	<string name="cancel_button">Cancel</string>
@@ -33,6 +35,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="email_label">E-mail</string>
 
 	<string name="error_info_save">There was an error saving your info. Please try again.</string>
+	<string name="error_pet_delete">There was an error deleting this pet. Please try again.</string>
+	<string name="pet_delete_successful">This pet was successfully deleted.</string>
+	<string name="update_successful">Your information saved successfully</string>
 
 	<string name="info_about_header">About Lucky Paws</string>
 	<string name="lucky_paws_inc">Lucky Paws, Inc — Clayton, NC</string>
@@ -93,4 +98,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	</string-array>
 
 	<string name="add_pet_button">Add A Pet</string>
+	<string name="confirm_delete_message">Are you sure you want to delete information for this pet?\n\nThis operation cannot be undone.</string>
 </resources>

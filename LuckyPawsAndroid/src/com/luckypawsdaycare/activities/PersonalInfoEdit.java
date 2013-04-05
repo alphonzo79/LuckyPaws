@@ -201,6 +201,10 @@ public class PersonalInfoEdit extends Activity {
                 warning.setGravity(Gravity.CENTER, 0, 0);
                 warning.show();
             } else {
+                Toast warning = Toast.makeText(PersonalInfoEdit.this, R.string.update_successful, Toast.LENGTH_SHORT);
+                warning.setGravity(Gravity.CENTER, 0, 0);
+                warning.show();
+
                 Intent display = new Intent(PersonalInfoEdit.this, PersonalInfoDisplay.class);
                 startActivity(display);
                 PersonalInfoEdit.this.finish();

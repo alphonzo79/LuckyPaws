@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
 import com.luckypawsdaycare.R;
@@ -312,17 +313,23 @@ public class EditMyPets extends Activity {
 
             PetsDAO db = new PetsDAO(EditMyPets.this);
             if(isEditing) {
-                db.updatePetData(id, updateArgs);
-                Intent display = new Intent(EditMyPets.this, ViewMyPet.class);
-                display.putExtra("com.luckypawsdaycare.petId", id);
-                startActivity(display);
-                EditMyPets.this.finish();
+                if(db.updatePetData(id, updateArgs)) {
+                    showSuccessToast();
+                    Intent display = new Intent(EditMyPets.this, ViewMyPet.class);
+                    display.putExtra("com.luckypawsdaycare.petId", id);
+                    startActivity(display);
+                    EditMyPets.this.finish();
+                } else {
+                    showErrorToast();
+                }
             } else {
-                db.addPetData(updateArgs);
-                //We don't have an id, so we'll just show the list
-                Intent list = new Intent(EditMyPets.this, ListMyPets.class);
-                startActivity(list);
-                EditMyPets.this.finish();
+                if(db.addPetData(updateArgs)) {
+                    //We don't have an id, so we'll just show the list or go back to settings if this was the first time
+                    showSuccessToast();
+                    EditMyPets.this.finish();
+                } else {
+                    showErrorToast();
+                }
             }
         }
     };
@@ -348,4 +355,16 @@ public class EditMyPets extends Activity {
             //Do Nothing
         }
     };
+
+    private void showSuccessToast() {
+        Toast warning = Toast.makeText(this, R.string.update_successful, Toast.LENGTH_SHORT);
+        warning.setGravity(Gravity.CENTER, 0, 0);
+        warning.show();
+    }
+
+    private void showErrorToast() {
+        Toast warning = Toast.makeText(this, R.string.error_info_save, Toast.LENGTH_SHORT);
+        warning.setGravity(Gravity.CENTER, 0, 0);
+        warning.show();
+    }
 }
