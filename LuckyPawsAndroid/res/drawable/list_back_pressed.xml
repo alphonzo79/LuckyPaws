@@ -4,8 +4,33 @@
   ~ Copyright (c) 2013. Lucky Paws, Inc
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-	   android:shape="rectangle">
-	<solid android:color="@color/lucky_paws_blue" />
-	<corners android:radius="@dimen/scalable_5_pix" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	   <item>
+			<shape android:shape="rectangle">
+
+			<gradient
+				android:angle="90"
+				android:startColor="@color/lucky_paws_blue"
+				android:endColor="@color/lucky_paws_light_blue"
+				android:type="linear"
+				/>
+
+			<corners android:radius="@dimen/scalable_5_pix" />
+
+			</shape>
+
+		</item>
+
+	<item>
+		<shape android:shape="rectangle">
+
+			<solid
+				android:color="@color/lucky_paws_light_blue_trans"
+				/>
+
+			<corners android:radius="@dimen/scalable_5_pix" />
+
+		</shape>
+
+	</item>
+</layer-list>
