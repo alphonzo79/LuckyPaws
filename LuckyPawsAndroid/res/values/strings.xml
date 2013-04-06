@@ -66,35 +66,46 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="birthdate_label">Birthdate</string>
 	<string name="size_label">Size</string>
 	<string name="sex_label">Sex</string>
+	<string name="male">Male</string>
+	<string name="female">Female</string>
+	<string name="dog">Dog</string>
+	<string name="cat">Cat</string>
+
+	<string name="less_than_ten_pounds">&lt;10 pounds</string>
+	<string name="ten_to_twenty_five_pounds">10-25 pounds</string>
+	<string name="twenty_five_to_fifty_pounds">25-50 pounds</string>
+	<string name="fifty_to_seventy_five_pounds">50-75 pounds</string>
+	<string name="seventy_five_to_one_hundred_pounds">75-100 pounds</string>
+	<string name="more_than_one_hundred_pounds">100+ pounds</string>
 
 	<string name="spinner_select_prompt">Select...</string>
 
 	<string-array name="dog_cat_spinner_entries">
 		<item>Select...</item>
-		<item>Dog</item>
-		<item>Cat</item>
+		<item>@string/dog</item>
+		<item>@string/cat</item>
 	</string-array>
 
 	<string-array name="yes_no_spinner_entries">
 		<item>Select...</item>
-		<item>Yes</item>
-		<item>No</item>
+		<item>@string/yes</item>
+		<item>@string/no</item>
 	</string-array>
 
 	<string-array name="size_spinner_entries">
 		<item>Select...</item>
-		<item>&lt;10 pounds</item>
-		<item>10-25 pounds</item>
-		<item>25-50 pounds</item>
-		<item>50-75 pounds</item>
-		<item>75-100 pounds</item>
-		<item>100+ pounds</item>
+		<item>@string/less_than_ten_pounds</item>
+		<item>@string/ten_to_twenty_five_pounds</item>
+		<item>@string/twenty_five_to_fifty_pounds</item>
+		<item>@string/fifty_to_seventy_five_pounds</item>
+		<item>@string/seventy_five_to_one_hundred_pounds</item>
+		<item>@string/more_than_one_hundred_pounds</item>
 	</string-array>
 
 	<string-array name="sex_spinner_entries">
 		<item>Select...</item>
-		<item>Male</item>
-		<item>Female</item>
+		<item>@string/male</item>
+		<item>@string/female</item>
 	</string-array>
 
 	<string name="add_pet_button">Add A Pet</string>

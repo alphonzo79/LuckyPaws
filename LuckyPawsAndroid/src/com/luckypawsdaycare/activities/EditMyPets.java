@@ -61,9 +61,9 @@ public class EditMyPets extends Activity {
         super.onCreate(savedInstance);
         setContentView(R.layout.my_pets_add_edit);
 
-        isEditing = getIntent().getBooleanExtra("com.luckypawsdaycare.isEditing", false);
+        isEditing = this.getIntent().getBooleanExtra("com.luckypawsdaycare.isEditing", false);
         if(isEditing) {
-            id = getIntent().getIntExtra("com.luckypawsdaycare.petId", -1);
+            id = this.getIntent().getIntExtra("com.luckypawsdaycare.petId", -1);
             getOriginalValues();
         }
 
@@ -109,7 +109,7 @@ public class EditMyPets extends Activity {
     }
 
     private void setDisplayValues() {
-        if(isEditing && id < 1) {
+        if(isEditing && id > -1) {
             if(!TextUtils.isEmpty(name)) {
                 nameInput.setText(name);
             }

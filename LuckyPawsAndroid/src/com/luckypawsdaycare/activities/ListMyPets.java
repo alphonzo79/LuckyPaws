@@ -73,7 +73,7 @@ public class ListMyPets extends ListActivity {
     {
         int petId = myPets.get(position).id;
         Intent view = new Intent(this, ViewMyPet.class);
-        view.putExtra("com.luckypawsdaycare.petId", id);
+        view.putExtra("com.luckypawsdaycare.petId", petId);
         startActivity(view);
     }
 

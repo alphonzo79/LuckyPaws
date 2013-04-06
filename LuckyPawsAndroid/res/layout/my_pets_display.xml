@@ -107,6 +107,7 @@
 						>
 
 						<TextView
+							android:id="@+id/dog_cat_label"
 							style="@style/form_label"
 							android:text="@string/dog_cat_label"
 							/>
@@ -238,6 +239,7 @@
 						>
 
 						<TextView
+							android:id="@+id/sex_label"
 							style="@style/form_label"
 							android:text="@string/sex_label"
 							android:layout_marginRight="@dimen/scalable_15_pix"

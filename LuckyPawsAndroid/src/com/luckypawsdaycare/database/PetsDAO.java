@@ -163,10 +163,12 @@ public class PetsDAO extends DatabaseHelper {
 
         Cursor rs = db.rawQuery(stmt, null);
         try {
-            rs.moveToFirst();
-            do {
-                result.put(rs.getString(1), rs.getInt(0));
-            } while (rs.moveToNext());
+            if(rs.getCount() > 0) {
+                rs.moveToFirst();
+                do {
+                    result.put(rs.getString(1), rs.getInt(0));
+                } while (rs.moveToNext());
+            }
         } catch(SQLiteException e) {
             e.printStackTrace();
         } finally {
