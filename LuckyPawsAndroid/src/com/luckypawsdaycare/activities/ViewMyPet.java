@@ -10,15 +10,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.DatabaseConstants;
 import com.luckypawsdaycare.database.PetsDAO;
 import com.luckypawsdaycare.database.PetsTableColumnNames;
+import com.luckypawsdaycare.support.CustomToast;
 
 import java.util.Map;
 
@@ -221,15 +220,12 @@ public class ViewMyPet extends Activity {
         public void onClick(DialogInterface dialog, int id) {
             PetsDAO db = new PetsDAO(ViewMyPet.this);
             if(db.deletePet(ViewMyPet.this.id)) {
-                Toast warning = Toast.makeText(ViewMyPet.this, R.string.pet_delete_successful, Toast.LENGTH_SHORT);
-                warning.setGravity(Gravity.CENTER, 0, 0);
-                warning.show();
+                CustomToast toast = new CustomToast(ViewMyPet.this, getString(R.string.pet_delete_successful));
+                toast.show();
                 ViewMyPet.this.finish();
             } else {
-                Toast warning = Toast.makeText(ViewMyPet.this, R.string.error_pet_delete, Toast.LENGTH_SHORT);
-                warning.setGravity(Gravity.CENTER, 0, 0);
-                warning.show();
-                ViewMyPet.this.finish();
+                CustomToast toast = new CustomToast(ViewMyPet.this, getString(R.string.error_pet_delete));
+                toast.show();
             }
         }
     };

@@ -8,14 +8,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.PersonalInfoDAO;
 import com.luckypawsdaycare.database.PersonalInfoTableColumns;
+import com.luckypawsdaycare.support.CustomToast;
 
 import java.util.Map;
 
@@ -197,13 +196,11 @@ public class PersonalInfoEdit extends Activity {
             PersonalInfoDAO db = new PersonalInfoDAO(PersonalInfoEdit.this);
             boolean success = db.setPersonalInfo(dbValues);
             if(!success) {
-                Toast warning = Toast.makeText(PersonalInfoEdit.this, R.string.error_info_save, Toast.LENGTH_SHORT);
-                warning.setGravity(Gravity.CENTER, 0, 0);
-                warning.show();
+                CustomToast toast = new CustomToast(PersonalInfoEdit.this, getString(R.string.error_info_save));
+                toast.show();
             } else {
-                Toast warning = Toast.makeText(PersonalInfoEdit.this, R.string.update_successful, Toast.LENGTH_SHORT);
-                warning.setGravity(Gravity.CENTER, 0, 0);
-                warning.show();
+                CustomToast toast = new CustomToast(PersonalInfoEdit.this, getString(R.string.update_successful));
+                toast.show();
 
                 Intent display = new Intent(PersonalInfoEdit.this, PersonalInfoDisplay.class);
                 startActivity(display);

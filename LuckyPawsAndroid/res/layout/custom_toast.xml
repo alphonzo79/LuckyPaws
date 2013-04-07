@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2013. Lucky Paws, Inc
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/toast_base_layout"
+	android:orientation="horizontal"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="@dimen/scalable_30_pix"
+	android:background="@drawable/custom_toast_back"
+	android:layout_gravity="center"
+	android:padding="@dimen/scalable_15_pix"
+	>
+
+	<ImageView
+		android:layout_height="@dimen/scalable_30_pix"
+		android:layout_width="wrap_content"
+		android:src="@drawable/clover"
+		android:layout_gravity="center_vertical"
+		android:layout_marginRight="@dimen/scalable_15_pix"
+		/>
+
+	<TextView
+		android:id="@+id/toast_text"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="@dimen/text_16"
+		android:textColor="@color/lucky_paws_blue"
+		android:text="@string/nothing_here"
+		android:layout_gravity="center_vertical"
+		/>
+
+</LinearLayout>

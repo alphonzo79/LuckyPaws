@@ -12,13 +12,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.DatabaseConstants;
 import com.luckypawsdaycare.database.PetsDAO;
 import com.luckypawsdaycare.database.PetsTableColumnNames;
+import com.luckypawsdaycare.support.CustomToast;
 import com.luckypawsdaycare.support.DateUtilities;
 
 import java.text.ParseException;
@@ -375,14 +375,12 @@ public class EditMyPets extends Activity {
     };
 
     private void showSuccessToast() {
-        Toast warning = Toast.makeText(this, R.string.update_successful, Toast.LENGTH_SHORT);
-        warning.setGravity(Gravity.CENTER, 0, 0);
-        warning.show();
+        CustomToast toast = new CustomToast(this, getString(R.string.update_successful));
+        toast.show();
     }
 
     private void showErrorToast() {
-        Toast warning = Toast.makeText(this, R.string.error_info_save, Toast.LENGTH_SHORT);
-        warning.setGravity(Gravity.CENTER, 0, 0);
-        warning.show();
+        CustomToast toast = new CustomToast(this, getString(R.string.error_info_save));
+        toast.show();
     }
 }
