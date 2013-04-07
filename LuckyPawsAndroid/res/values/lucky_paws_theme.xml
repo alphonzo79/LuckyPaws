@@ -7,6 +7,7 @@
 		<item name="android:listViewStyle">@style/lp_list_selector</item>
 		<item name="android:alertDialogStyle">@style/lp_popup_window</item>
 		<item name="android:windowSoftInputMode">stateHidden</item>
+		<item name="android:listDivider">@drawable/list_divider_transparent</item>
 	</style>
 
 	<style name="lucky_paws_radio" parent="@android:style/Widget.CompoundButton.RadioButton">
@@ -51,5 +52,6 @@
 	<!--Keep for future, but this can only be set in honeycomb (11) or later android:dialogTheme-->
 	<style name="lp_dialog_theme" parent="android:Theme.Dialog">
 		<item name="android:windowBackground">@drawable/popup_full_dark</item>
+		<item name="android:buttonStyle">@style/blue_button</item>
 	</style>
 </resources>

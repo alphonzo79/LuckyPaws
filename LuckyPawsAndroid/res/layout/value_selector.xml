@@ -32,12 +32,13 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			android:layout_marginBottom="@dimen/scalable_3_pix"
 			android:layout_alignParentBottom="true"
+			android:padding="@dimen/scalable_10_pix"
 			>
 
 			<Button
 				android:id="@+id/save_button"
+				style="@style/blue_button"
 				android:layout_width="@dimen/no_scale_0_pix"
 				android:layout_height="wrap_content"
 				android:layout_weight="50"
@@ -48,6 +49,7 @@
 
 			<Button
 				android:id="@+id/cancel_button"
+				style="@style/blue_button"
 				android:layout_width="@dimen/no_scale_0_pix"
 				android:layout_height="wrap_content"
 				android:layout_weight="50"

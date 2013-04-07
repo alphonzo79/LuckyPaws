@@ -52,8 +52,8 @@ public class ContactScreen extends Activity {
 
     Button.OnClickListener launchDrivingDirections = new Button.OnClickListener(){
         public void onClick(View v) {
-            String lp_location = "geo:0,0?q=" + getResources().getString(R.string.lucky_paws_location_uri);
-            lp_location = lp_location + " (" + getResources().getString(R.string.app_name) + ")";
+            String lp_location = "geo:0,0?q=" + getString(R.string.lucky_paws_location_uri);
+            lp_location = lp_location + " (" + getString(R.string.app_name) + ")";
             //geo:0,0?q=37.423156,-122.084917 (" + name + ")
 
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(lp_location));

@@ -16,12 +16,14 @@
 		<item name="android:layout_margin">@dimen/scalable_10_pix</item>
 	</style>
 
-	<style name="blue_button">
+	<style name="blue_button" parent="android:Widget.Button">
 		<item name="android:layout_width">@dimen/no_scale_0_pix</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_weight">50</item>
 		<item name="android:layout_marginLeft">@dimen/scalable_10_pix</item>
 		<item name="android:layout_marginRight">@dimen/scalable_10_pix</item>
+		<item name="android:gravity">center</item>
+		<item name="android:layout_gravity">center</item>
 		<item name="android:padding">@dimen/scalable_5_pix</item>
 		<item name="android:textColor">@color/white</item>
 		<item name="android:textSize">@dimen/text_14</item>
