@@ -14,6 +14,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="not_set">Press Edit Info To Set</string>
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
+	<string name="error">Oops!</string>
+	<string name="ok">OK</string>
 
 	<string name="save_button">Save</string>
 	<string name="cancel_button">Cancel</string>
@@ -70,6 +72,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="female">Female</string>
 	<string name="dog">Dog</string>
 	<string name="cat">Cat</string>
+
+	<string name="need_name">How can your pet come when you call if you don\'t give it a name?</string>
 
 	<string name="less_than_ten_pounds">&lt;10 pounds</string>
 	<string name="ten_to_twenty_five_pounds">10-25 pounds</string>

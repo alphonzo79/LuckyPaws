@@ -206,7 +206,8 @@ public class ViewMyPet extends Activity {
         @Override
         public void onClick(View v) {
             AlertDialog.Builder adBuilder = new AlertDialog.Builder(ViewMyPet.this);
-            adBuilder.setTitle(petData.get(PetsTableColumnNames.NAME));
+            adBuilder.setTitle(petData.get(PetsTableColumnNames.NAME.getString()));
+            adBuilder.setIcon(android.R.drawable.ic_dialog_alert);
             adBuilder.setMessage(R.string.confirm_delete_message);
             adBuilder.setPositiveButton(R.string.yes, confirmDelete);
             adBuilder.setNegativeButton(R.string.no, cancelDelete);

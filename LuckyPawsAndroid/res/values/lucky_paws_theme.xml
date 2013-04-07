@@ -47,4 +47,9 @@
 		<item name="android:bottomMedium">@drawable/popup_bottom_medium</item>
 		<item name="android:centerMedium">@drawable/popup_center_medium</item>
 	</style>
+
+	<!--Keep for future, but this can only be set in honeycomb (11) or later android:dialogTheme-->
+	<style name="lp_dialog_theme" parent="android:Theme.Dialog">
+		<item name="android:windowBackground">@drawable/popup_full_dark</item>
+	</style>
 </resources>

@@ -5,7 +5,9 @@
 package com.luckypawsdaycare.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -233,6 +235,15 @@ public class EditMyPets extends Activity {
             String newName = nameInput.getText().toString();
             if(!TextUtils.isEmpty(newName)) {
                 updateArgs.put(PetsTableColumnNames.NAME.getString(), newName);
+            } else {
+                AlertDialog.Builder adBuilder = new AlertDialog.Builder(EditMyPets.this);
+                adBuilder.setTitle(R.string.error);
+                adBuilder.setIcon(android.R.drawable.ic_dialog_alert);
+                adBuilder.setMessage(R.string.need_name);
+                adBuilder.setNegativeButton(R.string.ok, cancelSave);
+                AlertDialog alert = adBuilder.create();
+                alert.show();
+                return;
             }
 
             int newDogCat = dogCatSpinner.getSelectedItemPosition();
@@ -331,6 +342,13 @@ public class EditMyPets extends Activity {
                     showErrorToast();
                 }
             }
+        }
+    };
+
+    DialogInterface.OnClickListener cancelSave = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int id) {
+            dialog.cancel();
         }
     };
 

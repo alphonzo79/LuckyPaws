@@ -16,12 +16,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         />
 
 	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
-    <application android:icon="@drawable/clover" android:label="@string/app_name">
+    <application android:icon="@drawable/clover"
+				 android:label="@string/app_name"
+				 android:theme="@style/lucky_paws_theme">
+
         <activity android:name=".activities.MainScreen"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -31,73 +32,62 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 		<activity android:name=".activities.WebCamViewScreen"
 			android:label="@string/app_name"
-			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:configChanges="orientation"
 			>
 		</activity>
 
 		<activity android:name=".activities.ReservationsScreen"
 			android:label="@string/app_name"
-			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:configChanges="orientation"
 			>
 		</activity>
 
 		<activity android:name=".activities.SettingsScreen"
 			android:label="@string/app_name"
-			android:theme="@android:style/Theme.Light.NoTitleBar"
 			>
 		</activity>
 
 		<activity android:name=".activities.PersonalInfoEdit"
 				  android:label="@string/app_name"
-				  android:theme="@android:style/Theme.Light.NoTitleBar"
 				  android:configChanges="orientation"
 			>
 		</activity>
 
 		<activity android:name=".activities.PersonalInfoDisplay"
 				  android:label="@string/app_name"
-				  android:theme="@android:style/Theme.Light.NoTitleBar"
 			>
 		</activity>
 
 		<activity android:name=".activities.InfoAboutScreen"
 				  android:label="@string/app_name"
-				  android:theme="@android:style/Theme.Light.NoTitleBar"
 			>
 		</activity>
 
 		<activity android:name=".activities.ContactScreen"
 				  android:label="@string/app_name"
-				  android:theme="@android:style/Theme.Light.NoTitleBar"
 				  android:configChanges="orientation"
 			>
 		</activity>
 
 		<activity android:name=".activities.ListMyPets"
 				  android:label="@string/app_name"
-				  android:theme="@android:style/Theme.Light.NoTitleBar"
 			>
 		</activity>
 
 		<activity android:name=".activities.ViewMyPet"
 				  android:label="@string/app_name"
-				  android:theme="@android:style/Theme.Light.NoTitleBar"
 			>
 		</activity>
 
 		<activity android:name=".activities.EditMyPets"
 				  android:label="@string/app_name"
-				  android:theme="@style/lucky_paws_theme"
 				  android:configChanges="orientation"
 			>
 		</activity>
 
 		<activity android:name=".activities.ValueSelector"
-				  android:theme="@android:style/Theme.Translucent.NoTitleBar"
 				  android:configChanges="orientation"
 				  >
 	  	</activity>
     </application>
-</manifest> 
+</manifest>
