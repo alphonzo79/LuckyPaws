@@ -4,27 +4,464 @@
   ~ Copyright (c) 2013. Lucky Paws, Inc
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/layout_root"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
 	>
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="vertical"
+	<include layout="@layout/standard_header_no_action"/>
+
+	<TextView
+		style="@style/form_header"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/reservations"
+		/>
+
+	<View
+		style="@style/reservations_underline_full_width"
+		/>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		>
 
-		<include layout="@layout/standard_header_no_action"/>
-
 		<TextView
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/nothing_here"
-			android:textColor="@color/black"
-			android:gravity="center"
-			android:layout_margin="@dimen/scalable_10_pix"
+			style="@style/form_label"
+			android:text="@string/drop_off_label"
+			/>
+
+		<View
+			style="@style/form_label_underline"
 			/>
 
 	</LinearLayout>
 
-</FrameLayout>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			android:id="@+id/drop_off_date_picker"
+			style="@style/form_edit_text"
+			android:layout_weight="50"
+			android:hint="@string/date_hint"
+			android:textSize="@dimen/text_18"
+			android:layout_marginRight="@dimen/scalable_10_pix"
+			/>
+
+		<Spinner
+			android:id="@+id/drop_off_time_picker"
+			style="@style/spinner"
+			android:layout_weight="50"
+			android:entries="@array/time_frames"
+			android:prompt="@string/drop_off_time"
+			android:layout_marginLeft="@dimen/scalable_10_pix"
+			/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			style="@style/form_label"
+			android:text="@string/pick_up_label"
+			/>
+
+		<View
+			style="@style/form_label_underline"
+			/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			android:id="@+id/pick_up_date_picker"
+			style="@style/form_edit_text"
+			android:layout_weight="50"
+			android:hint="@string/date_hint"
+			android:textSize="@dimen/text_18"
+			android:layout_marginRight="@dimen/scalable_10_pix"
+			/>
+
+		<Spinner
+			android:id="@+id/pick_up_time_picker"
+			style="@style/spinner"
+			android:layout_weight="50"
+			android:entries="@array/time_frames"
+			android:prompt="@string/pick_up_time"
+			android:layout_marginLeft="@dimen/scalable_10_pix"
+			/>
+
+	</LinearLayout>
+
+	<View
+		style="@style/reservations_underline_full_width"
+		/>
+
+	<LinearLayout
+		android:id="@+id/first_name_labels"
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			style="@style/form_label"
+			android:text="@string/first_name_label"
+			/>
+
+		<View
+			style="@style/form_label_underline"
+			/>
+
+	</LinearLayout>
+
+	<EditText
+		android:id="@+id/first_name_input"
+		style="@style/form_edit_text"
+		android:hint="@string/first_name_label"
+		android:inputType="textCapWords"
+		android:maxLines="1"
+		/>
+
+	<LinearLayout
+		android:id="@+id/last_name_labels"
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			style="@style/form_label"
+			android:text="@string/last_name_label"
+			/>
+
+		<View
+			style="@style/form_label_underline"
+			/>
+
+	</LinearLayout>
+
+	<EditText
+		android:id="@+id/last_name_input"
+		style="@style/form_edit_text"
+		android:hint="@string/last_name_label"
+		android:inputType="textCapWords"
+		android:maxLines="1"
+		/>
+
+	<LinearLayout
+		android:id="@+id/phone_labels"
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			style="@style/form_label"
+			android:text="@string/phone_generic_label"
+			/>
+
+		<View
+			style="@style/form_label_underline"
+			/>
+
+	</LinearLayout>
+
+	<EditText
+		android:id="@+id/phone_input"
+		style="@style/form_edit_text"
+		android:hint="@string/phone_generic_label"
+		android:inputType="phone"
+		android:maxLines="1"
+		android:phoneNumber="true"
+		/>
+
+	<LinearLayout
+		android:id="@+id/address_street_labels"
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			style="@style/form_label"
+			android:text="@string/address_street_label"
+			/>
+
+		<View
+			style="@style/form_label_underline"
+			/>
+
+	</LinearLayout>
+
+	<EditText
+		android:id="@+id/address_street_input"
+		style="@style/form_edit_text"
+		android:hint="@string/address_street_label"
+		android:inputType="textCapWords"
+		android:maxLines="1"
+		/>
+
+	<LinearLayout
+		android:id="@+id/address_second_line"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+
+		<LinearLayout
+			android:id="@+id/address_city_container"
+			android:orientation="vertical"
+			android:layout_width="@dimen/no_scale_0_pix"
+			android:layout_height="wrap_content"
+			android:layout_weight="30"
+			>
+
+			<LinearLayout
+				android:id="@+id/address_city_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				>
+
+				<TextView
+					style="@style/form_label"
+					android:text="@string/address_city_label"
+					/>
+
+				<View
+					style="@style/form_label_underline"
+					/>
+
+			</LinearLayout>
+
+			<EditText
+				android:id="@+id/address_city_input"
+				style="@style/form_edit_text"
+				android:hint="@string/address_city_label"
+				android:inputType="textCapWords"
+				android:layout_marginRight="@dimen/scalable_10_pix"
+				android:maxLines="1"
+				/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/address_state_container"
+			android:orientation="vertical"
+			android:layout_width="@dimen/no_scale_0_pix"
+			android:layout_height="wrap_content"
+			android:layout_weight="20"
+			>
+
+			<LinearLayout
+				android:id="@+id/address_state_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				>
+
+				<TextView
+					style="@style/form_label"
+					android:text="@string/address_state_label"
+					android:layout_marginLeft="@dimen/scalable_15_pix"
+					/>
+
+				<View
+					style="@style/form_label_underline"
+					android:layout_marginLeft="@dimen/scalable_15_pix"
+					/>
+
+			</LinearLayout>
+
+			<EditText
+				android:id="@+id/address_state_input"
+				style="@style/form_edit_text"
+				android:hint="@string/address_state_label"
+				android:inputType="textCapWords"
+				android:layout_marginRight="@dimen/scalable_10_pix"
+				android:layout_marginLeft="@dimen/scalable_10_pix"
+				android:maxLines="1"
+				/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/address_zip_container"
+			android:orientation="vertical"
+			android:layout_width="@dimen/no_scale_0_pix"
+			android:layout_height="wrap_content"
+			android:layout_weight="20"
+			>
+
+			<LinearLayout
+				android:id="@+id/address_zip_labels"
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				>
+
+				<TextView
+					style="@style/form_label"
+					android:text="@string/address_zip_label"
+					android:layout_marginLeft="@dimen/scalable_15_pix"
+					/>
+
+				<View
+					style="@style/form_label_underline"
+					android:layout_marginLeft="@dimen/scalable_15_pix"
+					/>
+
+			</LinearLayout>
+
+			<EditText
+				android:id="@+id/address_zip_input"
+				style="@style/form_edit_text"
+				android:hint="@string/address_zip_label"
+				android:inputType="number"
+				android:layout_marginLeft="@dimen/scalable_10_pix"
+				android:maxLines="1"
+				android:maxLength="5"
+				/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/email_labels"
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			style="@style/form_label"
+			android:text="@string/email_label"
+			/>
+
+		<View
+			style="@style/form_label_underline"
+			/>
+
+	</LinearLayout>
+
+	<EditText
+		android:id="@+id/email_input"
+		style="@style/form_edit_text"
+		android:hint="@string/email_label"
+		android:inputType="textEmailAddress"
+		android:maxLines="1"
+		/>
+
+	<View
+		style="@style/reservations_underline_full_width"
+		/>
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+
+		<LinearLayout
+			android:id="@+id/num_dogs_labels"
+			android:orientation="vertical"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="50"
+			>
+
+			<TextView
+				style="@style/form_label"
+				android:text="@string/how_many_dogs"
+				/>
+
+			<View
+				style="@style/form_label_underline"
+				/>
+
+			<Spinner
+				android:id="@+id/num_dogs_picker"
+				style="@style/spinner"
+				android:entries="@array/one_to_four"
+				android:prompt="@string/how_many_dogs"
+				/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/num_cats_labels"
+			android:orientation="vertical"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="50"
+			>
+
+			<TextView
+				style="@style/form_label"
+				android:text="@string/how_many_cats"
+				/>
+
+			<View
+				style="@style/form_label_underline"
+				/>
+
+			<Spinner
+				android:id="@+id/num_cats_picker"
+				style="@style/spinner"
+				android:entries="@array/one_to_four"
+				android:prompt="@string/how_many_cats"
+				/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<View
+		style="@style/reservations_underline_full_width"
+		/>
+
+	<!--todo Each dog: name, exit bath?-->
+	<!--todo Each cat: name-->
+
+	<View
+		style="@style/reservations_underline_full_width"
+		/>
+
+	<GridView
+		android:id="@+id/price_display_grid"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:numColumns="2"
+		android:gravity="right"
+		android:stretchMode="columnWidth"
+		>
+
+		<!--todo start here : Price-->
+
+	</GridView>
+
+	<View
+		style="@style/reservations_underline_full_width"
+		/>
+	<!--todo Comments-->
+	<!--todo Buttons-->
+
+</LinearLayout>

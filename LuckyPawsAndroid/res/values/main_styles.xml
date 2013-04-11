@@ -68,6 +68,10 @@
 		<item name="android:layout_marginLeft">@dimen/no_scale_0_pix</item>
 	</style>
 
+	<style name="reservations_underline_full_width" parent="form_label_underline">
+		<item name="android:layout_margin">@dimen/scalable_10_pix</item>
+	</style>
+
 	<style name="form_edit_text">
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">wrap_content</item>

@@ -34,6 +34,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="phone1_label">Home</string>
 	<string name="phone2_label">Mobile</string>
 	<string name="phone3_label">Work</string>
+	<string name="phone_generic_label">Phone</string>
 	<string name="email_label">E-mail</string>
 
 	<string name="error_info_save">There was an error saving your info. Please try again.</string>
@@ -114,4 +115,27 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 	<string name="add_pet_button">Add A Pet</string>
 	<string name="confirm_delete_message">Are you sure you want to delete information for this pet?\n\nThis operation cannot be undone.</string>
+
+	<string name="drop_off_label">Drop-off:</string>
+	<string name="pick_up_label">Pick-up:</string>
+	<string name="date_hint">Date</string>
+	<string name="time_hint">Select Time</string>
+	<string name="drop_off_time">Drop-off Time</string>
+	<string name="pick_up_time">Pick-up Time</string>
+	<string name="how_many_dogs">How Many Dogs?</string>
+	<string name="how_many_cats">How Many Cats?</string>
+
+	<string-array name="time_frames">
+		<item>@string/time_hint</item>
+		<item>7-11 a.m.</item>
+		<item>3-7 p.m.</item>
+	</string-array>
+
+	<string-array name="one_to_four">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+	</string-array>
 </resources>
