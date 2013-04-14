@@ -8,6 +8,7 @@
 		<item name="android:alertDialogStyle">@style/lp_popup_window</item>
 		<item name="android:windowSoftInputMode">stateHidden</item>
 		<item name="android:listDivider">@drawable/list_divider_transparent</item>
+		<item name="android:checkboxStyle">@style/lp_check_box_style</item>
 	</style>
 
 	<style name="lucky_paws_trans" parent="lucky_paws_theme">
@@ -58,5 +59,11 @@
 	<style name="lp_dialog_theme" parent="android:Theme.Dialog">
 		<item name="android:windowBackground">@drawable/popup_full_dark</item>
 		<item name="android:buttonStyle">@style/blue_button</item>
+	</style>
+
+	<style name="lp_check_box_style" parent="android:Widget.CompoundButton.CheckBox">
+		<item name="android:button">@drawable/check_box_state</item>
+		<item name="android:textSize">@dimen/text_16</item>
+		<item name="android:textColor">@color/lucky_paws_blue</item>
 	</style>
 </resources>

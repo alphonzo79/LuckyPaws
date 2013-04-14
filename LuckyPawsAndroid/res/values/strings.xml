@@ -16,12 +16,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="no">No</string>
 	<string name="error">Oops!</string>
 	<string name="ok">OK</string>
+	<string name="none"></string>
 
 	<string name="save_button">Save</string>
 	<string name="cancel_button">Cancel</string>
 	<string name="edit_info_button">Edit Info</string>
 	<string name="close_button">Close</string>
 	<string name="delete_pet_button">Delete Pet</string>
+	<string name="submit_button">Submit</string>
 
 	<string name="personal_info_heading">Personal Info</string>
 	<string name="full_name_label">Pet Owner</string>
@@ -124,11 +126,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="pick_up_time">Pick-up Time</string>
 	<string name="how_many_dogs">How Many Dogs?</string>
 	<string name="how_many_cats">How Many Cats?</string>
+	<string name="boarding_price_label">Boarding:</string>
+	<string name="bath_price_label">*Exit Bath</string>
+	<string name="exit_bath_disclosure">*Exit baths are not included in the total price.</string>
+	<string name="order_exit_bath">Would you like to order an exit bath?</string>
+	<string name="total_price_label">Total Price:</string>
+	<string name="comments_label">Comments:</string>
 
 	<string-array name="time_frames">
 		<item>@string/time_hint</item>
 		<item>7-11 a.m.</item>
 		<item>3-7 p.m.</item>
+	</string-array>
+
+	<string-array name="time_frames_weekend">
+		<item>@string/time_hint</item>
+		<item>10 a.m. - 12 noon</item>
+		<item>4-5 p.m.</item>
 	</string-array>
 
 	<string-array name="one_to_four">
