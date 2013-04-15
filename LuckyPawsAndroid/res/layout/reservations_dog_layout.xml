@@ -49,4 +49,10 @@
 
 	</LinearLayout>
 
+	<EditText
+		android:id="@+id/dog_name_input"
+		style="@style/form_edit_text"
+		android:visibility="gone"
+		/>
+
 </LinearLayout>

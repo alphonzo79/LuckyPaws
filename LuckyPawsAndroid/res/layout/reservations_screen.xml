@@ -458,10 +458,6 @@
 				android:layout_height="wrap_content"
 				>
 
-				<include
-					layout="@layout/reservations_dog_layout"
-					/>
-
 			</LinearLayout>
 
 			<LinearLayout
@@ -469,10 +465,6 @@
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				>
-
-				<include
-					layout="@layout/reservations_cat_layout"
-					/>
 
 			</LinearLayout>
 

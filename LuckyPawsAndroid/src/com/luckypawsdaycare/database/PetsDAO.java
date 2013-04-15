@@ -62,6 +62,27 @@ public class PetsDAO extends DatabaseHelper {
         return result;
     }
 
+    public Map<String, Integer> getAllNamesAndAnimal() {
+        SQLiteDatabase db = getReadableDatabase();
+        String stmt = String.format("SELECT %s, %s FROM pets", PetsTableColumnNames.NAME, PetsTableColumnNames.DOG_CAT);
+
+        Cursor rs = db.rawQuery(stmt, null);
+        Map<String, Integer> result = new HashMap<String, Integer>();
+        try {
+            rs.moveToFirst();
+            do{
+                result.put(rs.getString(0), rs.getInt(1));
+            } while(rs.moveToNext());
+        } catch(SQLiteException e) {
+            e.printStackTrace();
+        } finally {
+            rs.close();
+            db.close();
+        }
+
+        return result;
+    }
+
     public boolean addPetData(Map<String, String> args) {
         boolean success = false;
 
