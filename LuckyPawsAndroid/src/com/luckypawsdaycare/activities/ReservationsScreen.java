@@ -16,10 +16,10 @@ import com.luckypawsdaycare.database.PetsDAO;
 import com.luckypawsdaycare.reservations_support.CatSelector;
 import com.luckypawsdaycare.reservations_support.DogSelector;
 import com.luckypawsdaycare.reservations_support.PriceProcessor;
+import com.luckypawsdaycare.support.DateUtilities;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -54,20 +54,16 @@ public class ReservationsScreen extends Activity {
     Button submitButton;
     Button cancelButton;
 
-    Date dropOffDate;
-    Date pickUpDate;
+    Calendar dropOffDate;
+    Calendar pickUpDate;
     //for drop off and pick up time, use 0 for a morning time frame and 1 for an evening time frame. -1 for Unknown
     int dropOffTime;
     int pickUpTime;
-
-    SimpleDateFormat sdf;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservations_screen);
-
-        sdf = new SimpleDateFormat("MMM dd, yyyy");
 
         gatherInfo();
         findAndWireElements();
@@ -100,9 +96,11 @@ public class ReservationsScreen extends Activity {
 
     private void findAndWireElements() {
         dropOffDateDisplay = (TextView)findViewById(R.id.drop_off_date_picker);
-        //todo onclick
+        dropOffDateDisplay.setOnClickListener(launchDropOffDatePicker);
         pickUpDateDisplay = (TextView)findViewById(R.id.pick_up_date_picker);
+        pickUpDateDisplay.setOnClickListener(launchPickUpDatePicker);
         dropOffTimeDisplay = (Spinner)findViewById(R.id.drop_off_time_picker);
+        //todo onclick
         pickupTimeDisplay = (Spinner)findViewById(R.id.pick_up_time_picker);
         ownerFirstName = (EditText)findViewById(R.id.first_name_input);
         ownerLastName = (EditText)findViewById(R.id.last_name_input);
@@ -151,9 +149,17 @@ public class ReservationsScreen extends Activity {
 
     View.OnClickListener launchDropOffDatePicker = new View.OnClickListener(){
         public void onClick(View v) {
-//            DatePickerDialog dialog = new DatePickerDialog(ReservationsScreen.this, dropOffDateSet, year, month, day);
-//            dialog.show();
-            //todo
+            int year;
+            int month;
+            int day;
+            if(dropOffDate == null) {
+                dropOffDate = Calendar.getInstance();
+            }
+            year = dropOffDate.get(Calendar.YEAR);
+            month = dropOffDate.get(Calendar.MONTH);
+            day = dropOffDate.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dialog = new DatePickerDialog(ReservationsScreen.this, dropOffDateSet, year, month, day);
+            dialog.show();
         }
     };
 
@@ -161,22 +167,31 @@ public class ReservationsScreen extends Activity {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             //Month is 0 - 11 for compatibility with Calendar
-//            EditMyPets.this.year = year;
-//            EditMyPets.this.month = month;
-//            EditMyPets.this.day = day;
-//            Calendar cal = Calendar.getInstance();
-//            cal.set(year, month, day);
-//            birthdate = DateUtilities.appDateFormat().format(cal.getTime());
-//            birthdateInput.setText(birthdate);
-            //todo
+            dropOffDate.set(year, month, day);
+            dropOffDateDisplay.setText(DateUtilities.appDateFormat().format(dropOffDate.getTime()));
         }
     };
 
     View.OnClickListener launchPickUpDatePicker = new View.OnClickListener(){
         public void onClick(View v) {
-//            DatePickerDialog dialog = new DatePickerDialog(EditMyPets.this, dateSet, year, month, day);
-//            dialog.show();
-            //todo
+            int year;
+            int month;
+            int day;
+            if(pickUpDate == null) {
+                pickUpDate = Calendar.getInstance();
+            }
+            //First, advance Pickup date to match drop-off date if dropoff date has been set
+            if(dropOffDate != null) {
+                pickUpDate.setTime(dropOffDate.getTime());
+            }
+            //Now, because pickup must be after dropoff, we'll advance it one more day
+            pickUpDate.add(Calendar.DAY_OF_MONTH, 1);
+
+            year = pickUpDate.get(Calendar.YEAR);
+            month = pickUpDate.get(Calendar.MONTH);
+            day = pickUpDate.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dialog = new DatePickerDialog(ReservationsScreen.this, pickUpDateSet, year, month, day);
+            dialog.show();
         }
     };
 
@@ -184,14 +199,8 @@ public class ReservationsScreen extends Activity {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
             //Month is 0 - 11 for compatibility with Calendar
-//            EditMyPets.this.year = year;
-//            EditMyPets.this.month = month;
-//            EditMyPets.this.day = day;
-//            Calendar cal = Calendar.getInstance();
-//            cal.set(year, month, day);
-//            birthdate = DateUtilities.appDateFormat().format(cal.getTime());
-//            birthdateInput.setText(birthdate);
-            //todo
+            pickUpDate.set(year, month, day);
+            pickUpDateDisplay.setText(DateUtilities.appDateFormat().format(pickUpDate.getTime()));
         }
     };
 

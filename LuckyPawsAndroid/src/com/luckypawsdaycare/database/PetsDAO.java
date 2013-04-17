@@ -64,7 +64,7 @@ public class PetsDAO extends DatabaseHelper {
 
     public Map<String, Integer> getAllNamesAndAnimal() {
         SQLiteDatabase db = getReadableDatabase();
-        String stmt = String.format("SELECT %s, %s FROM pets", PetsTableColumnNames.NAME, PetsTableColumnNames.DOG_CAT);
+        String stmt = String.format("SELECT %s, %s FROM pets", PetsTableColumnNames.NAME.getString(), PetsTableColumnNames.DOG_CAT.getString());
 
         Cursor rs = db.rawQuery(stmt, null);
         Map<String, Integer> result = new HashMap<String, Integer>();
