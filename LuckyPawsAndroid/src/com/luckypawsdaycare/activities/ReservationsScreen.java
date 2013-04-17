@@ -17,7 +17,9 @@ import com.luckypawsdaycare.reservations_support.CatSelector;
 import com.luckypawsdaycare.reservations_support.DogSelector;
 import com.luckypawsdaycare.reservations_support.PriceProcessor;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,10 +31,10 @@ public class ReservationsScreen extends Activity {
     List<CatSelector> catSelectors;
     PriceProcessor priceProcessor;
 
-    TextView dropOffDate;
-    TextView pickUpDate;
-    Spinner dropOffTime;
-    Spinner pickupTime;
+    TextView dropOffDateDisplay;
+    TextView pickUpDateDisplay;
+    Spinner dropOffTimeDisplay;
+    Spinner pickupTimeDisplay;
     EditText ownerFirstName;
     EditText ownerLastName;
     EditText phoneNummber;
@@ -52,14 +54,26 @@ public class ReservationsScreen extends Activity {
     Button submitButton;
     Button cancelButton;
 
+    Date dropOffDate;
+    Date pickUpDate;
+    //for drop off and pick up time, use 0 for a morning time frame and 1 for an evening time frame. -1 for Unknown
+    int dropOffTime;
+    int pickUpTime;
+
+    SimpleDateFormat sdf;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservations_screen);
 
+        sdf = new SimpleDateFormat("MMM dd, yyyy");
+
         gatherInfo();
         findAndWireElements();
         populateElements();
+
+        priceProcessor = new PriceProcessor(boardingPriceDisplay, bathPriceDisplay, totalPriceDisplay);
     }
 
     private void gatherInfo() {
@@ -82,17 +96,14 @@ public class ReservationsScreen extends Activity {
                 cats.add(pet);
             }
         }
-
-        //Price Processor
-        priceProcessor = new PriceProcessor();
     }
 
     private void findAndWireElements() {
-        dropOffDate = (TextView)findViewById(R.id.drop_off_date_picker);
+        dropOffDateDisplay = (TextView)findViewById(R.id.drop_off_date_picker);
         //todo onclick
-        pickUpDate = (TextView)findViewById(R.id.pick_up_date_picker);
-        dropOffTime = (Spinner)findViewById(R.id.drop_off_time_picker);
-        pickupTime = (Spinner)findViewById(R.id.pick_up_time_picker);
+        pickUpDateDisplay = (TextView)findViewById(R.id.pick_up_date_picker);
+        dropOffTimeDisplay = (Spinner)findViewById(R.id.drop_off_time_picker);
+        pickupTimeDisplay = (Spinner)findViewById(R.id.pick_up_time_picker);
         ownerFirstName = (EditText)findViewById(R.id.first_name_input);
         ownerLastName = (EditText)findViewById(R.id.last_name_input);
         phoneNummber = (EditText)findViewById(R.id.phone_input);
@@ -114,10 +125,10 @@ public class ReservationsScreen extends Activity {
     }
 
     private void populateElements() {
-//        dropOffDate = (TextView)findViewById(R.id.drop_off_date_picker);
-//        pickUpDate = (TextView)findViewById(R.id.pick_up_date_picker);
-//        dropOffTime = (Spinner)findViewById(R.id.drop_off_time_picker);
-//        pickupTime = (Spinner)findViewById(R.id.pick_up_time_picker);
+//        dropOffDateDisplay = (TextView)findViewById(R.id.drop_off_date_picker);
+//        pickUpDateDisplay = (TextView)findViewById(R.id.pick_up_date_picker);
+//        dropOffTimeDisplay = (Spinner)findViewById(R.id.drop_off_time_picker);
+//        pickupTimeDisplay = (Spinner)findViewById(R.id.pick_up_time_picker);
 //        ownerFirstName = (EditText)findViewById(R.id.first_name_input);
 //        ownerLastName = (EditText)findViewById(R.id.last_name_input);
 //        phoneNummber = (EditText)findViewById(R.id.phone_input);
@@ -140,7 +151,7 @@ public class ReservationsScreen extends Activity {
 
     View.OnClickListener launchDropOffDatePicker = new View.OnClickListener(){
         public void onClick(View v) {
-//            DatePickerDialog dialog = new DatePickerDialog(EditMyPets.this, dateSet, year, month, day);
+//            DatePickerDialog dialog = new DatePickerDialog(ReservationsScreen.this, dropOffDateSet, year, month, day);
 //            dialog.show();
             //todo
         }
