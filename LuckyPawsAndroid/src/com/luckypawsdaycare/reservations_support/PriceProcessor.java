@@ -6,18 +6,21 @@ package com.luckypawsdaycare.reservations_support;
 
 import android.widget.TextView;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class PriceProcessor {
     TextView boardingPriceDisplay;
     TextView bathPriceDisplay;
     TextView totalPriceDisplay;
 
-    Date dropOffDate;
-    Date pickUpDate;
+    Calendar dropOffDate;
+    Calendar pickUpDate;
     //For drop off and pick up times, 0 refers to morning time frame, 1 refers to afternoon time frame, -1 for unknown
     int dropOffTime;
     int pickUpTime;
+
+    int numDogs;
+    int numCats;
 
     public PriceProcessor(TextView boardingPriceDisplay, TextView bathPriceDisplay, TextView totalPriceDisplay) {
         this.boardingPriceDisplay = boardingPriceDisplay;
@@ -29,7 +32,7 @@ public class PriceProcessor {
         totalPriceDisplay.setText("$0");
     }
 
-    public void setDropOffDate(Date date) {
+    public void setDropOffDate(Calendar date) {
         dropOffDate = date;
         figureCost();
     }
@@ -39,7 +42,7 @@ public class PriceProcessor {
         figureCost();
     }
 
-    public void setPickUpDate(Date date) {
+    public void setPickUpDate(Calendar date) {
         pickUpDate = date;
         figureCost();
     }
@@ -47,6 +50,14 @@ public class PriceProcessor {
     public void setPickUpTime(int time) {
         pickUpTime = time;
         figureCost();
+    }
+
+    public void setNumDogs(int dogs) {
+        numDogs = dogs;
+    }
+
+    public void setNumCats(int cats) {
+        numCats = cats;
     }
 
     private void figureCost() {
