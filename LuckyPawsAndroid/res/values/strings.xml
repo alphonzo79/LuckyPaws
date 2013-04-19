@@ -132,6 +132,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="order_exit_bath">Would you like to order an exit bath?</string>
 	<string name="total_price_label">Total Price:</string>
 	<string name="comments_label">Comments:</string>
+	<string name="choose_pet">Choose a pet</string>
+	<string name="custom_pet_name">Enter new pet name</string>
 
 	<string-array name="time_frames">
 		<item>@string/time_hint</item>

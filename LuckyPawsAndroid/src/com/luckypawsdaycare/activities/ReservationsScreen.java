@@ -7,11 +7,13 @@ package com.luckypawsdaycare.activities;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.database.DatabaseConstants;
 import com.luckypawsdaycare.database.PersonalInfoDAO;
+import com.luckypawsdaycare.database.PersonalInfoTableColumns;
 import com.luckypawsdaycare.database.PetsDAO;
 import com.luckypawsdaycare.reservations_support.CatSelector;
 import com.luckypawsdaycare.reservations_support.DogSelector;
@@ -128,29 +130,56 @@ public class ReservationsScreen extends Activity {
     }
 
     private void populateElements() {
-        //todo
-//        dropOffDateDisplay = (TextView)findViewById(R.id.drop_off_date_picker);
-//        pickUpDateDisplay = (TextView)findViewById(R.id.pick_up_date_picker);
-//        dropOffTimeDisplay = (Spinner)findViewById(R.id.drop_off_time_picker);
-//        pickupTimeDisplay = (Spinner)findViewById(R.id.pick_up_time_picker);
-//        ownerFirstName = (EditText)findViewById(R.id.first_name_input);
-//        ownerLastName = (EditText)findViewById(R.id.last_name_input);
-//        phoneNummber = (EditText)findViewById(R.id.phone_input);
-//        streetAddress = (EditText)findViewById(R.id.address_street_input);
-//        city = (EditText)findViewById(R.id.address_city_input);
-//        state = (EditText)findViewById(R.id.address_state_input);
-//        zip = (EditText)findViewById(R.id.address_zip_input);
-//        email = (EditText)findViewById(R.id.email_input);
-//        numDogs = (Spinner)findViewById(R.id.num_dogs_picker);
-//        numCats = (Spinner)findViewById(R.id.num_cats_picker);
-//        dogsDetailRoot = (LinearLayout)findViewById(R.id.dogs_root_layout);
-//        catsDetailRoot = (LinearLayout)findViewById(R.id.cats_root_layout);
-//        boardingPriceDisplay = (TextView)findViewById(R.id.boarding_price_value);
-//        bathPriceDisplay = (TextView)findViewById(R.id.bath_price_value);
-//        totalPriceDisplay = (TextView)findViewById(R.id.total_price_value);
-//        comments = (EditText)findViewById(R.id.comments_input);
-//        submitButton = (Button)findViewById(R.id.submit_button);
-//        cancelButton = (Button)findViewById(R.id.cancel_button);
+        String value = personalInfo.get(PersonalInfoTableColumns.FIRST_NAME.getString());
+        if(!TextUtils.isEmpty(value)){
+            ownerFirstName.setText(value);
+        }
+
+        value = personalInfo.get(PersonalInfoTableColumns.LAST_NAME.getString());
+        if(!TextUtils.isEmpty(value)){
+            ownerLastName.setText(value);
+        }
+
+        //Prefer the mobile number, then home if there is not one, then work
+        value = personalInfo.get(PersonalInfoTableColumns.PHONE_TWO.getString());
+        if(!TextUtils.isEmpty(value)){
+            phoneNummber.setText(value);
+        } else {
+            value = personalInfo.get(PersonalInfoTableColumns.PHONE_ONE.getString());
+            if(!TextUtils.isEmpty(value)){
+                phoneNummber.setText(value);
+            } else {
+                value = personalInfo.get(PersonalInfoTableColumns.PHONE_THREE.getString());
+                if(!TextUtils.isEmpty(value)){
+                    phoneNummber.setText(value);
+                }
+            }
+        }
+
+        value = personalInfo.get(PersonalInfoTableColumns.STREET.getString());
+        if(!TextUtils.isEmpty(value)){
+            streetAddress.setText(value);
+        }
+
+        value = personalInfo.get(PersonalInfoTableColumns.CITY.getString());
+        if(!TextUtils.isEmpty(value)){
+            city.setText(value);
+        }
+
+        value = personalInfo.get(PersonalInfoTableColumns.STATE.getString());
+        if(!TextUtils.isEmpty(value)){
+            state.setText(value);
+        }
+
+        value = personalInfo.get(PersonalInfoTableColumns.ZIP.getString());
+        if(!TextUtils.isEmpty(value)){
+            zip.setText(value);
+        }
+
+        value = personalInfo.get(PersonalInfoTableColumns.EMAIL.getString());
+        if(!TextUtils.isEmpty(value)){
+            email.setText(value);
+        }
     }
 
     View.OnClickListener launchDropOffDatePicker = new View.OnClickListener(){
