@@ -18,14 +18,16 @@ public abstract class PetSelector {
     Activity activity;
     ViewGroup animalRoot;
     List<String> animalNames;
+    int index;
 
     int customSelected;
 
     LinearLayout animalLayout;
+    TextView nameLabel;
     Spinner animalSelector;
     EditText customNameField;
 
-    public PetSelector(Activity context, LinearLayout rootLayout, List<String> petNames) {
+    public PetSelector(Activity context, LinearLayout rootLayout, List<String> petNames, int index) {
         activity = context;
         animalRoot = rootLayout;
 
@@ -36,6 +38,8 @@ public abstract class PetSelector {
 
         customSelected = animalNames.size() - 1;
 
+        this.index = index;
+
         inflateLayoutFindElements();
         setUpSpinner();
     }
@@ -43,7 +47,7 @@ public abstract class PetSelector {
     protected abstract void inflateLayoutFindElements();
 
     private void setUpSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, activity.getResources().getStringArray(R.array.time_frames_weekend));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, animalNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         animalSelector.setAdapter(adapter);
         animalSelector.setSelection(0);
@@ -70,7 +74,7 @@ public abstract class PetSelector {
     };
 
     public void detach() {
-        animalRoot.removeView(animalLayout);
+        animalRoot.removeViewAt(index);
     }
 
     public String getPetName() {

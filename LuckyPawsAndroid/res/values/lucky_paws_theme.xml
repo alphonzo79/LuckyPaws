@@ -8,7 +8,7 @@
 		<item name="android:alertDialogStyle">@style/lp_popup_window</item>
 		<item name="android:windowSoftInputMode">stateHidden</item>
 		<item name="android:listDivider">@drawable/list_divider_transparent</item>
-		<item name="android:checkboxStyle">@style/lp_check_box_style</item>
+		<!--<item name="android:checkboxStyle">@style/lp_check_box_style</item>-->
 	</style>
 
 	<style name="lucky_paws_trans" parent="lucky_paws_theme">

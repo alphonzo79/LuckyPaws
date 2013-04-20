@@ -30,22 +30,44 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
+		android:gravity="center_vertical"
 		>
 
 		<Spinner
 			android:id="@+id/dog_name_spinner"
 			style="@style/spinner"
-			android:layout_width="wrap_content"
+			android:layout_width="@dimen/no_scale_0_pix"
+			android:layout_weight="50"
+			android:layout_marginRight="@dimen/scalable_15_pix"
 			android:prompt="@string/none"
 			/>
 
-		<CheckBox
-			android:id="@+id/bath_checkbox"
-			android:layout_width="wrap_content"
+		<LinearLayout
+			android:layout_width="@dimen/no_scale_0_pix"
 			android:layout_height="wrap_content"
+			android:layout_weight="50"
 			android:layout_marginRight="@dimen/scalable_30_pix"
-			android:text="@string/order_exit_bath"
-			/>
+			android:orientation="vertical"
+			android:gravity="center"
+			>
+
+			<CheckBox
+				android:id="@+id/bath_checkbox"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/none"
+				android:textColor="@color/lucky_paws_blue"
+				/>
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="@string/order_exit_bath"
+				android:textColor="@color/lucky_paws_blue"
+				android:gravity="center_horizontal"
+				/>
+
+		</LinearLayout>
 
 	</LinearLayout>
 

@@ -316,7 +316,27 @@ public class ReservationsScreen extends Activity {
     Spinner.OnItemSelectedListener numDogsSet = new Spinner.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-//todo
+            int count = dogSelectors.size();
+            int diff = count - position;
+            //possibility samples: count == 2; position == 2; diff == 0 -- Do nothing
+                //count == 1; position == 4; diff == -3 -- We need to add three selectors, add until diff == 0
+                //count == 3; position == 1; diff == 2 -- We needto remove two selectors, remove until diff == 0
+            //We can avoid an if evaluation and just go for two while loops since our goal is diff == 0
+            while(diff < 0) {
+                //add selectors and increment
+                int index = dogSelectors.size();
+                dogSelectors.add(new DogSelector(ReservationsScreen.this, dogsDetailRoot, dogs, index, priceProcessor));
+                diff++;
+            }
+            while(diff > 0) {
+                //remove selectors and decrement
+                int last = dogSelectors.size() - 1;
+                dogSelectors.get(last).detach();
+                dogSelectors.remove(last);
+                diff--;
+            }
+
+            priceProcessor.setNumDogs(count);
         }
 
         @Override
@@ -328,7 +348,24 @@ public class ReservationsScreen extends Activity {
     Spinner.OnItemSelectedListener numCatsSet = new Spinner.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-//todo
+            int count = catSelectors.size();
+            int diff = count - position;
+            //See reasoning in numDogsSet
+            while(diff < 0) {
+                //add selectors and increment
+                int index = catSelectors.size();
+                catSelectors.add(new CatSelector(ReservationsScreen.this, catsDetailRoot, cats, index));
+                diff++;
+            }
+            while(diff > 0) {
+                //remove selectors and decrement
+                int last = catSelectors.size() - 1;
+                catSelectors.get(last).detach();
+                catSelectors.remove(last);
+                diff--;
+            }
+
+            priceProcessor.setNumCats(count);
         }
 
         @Override

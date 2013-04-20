@@ -22,6 +22,8 @@ public class PriceProcessor {
     int numDogs;
     int numCats;
 
+    int numBaths;
+
     public PriceProcessor(TextView boardingPriceDisplay, TextView bathPriceDisplay, TextView totalPriceDisplay) {
         this.boardingPriceDisplay = boardingPriceDisplay;
         this.bathPriceDisplay = bathPriceDisplay;
@@ -54,10 +56,17 @@ public class PriceProcessor {
 
     public void setNumDogs(int dogs) {
         numDogs = dogs;
+        figureCost();
     }
 
     public void setNumCats(int cats) {
         numCats = cats;
+        figureCost();
+    }
+
+    public void changeNumBaths(int diff){
+        numBaths += diff;
+        figureCost();
     }
 
     private void figureCost() {
