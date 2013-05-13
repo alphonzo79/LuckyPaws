@@ -63,6 +63,7 @@ public class WebCamAsync implements Runnable{
     public void startThread(AndroidHttpClient connection) {
         this.connection = connection;
         httpHost = new HttpHost(host, 80, "http");
+        executionContext = new BasicHttpContext();
 
         new Thread(this).start();
     }

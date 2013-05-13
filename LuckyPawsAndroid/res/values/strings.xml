@@ -137,16 +137,25 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="dog_num">Dog #</string>
 	<string name="cat_num">Cat #</string>
 
+	<string name="am_weekday">7-11 a.m.</string>
+	<string name="am_weekday_form_data">AM.7-11 AM</string>
+	<string name="am_weekend">10 a.m. - 12 noon</string>
+	<string name="am_weekend_form_data">AM.10-12 AM</string>
+	<string name="pm_weekday">3-7 p.m.</string>
+	<string name="pm_weekday_form_data">PM.3-7 PM</string>
+	<string name="pm_weekend">4-5 p.m.</string>
+	<string name="pm_weekend_form_data">PM.4-5 PM</string>
+
 	<string-array name="time_frames">
 		<item>@string/time_hint</item>
-		<item>7-11 a.m.</item>
-		<item>3-7 p.m.</item>
+		<item>@string/am_weekday</item>
+		<item>@string/pm_weekday</item>
 	</string-array>
 
 	<string-array name="time_frames_weekend">
 		<item>@string/time_hint</item>
-		<item>10 a.m. - 12 noon</item>
-		<item>4-5 p.m.</item>
+		<item>@string/am_weekend</item>
+		<item>@string/pm_weekend</item>
 	</string-array>
 
 	<string-array name="one_to_four">

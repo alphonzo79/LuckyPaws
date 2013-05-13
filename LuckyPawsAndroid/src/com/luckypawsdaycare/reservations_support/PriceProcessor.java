@@ -4,12 +4,17 @@
 
 package com.luckypawsdaycare.reservations_support;
 
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.luckypawsdaycare.R;
 
 import java.util.Calendar;
 
 public class PriceProcessor {
+    View priceDisplayRoot;
     TextView boardingPriceDisplay;
+    LinearLayout bathPriceLayout;
     TextView bathPriceDisplay;
     TextView totalPriceDisplay;
 
@@ -24,13 +29,16 @@ public class PriceProcessor {
 
     int numBaths;
 
-    public PriceProcessor(TextView boardingPriceDisplay, TextView bathPriceDisplay, TextView totalPriceDisplay) {
-        this.boardingPriceDisplay = boardingPriceDisplay;
-        this.bathPriceDisplay = bathPriceDisplay;
-        this.totalPriceDisplay = totalPriceDisplay;
+    public PriceProcessor(View priceDisplayRoot) {
+        this.priceDisplayRoot = priceDisplayRoot;
+        this.boardingPriceDisplay = (TextView)priceDisplayRoot.findViewById(R.id.boarding_price_value);
+        this.bathPriceLayout = (LinearLayout)priceDisplayRoot.findViewById(R.id.bath_layout_root);
+        this.bathPriceDisplay = (TextView)priceDisplayRoot.findViewById(R.id.bath_price_value);
+        this.totalPriceDisplay = (TextView)priceDisplayRoot.findViewById(R.id.total_price_value);
 
         boardingPriceDisplay.setText("$0");
         bathPriceDisplay.setText("$0");
+        bathPriceLayout.setVisibility(View.GONE);
         totalPriceDisplay.setText("$0");
     }
 
@@ -70,6 +78,8 @@ public class PriceProcessor {
     }
 
     private void figureCost() {
-        //todo
+        if(dropOffDate != null && pickUpDate != null && (numCats + numDogs) > 0) {
+            //todo
+        }
     }
 }

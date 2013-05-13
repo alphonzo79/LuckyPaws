@@ -5,9 +5,12 @@
 package com.luckypawsdaycare.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.luckypawsdaycare.R;
@@ -17,13 +20,13 @@ import com.luckypawsdaycare.database.PersonalInfoTableColumns;
 import com.luckypawsdaycare.database.PetsDAO;
 import com.luckypawsdaycare.reservations_support.CatSelector;
 import com.luckypawsdaycare.reservations_support.DogSelector;
+import com.luckypawsdaycare.reservations_support.PetSelector;
 import com.luckypawsdaycare.reservations_support.PriceProcessor;
+import com.luckypawsdaycare.support.CustomToast;
 import com.luckypawsdaycare.support.DateUtilities;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ReservationsScreen extends Activity {
     Map<String, String> personalInfo;
@@ -49,9 +52,7 @@ public class ReservationsScreen extends Activity {
     Spinner numCats;
     LinearLayout dogsDetailRoot;
     LinearLayout catsDetailRoot;
-    TextView boardingPriceDisplay;
-    TextView bathPriceDisplay;
-    TextView totalPriceDisplay;
+    LinearLayout pricingRoot;
     EditText comments;
     Button submitButton;
     Button cancelButton;
@@ -71,7 +72,7 @@ public class ReservationsScreen extends Activity {
         findAndWireElements();
         populateElements();
 
-        priceProcessor = new PriceProcessor(boardingPriceDisplay, bathPriceDisplay, totalPriceDisplay);
+        priceProcessor = new PriceProcessor(pricingRoot);
     }
 
     private void gatherInfo() {
@@ -119,9 +120,7 @@ public class ReservationsScreen extends Activity {
         numCats.setOnItemSelectedListener(numCatsSet);
         dogsDetailRoot = (LinearLayout)findViewById(R.id.dogs_root_layout);
         catsDetailRoot = (LinearLayout)findViewById(R.id.cats_root_layout);
-        boardingPriceDisplay = (TextView)findViewById(R.id.boarding_price_value);
-        bathPriceDisplay = (TextView)findViewById(R.id.bath_price_value);
-        totalPriceDisplay = (TextView)findViewById(R.id.total_price_value);
+        pricingRoot = (LinearLayout)findViewById(R.id.price_display_layout);
         comments = (EditText)findViewById(R.id.comments_input);
         submitButton = (Button)findViewById(R.id.submit_button);
         submitButton.setOnClickListener(submitReservation);
@@ -205,6 +204,7 @@ public class ReservationsScreen extends Activity {
             dropOffDate.set(year, month, day);
             dropOffDateDisplay.setText(DateUtilities.appDateFormat().format(dropOffDate.getTime()));
 
+            //todo holidays, Thanksgiving and Christmas
             int dow = dropOffDate.get(Calendar.DAY_OF_WEEK);
             if(dow == Calendar.SATURDAY || dow == Calendar.SUNDAY) {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservationsScreen.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.time_frames_weekend));
@@ -254,6 +254,7 @@ public class ReservationsScreen extends Activity {
             pickUpDate.set(year, month, day);
             pickUpDateDisplay.setText(DateUtilities.appDateFormat().format(pickUpDate.getTime()));
 
+            //todo holidays, Thanksgiving and Christmas
             int dow = pickUpDate.get(Calendar.DAY_OF_WEEK);
             if(dow == Calendar.SATURDAY || dow == Calendar.SUNDAY) {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservationsScreen.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.time_frames_weekend));
@@ -382,7 +383,203 @@ public class ReservationsScreen extends Activity {
 
     Button.OnClickListener submitReservation = new Button.OnClickListener() {
         public void onClick(View v) {
-            //todo
+            if(validateInputs()) {
+                Log.d("LuckyPaws", "Passed validation");
+                try {
+                    Map<String, String> formValues = new HashMap<String, String>();
+                    SimpleDateFormat sdf = DateUtilities.reservationRequestDateFormat();
+                    formValues.put("inDate", sdf.format(dropOffDate.getTime()));
+                    formValues.put("outDate", sdf.format(pickUpDate.getTime()));
+
+                    String inTime = "";
+                    int dow = dropOffDate.get(Calendar.DAY_OF_WEEK);
+                    if(dow == Calendar.SATURDAY || dow == Calendar.SUNDAY) {
+                        switch(dropOffTime) {
+                            case 0:
+                                inTime = getResources().getString(R.string.am_weekday_form_data);
+                                break;
+                            case 1:
+                                inTime = getResources().getString(R.string.pm_weekday_form_data);
+                                break;
+                            default:
+                                break;
+                        }
+                    } else {
+                        switch(dropOffTime) {
+                            case 0:
+                                inTime = getResources().getString(R.string.am_weekend_form_data);
+                                break;
+                            case 1:
+                                inTime = getResources().getString(R.string.pm_weekend_form_data);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    formValues.put("inTime", inTime);
+
+                    String outTime = "";
+                    dow = pickUpDate.get(Calendar.DAY_OF_WEEK);
+                    if(dow == Calendar.SATURDAY || dow == Calendar.SUNDAY) {
+                        switch(pickUpTime) {
+                            case 0:
+                                outTime = getResources().getString(R.string.am_weekday_form_data);
+                                break;
+                            case 1:
+                                outTime = getResources().getString(R.string.pm_weekday_form_data);
+                                break;
+                            default:
+                                break;
+                        }
+                    } else {
+                        switch(pickUpTime) {
+                            case 0:
+                                outTime = getResources().getString(R.string.am_weekend_form_data);
+                                break;
+                            case 1:
+                                outTime = getResources().getString(R.string.pm_weekend_form_data);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    formValues.put("outTime", outTime);
+
+                    formValues.put("firstName", ownerFirstName.getText().toString());
+                    formValues.put("lastName", ownerLastName.getText().toString());
+
+                    String phone = phoneNummber.getText().toString().replace("-", "");
+                    formValues.put("phone1a", phone.substring(0, 3));
+                    formValues.put("phone1b", phone.substring(3, 6));
+                    formValues.put("phone1c", phone.substring(6));
+
+                    formValues.put("email", email.getText().toString());
+
+//                    <input type="hidden" name="firstName" value="Karen" />
+//                    <input type="hidden" name="lastName" value="Davis" />
+//                    <input type="hidden" name="phone1a" value="919" />
+//                    <input type="hidden" name="phone1b" value="123" />
+//                    <input type="hidden" name="phone1c" value="4567" />
+//                    <input type="hidden" name="email" value="karen@myluckypaws.com" />
+//                    <input type="hidden" name="address" value="123 Main Stree" />
+//                    <input type="hidden" name="city" value="Selma" />
+//                    <input type="hidden" name="state" value="NC" />
+//                    <input type="hidden" name="zip" value="27576" />
+//                    <input type="hidden" name="numDogs" value="2" />
+//                    <input type="hidden" name="numCats" value="1" />
+//                    <input type="hidden" name="play" value="1" />
+//                    <input type="hidden" name="dogName[1]" value="Bugg" />
+//                    <input type="hidden" name="dogName[2]" value="Lugzz" />
+//                    <input type="hidden" name="dogBreed[1]" value="Dalmation" />
+//                    <input type="hidden" name="dogBreed[2]" value="Pit Bull" />
+//                    <input type="hidden" name="bath[1]" value="Yes" />
+//                    <input type="hidden" name="bath[2]" value="No" />
+//                    <input type="hidden" name="catName[1]" value="Kitty" />
+//                    <input type='hidden' name='price' value='475.7' />
+//                    <input type="text" name="notes" value="" size=40 />
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    CustomToast toast = new CustomToast(ReservationsScreen.this, getString(R.string.error_info_save));
+                    toast.show();
+                }
+            }
         }
     };
+
+    private boolean validateInputs() {
+        StringBuilder errorMessage = new StringBuilder("");
+
+        //Drop off date, pick up date, drop off time and pick up time need to be populated
+        if(dropOffDate == null || dropOffDate.get(Calendar.DAY_OF_MONTH) < Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+            appendErrorMessage(errorMessage, "• You must select a valid drop off date.");
+        }
+        if(dropOffTime < 0) {
+            appendErrorMessage(errorMessage, "• You must select a valid drop off time frame.");
+        }
+        if(pickUpDate == null || pickUpDate.before(Calendar.getInstance())) {
+            appendErrorMessage(errorMessage, "• You must select a valid pick up date.");
+        }
+        if(pickUpTime < 0) {
+            appendErrorMessage(errorMessage, "• You must select a valid pick up time frame.");
+        }
+
+        //Check dates -- Drop off must be before pickup, Can't be the same date
+        if(dropOffDate != null && pickUpDate != null) {
+            if(pickUpDate.before(dropOffDate) || dropOffDate.equals(pickUpDate) || dropOffDate.get(Calendar.DAY_OF_MONTH) == pickUpDate.get(Calendar.DAY_OF_MONTH)) {
+                appendErrorMessage(errorMessage, "• Your pick up date must be after your drop off date.");
+            }
+        }
+
+        //Personal Info must be populated
+        if(TextUtils.isEmpty(ownerFirstName.getText().toString()) || TextUtils.isEmpty(ownerLastName.getText().toString())){
+            appendErrorMessage(errorMessage, "• You must enter your first and last name.");
+        }
+        if(!TextUtils.isEmpty(phoneNummber.getText().toString())) {
+            String phone = phoneNummber.getText().toString().replace("-", "");
+            if(phone.length() < 10) {
+                appendErrorMessage(errorMessage, "• You must provide your full 10-digit contact phone number.");
+            }
+        } else {
+            appendErrorMessage(errorMessage, "• You must enter your phone number.");
+        }
+        if(TextUtils.isEmpty(streetAddress.getText().toString()) ||
+                TextUtils.isEmpty(city.getText().toString()) ||
+                TextUtils.isEmpty(state.getText().toString()) ||
+                TextUtils.isEmpty(zip.getText().toString())) {
+            appendErrorMessage(errorMessage, "• You must provide your full address.");
+        }
+        if(TextUtils.isEmpty(email.getText().toString()) || !email.getText().toString().contains("@")) {
+            appendErrorMessage(errorMessage, "• You must provide a valid e-mail address.");
+        }
+
+        //We need to have animals to board, and we need the info for each animal
+        int numDogsToBoard = numDogs.getSelectedItemPosition();
+        int numCatsToBoard = numCats.getSelectedItemPosition();
+        if(numDogsToBoard + numCatsToBoard < 1) {
+            appendErrorMessage(errorMessage, "• You must provide at least one dog or cat to board.");
+        }
+        boolean allAnimalsInput = true;
+        if(numDogsToBoard > 0) {
+            for(PetSelector pet : dogSelectors) {
+                if(TextUtils.isEmpty(pet.getPetName())) {
+                    allAnimalsInput = false;
+                }
+            }
+        }
+        if(numCatsToBoard > 0) {
+            for(PetSelector pet : catSelectors) {
+                if(TextUtils.isEmpty(pet.getPetName())) {
+                    allAnimalsInput = false;
+                }
+            }
+        }
+        if(!allAnimalsInput) {
+            appendErrorMessage(errorMessage, "• You must provide information about each of the animals scheduled.");
+        }
+
+        String errorMessageString = errorMessage.toString();
+        if(TextUtils.isEmpty(errorMessageString)) {
+            return true;
+        } else {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle(R.string.error);
+            dialog.setIcon(android.R.drawable.ic_dialog_alert);
+            dialog.setMessage(errorMessageString);
+            dialog.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            dialog.show();
+            return false;
+        }
+    }
+
+    private void appendErrorMessage(StringBuilder builder, String messagePortion) {
+        if(builder.length() > 1) {
+            builder.append("\n");
+        }
+        builder.append(messagePortion);
+    }
 }
