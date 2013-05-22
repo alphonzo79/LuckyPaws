@@ -26,6 +26,7 @@ public class PriceProcessor {
     LinearLayout bathPriceLayout;
     TextView bathPriceDisplay;
     TextView totalPriceDisplay;
+    TextView bathFinePrint;
 
     Calendar dropOffDate;
     Calendar pickUpDate;
@@ -46,6 +47,7 @@ public class PriceProcessor {
         this.bathPriceLayout = (LinearLayout)priceDisplayRoot.findViewById(R.id.bath_layout_root);
         this.bathPriceDisplay = (TextView)priceDisplayRoot.findViewById(R.id.bath_price_value);
         this.totalPriceDisplay = (TextView)priceDisplayRoot.findViewById(R.id.total_price_value);
+        this.bathFinePrint = (TextView)priceDisplayRoot.findViewById(R.id.bath_price_disclosure);
 
         boardingPriceDisplay.setText("$0");
         halfDayDisplay.setText("$0");
@@ -53,6 +55,7 @@ public class PriceProcessor {
         bathPriceDisplay.setText("$0");
         bathPriceLayout.setVisibility(View.GONE);
         totalPriceDisplay.setText("$0");
+        bathFinePrint.setVisibility(View.GONE);
     }
 
     public void setDropOffDate(Calendar date) {
@@ -182,6 +185,17 @@ public class PriceProcessor {
         } else {
             halfDayPriceLayout.setVisibility(View.GONE);
             halfDayDisplay.setText(getPriceString("$0"));
+        }
+
+        String bath = prices.get("bath");
+        if(!TextUtils.isEmpty(bath)) {
+            bathPriceLayout.setVisibility(View.VISIBLE);
+            bathFinePrint.setVisibility(View.VISIBLE);
+            bathPriceDisplay.setText(getPriceString(bath));
+        } else {
+            bathPriceLayout.setVisibility(View.GONE);
+            bathFinePrint.setVisibility(View.GONE);
+            bathPriceDisplay.setText("$0");
         }
 
         String total = prices.get("total");

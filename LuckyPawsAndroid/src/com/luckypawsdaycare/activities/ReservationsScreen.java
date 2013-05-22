@@ -120,7 +120,7 @@ public class ReservationsScreen extends Activity {
         numCats.setOnItemSelectedListener(numCatsSet);
         dogsDetailRoot = (LinearLayout)findViewById(R.id.dogs_root_layout);
         catsDetailRoot = (LinearLayout)findViewById(R.id.cats_root_layout);
-        pricingRoot = (LinearLayout)findViewById(R.id.price_display_layout);
+        pricingRoot = (LinearLayout)findViewById(R.id.reservations_root);
         comments = (EditText)findViewById(R.id.comments_input);
         submitButton = (Button)findViewById(R.id.submit_button);
         submitButton.setOnClickListener(submitReservation);
