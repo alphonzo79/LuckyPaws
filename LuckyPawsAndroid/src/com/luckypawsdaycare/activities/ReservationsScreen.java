@@ -337,7 +337,7 @@ public class ReservationsScreen extends Activity {
                 diff--;
             }
 
-            priceProcessor.setNumDogs(count);
+            priceProcessor.setNumDogs(dogSelectors.size());
         }
 
         @Override
@@ -366,7 +366,7 @@ public class ReservationsScreen extends Activity {
                 diff--;
             }
 
-            priceProcessor.setNumCats(count);
+            priceProcessor.setNumCats(catSelectors.size());
         }
 
         @Override
@@ -455,6 +455,7 @@ public class ReservationsScreen extends Activity {
 
                     formValues.put("email", email.getText().toString());
 
+                    //todo
 //                    <input type="hidden" name="firstName" value="Karen" />
 //                    <input type="hidden" name="lastName" value="Davis" />
 //                    <input type="hidden" name="phone1a" value="919" />

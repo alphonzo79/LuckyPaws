@@ -512,6 +512,33 @@
 				</LinearLayout>
 
 				<LinearLayout
+					android:id="@+id/half_day_price_layout_root"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					>
+
+					<TextView
+						android:id="@+id/half_day_price_label"
+						style="@style/form_label"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/half_day_price_label"
+						/>
+
+					<TextView
+						android:id="@+id/half_day_price_value"
+						style="@style/form_label"
+						android:layout_width="@dimen/scalable_75_pix"
+						android:layout_height="wrap_content"
+						android:layout_marginRight="@dimen/scalable_30_pix"
+						android:gravity="right"
+						android:text="@string/none"
+						/>
+
+				</LinearLayout>
+
+				<LinearLayout
 					android:id="@+id/bath_layout_root"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"

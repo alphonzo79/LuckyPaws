@@ -127,6 +127,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="how_many_dogs">How Many Dogs?</string>
 	<string name="how_many_cats">How Many Cats?</string>
 	<string name="boarding_price_label">Boarding:</string>
+	<string name="half_day_price_label">Half Day:</string>
 	<string name="bath_price_label">*Exit Bath</string>
 	<string name="exit_bath_disclosure">*Exit baths are not included in the total price.</string>
 	<string name="order_exit_bath">Would you like to order an exit bath?</string>

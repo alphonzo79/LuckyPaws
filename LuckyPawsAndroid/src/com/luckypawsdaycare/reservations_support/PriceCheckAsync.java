@@ -1,7 +1,6 @@
 package com.luckypawsdaycare.reservations_support;
 
 import android.net.http.AndroidHttpClient;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 import org.apache.http.HttpEntity;
@@ -9,15 +8,15 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PriceCheckAsync extends AsyncTask<URL, Void, String> {
-    private final String urlRoot = ""; //todo
-    private final String host = ""; //todo
+public class PriceCheckAsync implements Runnable {
+    private final String urlRoot = "http://www.luckypawsdaycare.com/processMobile.php?";
+    private final String host = "www.luckypawsdaycare.com";
 
     private PriceCheckListener listener;
     private AndroidHttpClient client;
@@ -25,7 +24,11 @@ public class PriceCheckAsync extends AsyncTask<URL, Void, String> {
     private HttpHost httpHost;
     private BasicHttpContext executionContext;
 
-    public PriceCheckAsync(PriceCheckListener listener) {
+    private String arguments;
+
+    public PriceCheckAsync(String arguments, PriceCheckListener listener) {
+        this.arguments = arguments;
+
         this.listener = listener;
         userAgent = System.getProperty("http.agent");
         if(client == null) {
@@ -35,33 +38,39 @@ public class PriceCheckAsync extends AsyncTask<URL, Void, String> {
         executionContext = new BasicHttpContext();
     }
 
+    public void getPrice() {
+        new Thread(this).start();
+    }
+
     @Override
-    protected String doInBackground(URL... params) {
-        HttpGet request = new HttpGet(urlRoot + params[0]);
+    public void run() {
+        HttpGet request = new HttpGet(urlRoot + arguments);
         HttpResponse response = null;
         String result = "";
         try {
             response = client.execute(httpHost, request, executionContext);
             HttpEntity entity = response.getEntity();
-            //todo Get the string
+            result = EntityUtils.toString(entity);
         } catch (IOException e) {
             Log.e("LuckyPaws", "Caught IOException while trying to get pricing");
             e.printStackTrace();
         }
         client.getConnectionManager().shutdown();
-        return result;
-    }
 
-    @Override
-    protected void onPostExecute(String result){
         if(!TextUtils.isEmpty(result)){
-            Map<String, Float> prices = new HashMap<String, Float>();
-            //todo parse string
+            Map<String, String> prices = new HashMap<String, String>();
+            String[] splitString = result.split(";");
+            for(String segment : splitString) {
+                String[] secondSplit = segment.split(":");
+                if(secondSplit.length == 2) {
+                    prices.put(secondSplit[0], secondSplit[1]);
+                }
+            }
             listener.handleFoundPrice(prices);
         }
     }
 
     public interface PriceCheckListener {
-        public void handleFoundPrice(Map<String, Float> prices);
+        public void handleFoundPrice(Map<String, String> prices);
     }
 }
