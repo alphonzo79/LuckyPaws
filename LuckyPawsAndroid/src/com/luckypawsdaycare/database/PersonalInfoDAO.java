@@ -115,6 +115,7 @@ public class PersonalInfoDAO extends DatabaseHelper {
             db.endTransaction();
             stmt.clearBindings();
             stmt.close();
+            db.close();
         }
 
         return result;

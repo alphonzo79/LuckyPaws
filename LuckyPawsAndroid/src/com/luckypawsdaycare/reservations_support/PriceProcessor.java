@@ -7,6 +7,7 @@ package com.luckypawsdaycare.reservations_support;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -90,6 +91,7 @@ public class PriceProcessor {
 
     public void changeNumBaths(int diff){
         numBaths += diff;
+        Log.d("LuckyPaws", "NumBaths: " + numBaths);
         figureCost();
     }
 
@@ -190,12 +192,16 @@ public class PriceProcessor {
         String bath = prices.get("bath");
         if(!TextUtils.isEmpty(bath)) {
             bathPriceLayout.setVisibility(View.VISIBLE);
-            bathFinePrint.setVisibility(View.VISIBLE);
             bathPriceDisplay.setText(getPriceString(bath));
         } else {
             bathPriceLayout.setVisibility(View.GONE);
-            bathFinePrint.setVisibility(View.GONE);
             bathPriceDisplay.setText("$0");
+        }
+
+        if(numBaths > 0) {
+            bathFinePrint.setVisibility(View.VISIBLE);
+        } else {
+            bathFinePrint.setVisibility(View.GONE);
         }
 
         String total = prices.get("total");

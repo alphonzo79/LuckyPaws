@@ -28,7 +28,7 @@ import com.luckypawsdaycare.support.DateUtilities;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class ReservationsScreen extends Activity {
+public class ReservationsScreen extends Activity implements PetSelector.PetSelectorListener {
     Map<String, String> personalInfo;
     List<String> dogs;
     List<String> cats;
@@ -181,6 +181,32 @@ public class ReservationsScreen extends Activity {
         }
     }
 
+    public void removePetFromSelectors(String petName) {
+        if(cats.contains(petName)) {
+            for(PetSelector catSelector : catSelectors) {
+                catSelector.removePetName(petName);
+            }
+        } else if (dogs.contains(petName)) {
+            for(PetSelector dogSelector : dogSelectors) {
+                dogSelector.removePetName(petName);
+            }
+        }
+    }
+
+    public void addPetToSelectors(String petName) {
+        if(cats.contains(petName)) {
+            int index = cats.indexOf(petName);
+            for(PetSelector catSelector : catSelectors) {
+                catSelector.addPetName(petName, index);
+            }
+        } else if (dogs.contains(petName)) {
+            int index = dogs.indexOf(petName);
+            for(PetSelector dogSelector : dogSelectors) {
+                dogSelector.addPetName(petName, index);
+            }
+        }
+    }
+
     View.OnClickListener launchDropOffDatePicker = new View.OnClickListener(){
         public void onClick(View v) {
             int year;
@@ -326,14 +352,26 @@ public class ReservationsScreen extends Activity {
             while(diff < 0) {
                 //add selectors and increment
                 int index = dogSelectors.size();
-                dogSelectors.add(new DogSelector(ReservationsScreen.this, dogsDetailRoot, dogs, index, priceProcessor));
+
+                //Don't include pets that are already selected in other lists
+                List<String> tempList = new ArrayList<String>(dogs);
+                for(PetSelector selector : dogSelectors) {
+                    tempList.remove(selector.getPetName());
+                }
+                dogSelectors.add(new DogSelector(ReservationsScreen.this, dogsDetailRoot, tempList, index, priceProcessor));
                 diff++;
             }
             while(diff > 0) {
                 //remove selectors and decrement
                 int last = dogSelectors.size() - 1;
+                String name = dogSelectors.get(last).getPetName();
                 dogSelectors.get(last).detach();
                 dogSelectors.remove(last);
+
+                //Add the name back into the other selectors
+                if(dogs.contains(name)) { //This way we don't add "choose" or "Custom"
+                    addPetToSelectors(name);
+                }
                 diff--;
             }
 
@@ -355,14 +393,26 @@ public class ReservationsScreen extends Activity {
             while(diff < 0) {
                 //add selectors and increment
                 int index = catSelectors.size();
-                catSelectors.add(new CatSelector(ReservationsScreen.this, catsDetailRoot, cats, index));
+
+                //Don't include pets that are already selected in other lists
+                List<String> tempList = new ArrayList<String>(cats);
+                for(PetSelector selector : catSelectors) {
+                    tempList.remove(selector.getPetName());
+                }
+                catSelectors.add(new CatSelector(ReservationsScreen.this, catsDetailRoot, tempList, index));
                 diff++;
             }
             while(diff > 0) {
                 //remove selectors and decrement
                 int last = catSelectors.size() - 1;
+                String name = catSelectors.get(last).getPetName();
                 catSelectors.get(last).detach();
                 catSelectors.remove(last);
+
+                //Add the name back into the other selectors
+                if(cats.contains(name)) { //This way we don't add "choose" or "Custom"
+                    addPetToSelectors(name);
+                }
                 diff--;
             }
 

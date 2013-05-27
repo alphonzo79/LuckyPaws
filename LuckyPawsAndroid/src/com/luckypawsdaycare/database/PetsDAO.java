@@ -126,6 +126,7 @@ public class PetsDAO extends DatabaseHelper {
             db.endTransaction();
             stmt.clearBindings();
             stmt.close();
+            db.close();
         }
 
         return success;
@@ -171,6 +172,7 @@ public class PetsDAO extends DatabaseHelper {
             db.endTransaction();
             stmt.clearBindings();
             stmt.close();
+            db.close();
         }
 
         return success;

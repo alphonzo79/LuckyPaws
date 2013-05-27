@@ -6,6 +6,7 @@ package com.luckypawsdaycare.reservations_support;
 
 import android.app.Activity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -16,9 +17,13 @@ import java.util.List;
 
 public abstract class PetSelector {
     Activity activity;
+    PetSelectorListener listener;
     ViewGroup animalRoot;
     List<String> animalNames;
     int index;
+
+    String currentSelected;
+    ArrayAdapter<String> adapter;
 
     int customSelected;
 
@@ -29,6 +34,12 @@ public abstract class PetSelector {
 
     public PetSelector(Activity context, LinearLayout rootLayout, List<String> petNames, int index) {
         activity = context;
+        if(activity instanceof PetSelectorListener) {
+            listener = (PetSelectorListener)activity;
+        } else {
+            Log.e("LuckyPaws", "The activity that hosts this pet selector must implement the PestSelectorListener Interface");
+        }
+
         animalRoot = rootLayout;
 
         animalNames = new ArrayList<String>();
@@ -47,7 +58,7 @@ public abstract class PetSelector {
     protected abstract void inflateLayoutFindElements();
 
     private void setUpSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, animalNames);
+        adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, animalNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         animalSelector.setAdapter(adapter);
         animalSelector.setSelection(0);
@@ -55,15 +66,61 @@ public abstract class PetSelector {
         animalSelector.setOnItemSelectedListener(animalNameSelected);
     }
 
+    public void removePetName(String petName) {
+        if(!petName.equals(currentSelected)) { //This way we don't remove it from the one that triggered the removal
+            if(animalNames.remove(petName)){
+                Log.d("LuckyPaws", "PetSelector removing " + currentSelected + " From this selector");
+                adapter.notifyDataSetChanged();
+                //Reset the selected index to take into account the removed name
+                int index = adapter.getPosition(currentSelected);
+                animalSelector.setSelection(index);
+                animalSelector.invalidate();
+            }
+        }
+
+        customSelected = animalNames.size() - 1;
+    }
+
+    public void addPetName(String petName, int index) {
+        if(!animalNames.contains(petName)) {
+            Log.d("LuckyPaws", "PetSelector adding " + currentSelected + " to this selector");
+            animalNames.add(index + 1, petName);
+            //Reset the selected index to take into account the removed name
+            int currIndex = adapter.getPosition(currentSelected);
+            animalSelector.setSelection(currIndex);
+            animalSelector.invalidate();
+        }
+        customSelected = animalNames.size() - 1;
+    }
+
     Spinner.OnItemSelectedListener animalNameSelected = new Spinner.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-            if(position == customSelected && customNameField.getVisibility() != View.VISIBLE) {
-                customNameField.setVisibility(View.VISIBLE);
+            if(!TextUtils.isEmpty(currentSelected) && !currentSelected.equals("custom") && !currentSelected.equals("choose")) {
+                Log.d("LuckyPaws", "PetSelector adding " + currentSelected + " back into other selectors");
+                listener.addPetToSelectors(currentSelected);
+            }
+
+            int selectedIndex = animalSelector.getSelectedItemPosition();
+            currentSelected = animalNames.get(selectedIndex);
+            if(position == customSelected) {
+                currentSelected = "custom";
+                if(customNameField.getVisibility() != View.VISIBLE){
+                    customNameField.setVisibility(View.VISIBLE);
+                }
             } else {
                 if(customNameField.getVisibility() == View.VISIBLE) {
                     customNameField.setVisibility(View.GONE);
                 }
+
+                if(position == 0) {
+                    currentSelected = "choose";
+                }
+            }
+
+            if(!currentSelected.equals("custom") && !currentSelected.equals("choose")) {
+                Log.d("LuckyPaws", "PetSelector removing " + currentSelected + " from other selectors");
+                listener.removePetFromSelectors(currentSelected);
             }
         }
 
@@ -91,5 +148,10 @@ public abstract class PetSelector {
         } //All other cases return null
 
         return retVal;
+    }
+
+    public interface PetSelectorListener {
+        public void removePetFromSelectors(String petName);
+        public void addPetToSelectors(String petName);
     }
 }

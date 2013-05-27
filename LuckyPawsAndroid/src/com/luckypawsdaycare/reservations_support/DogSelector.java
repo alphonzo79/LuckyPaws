@@ -5,6 +5,7 @@
 package com.luckypawsdaycare.reservations_support;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.*;
 import com.luckypawsdaycare.R;
@@ -28,7 +29,18 @@ public class DogSelector extends PetSelector {
         animalSelector = (Spinner)animalLayout.findViewById(R.id.dog_name_spinner);
         customNameField = (EditText)animalLayout.findViewById(R.id.dog_name_input);
         exitBathCheckBox = (CheckBox)animalLayout.findViewById(R.id.bath_checkbox);
-        exitBathCheckBox.setOnCheckedChangeListener(checkChanged);
+        exitBathCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                Log.d("LuckyPaws", "Check box clicked");
+                if(checked) {
+                    priceProcessor.changeNumBaths(1);
+                } else {
+                    priceProcessor.changeNumBaths(-1);
+                }
+            }
+        });
 
         nameLabel = (TextView)animalLayout.findViewById(R.id.dog_name_label);
         String dogNum = activity.getString(R.string.dog_num) + (index + 1);
@@ -45,6 +57,7 @@ public class DogSelector extends PetSelector {
 
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+            Log.d("LuckyPaws", "Check box clicked");
             if(checked) {
                 priceProcessor.changeNumBaths(1);
             } else {

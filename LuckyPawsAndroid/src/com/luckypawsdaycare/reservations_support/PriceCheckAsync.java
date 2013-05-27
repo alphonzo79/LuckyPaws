@@ -1,6 +1,8 @@
 package com.luckypawsdaycare.reservations_support;
 
+import android.annotation.TargetApi;
 import android.net.http.AndroidHttpClient;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import org.apache.http.HttpEntity;
@@ -26,6 +28,7 @@ public class PriceCheckAsync implements Runnable {
 
     private String arguments;
 
+    @TargetApi(Build.VERSION_CODES.FROYO)
     public PriceCheckAsync(String arguments, PriceCheckListener listener) {
         this.arguments = arguments;
 
@@ -57,6 +60,7 @@ public class PriceCheckAsync implements Runnable {
             e.printStackTrace();
         }
         client.getConnectionManager().shutdown();
+        client.close();
 
         if(!TextUtils.isEmpty(result)){
             Map<String, String> prices = new HashMap<String, String>();
