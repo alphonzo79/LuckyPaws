@@ -229,4 +229,25 @@ public class PetsDAO extends DatabaseHelper {
 
         return success;
     }
+
+    public String getPetBreed(String petName) {
+        String result = "";
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor rs = db.query("pets", new String[] {PetsTableColumnNames.BREED.getString()}, PetsTableColumnNames.NAME.getString() + "=?", new String[]{petName}, null, null, null);
+
+        try {
+            if(rs.getCount() > 0) {
+                rs.moveToFirst();
+                result = rs.getString(0);
+            }
+        } catch(SQLiteException e) {
+            e.printStackTrace();
+        } finally {
+            rs.close();
+            db.close();
+        }
+
+        return result;
+    }
 }

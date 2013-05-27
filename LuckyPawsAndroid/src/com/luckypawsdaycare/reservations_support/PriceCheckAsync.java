@@ -61,6 +61,7 @@ public class PriceCheckAsync implements Runnable {
         }
         client.getConnectionManager().shutdown();
         client.close();
+        client = null;
 
         if(!TextUtils.isEmpty(result)){
             Map<String, String> prices = new HashMap<String, String>();

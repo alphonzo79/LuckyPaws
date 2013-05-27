@@ -4,9 +4,11 @@
 
 package com.luckypawsdaycare.web_cam;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.http.AndroidHttpClient;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -31,6 +33,7 @@ public class WebCamStreamer {
         asyncTask = new WebCamAsync(updateImage, defaultImage);
     }
 
+    @TargetApi(Build.VERSION_CODES.FROYO)
     public void beginStream() {
         Log.d(TAG, "Begin Stream called");
         if(checkWorkingHours()) {
@@ -65,6 +68,7 @@ public class WebCamStreamer {
         }
         if(client != null) {
             client.getConnectionManager().shutdown();
+            client.close();
             client = null;
         }
         asyncRunning = false;

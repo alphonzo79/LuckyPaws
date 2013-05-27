@@ -40,6 +40,8 @@ public class PriceProcessor {
 
     int numBaths;
 
+    String price;
+
     public PriceProcessor(View priceDisplayRoot) {
         this.priceDisplayRoot = priceDisplayRoot;
         this.boardingPriceDisplay = (TextView)priceDisplayRoot.findViewById(R.id.boarding_price_value);
@@ -207,8 +209,14 @@ public class PriceProcessor {
         String total = prices.get("total");
         if(!TextUtils.isEmpty(total)) {
             totalPriceDisplay.setText(getPriceString(total));
+            price = total;
         } else {
             totalPriceDisplay.setText("$0");
+            price = "0";
         }
+    }
+
+    public String getPrice() {
+        return price;
     }
 }

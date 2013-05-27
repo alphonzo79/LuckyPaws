@@ -505,24 +505,48 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
 
                     formValues.put("email", email.getText().toString());
 
+                    formValues.put("address", streetAddress.getText().toString());
+                    formValues.put("city", city.getText().toString());
+                    formValues.put("state", state.getText().toString());
+                    formValues.put("zip", zip.getText().toString());
+
+                    formValues.put("numDogs", Integer.toString(dogSelectors.size()));
+                    formValues.put("numCats", Integer.toString(catSelectors.size()));
+
+                    formValues.put("play", "1"); //Hard coded -- every reservation has this
+
+                    for(int i = 0; i < dogSelectors.size(); i++) {
+                        String name = dogSelectors.get(i).getPetName();
+                        formValues.put("dogName[" + (i + 1) + "]", name);
+
+                        PetsDAO db = new PetsDAO(ReservationsScreen.this);
+                        String breed = db.getPetBreed(name);
+                        formValues.put("dogBreed[" + (i + 1) + "]", breed);
+
+                        boolean doBath = dogSelectors.get(i).doExitBath();
+                        String bathString = "";
+                        if(doBath) {
+                            bathString = "Yes";
+                        } else {
+                            bathString = "No";
+                        }
+                        formValues.put("bath[" + (i + 1) + "]", bathString);
+                    }
+
+                    for(int i = 0; i < catSelectors.size(); i++) {
+                        String name = catSelectors.get(i).getPetName();
+                        formValues.put("catName[" + (i + 1) + "]", name);
+
+                        PetsDAO db = new PetsDAO(ReservationsScreen.this);
+                        String breed = db.getPetBreed(name);
+                        formValues.put("catBreed[" + (i + 1) + "]", breed);
+                    }
+
+                    formValues.put("price", priceProcessor.getPrice());
+
+                    formValues.put("notes", comments.getText().toString());
+
                     //todo
-//                    <input type="hidden" name="firstName" value="Karen" />
-//                    <input type="hidden" name="lastName" value="Davis" />
-//                    <input type="hidden" name="phone1a" value="919" />
-//                    <input type="hidden" name="phone1b" value="123" />
-//                    <input type="hidden" name="phone1c" value="4567" />
-//                    <input type="hidden" name="email" value="karen@myluckypaws.com" />
-//                    <input type="hidden" name="address" value="123 Main Stree" />
-//                    <input type="hidden" name="city" value="Selma" />
-//                    <input type="hidden" name="state" value="NC" />
-//                    <input type="hidden" name="zip" value="27576" />
-//                    <input type="hidden" name="numDogs" value="2" />
-//                    <input type="hidden" name="numCats" value="1" />
-//                    <input type="hidden" name="play" value="1" />
-//                    <input type="hidden" name="dogName[1]" value="Bugg" />
-//                    <input type="hidden" name="dogName[2]" value="Lugzz" />
-//                    <input type="hidden" name="dogBreed[1]" value="Dalmation" />
-//                    <input type="hidden" name="dogBreed[2]" value="Pit Bull" />
 //                    <input type="hidden" name="bath[1]" value="Yes" />
 //                    <input type="hidden" name="bath[2]" value="No" />
 //                    <input type="hidden" name="catName[1]" value="Kitty" />
