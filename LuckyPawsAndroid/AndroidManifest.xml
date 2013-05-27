@@ -17,6 +17,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 	<uses-permission android:name="android.permission.INTERNET"/>
 
+
     <application android:icon="@drawable/clover"
 				 android:label="@string/app_name"
 				 android:theme="@style/lucky_paws_theme">

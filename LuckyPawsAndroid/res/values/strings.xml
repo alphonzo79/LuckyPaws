@@ -137,6 +137,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 	<string name="custom_pet_name">Enter new pet name</string>
 	<string name="dog_num">Dog #</string>
 	<string name="cat_num">Cat #</string>
+    <string name="reservation_error">There was an error making your reservation. Please check you info and connectivity and try again.</string>
+    <string name="reservation_success_header">Reservation Successful</string>
+    <string name="reservation_success">We\'ll see you soon!\n\nIf you do not receive your confirmation email within 24 hours please check your spam folder.</string>
+    <string name="put_reservation_in_calendar">Would you like to make reminder appointments in your calendar?</string>
 
 	<string name="am_weekday">7-11 a.m.</string>
 	<string name="am_weekday_form_data">AM.7-11 AM</string>

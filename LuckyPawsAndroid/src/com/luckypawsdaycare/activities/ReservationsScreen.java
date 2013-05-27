@@ -9,6 +9,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,12 +20,11 @@ import com.luckypawsdaycare.database.DatabaseConstants;
 import com.luckypawsdaycare.database.PersonalInfoDAO;
 import com.luckypawsdaycare.database.PersonalInfoTableColumns;
 import com.luckypawsdaycare.database.PetsDAO;
-import com.luckypawsdaycare.reservations_support.CatSelector;
-import com.luckypawsdaycare.reservations_support.DogSelector;
-import com.luckypawsdaycare.reservations_support.PetSelector;
-import com.luckypawsdaycare.reservations_support.PriceProcessor;
+import com.luckypawsdaycare.reservations_support.*;
 import com.luckypawsdaycare.support.CustomToast;
 import com.luckypawsdaycare.support.DateUtilities;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -436,10 +437,10 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
             if(validateInputs()) {
                 Log.d("LuckyPaws", "Passed validation");
                 try {
-                    Map<String, String> formValues = new HashMap<String, String>();
+                    List<NameValuePair> formValues = new ArrayList<NameValuePair>();
                     SimpleDateFormat sdf = DateUtilities.reservationRequestDateFormat();
-                    formValues.put("inDate", sdf.format(dropOffDate.getTime()));
-                    formValues.put("outDate", sdf.format(pickUpDate.getTime()));
+                    formValues.add(new BasicNameValuePair("inDate", sdf.format(dropOffDate.getTime())));
+                    formValues.add(new BasicNameValuePair("outDate", sdf.format(pickUpDate.getTime())));
 
                     String inTime = "";
                     int dow = dropOffDate.get(Calendar.DAY_OF_WEEK);
@@ -466,7 +467,7 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
                                 break;
                         }
                     }
-                    formValues.put("inTime", inTime);
+                    formValues.add(new BasicNameValuePair("inTime", inTime));
 
                     String outTime = "";
                     dow = pickUpDate.get(Calendar.DAY_OF_WEEK);
@@ -493,35 +494,35 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
                                 break;
                         }
                     }
-                    formValues.put("outTime", outTime);
+                    formValues.add(new BasicNameValuePair("outTime", outTime));
 
-                    formValues.put("firstName", ownerFirstName.getText().toString());
-                    formValues.put("lastName", ownerLastName.getText().toString());
+                    formValues.add(new BasicNameValuePair("firstName", ownerFirstName.getText().toString()));
+                    formValues.add(new BasicNameValuePair("lastName", ownerLastName.getText().toString()));
 
                     String phone = phoneNummber.getText().toString().replace("-", "");
-                    formValues.put("phone1a", phone.substring(0, 3));
-                    formValues.put("phone1b", phone.substring(3, 6));
-                    formValues.put("phone1c", phone.substring(6));
+                    formValues.add(new BasicNameValuePair("phone1a", phone.substring(0, 3)));
+                    formValues.add(new BasicNameValuePair("phone1b", phone.substring(3, 6)));
+                    formValues.add(new BasicNameValuePair("phone1c", phone.substring(6)));
 
-                    formValues.put("email", email.getText().toString());
+                    formValues.add(new BasicNameValuePair("email", email.getText().toString()));
 
-                    formValues.put("address", streetAddress.getText().toString());
-                    formValues.put("city", city.getText().toString());
-                    formValues.put("state", state.getText().toString());
-                    formValues.put("zip", zip.getText().toString());
+                    formValues.add(new BasicNameValuePair("address", streetAddress.getText().toString()));
+                    formValues.add(new BasicNameValuePair("city", city.getText().toString()));
+                    formValues.add(new BasicNameValuePair("state", state.getText().toString()));
+                    formValues.add(new BasicNameValuePair("zip", zip.getText().toString()));
 
-                    formValues.put("numDogs", Integer.toString(dogSelectors.size()));
-                    formValues.put("numCats", Integer.toString(catSelectors.size()));
+                    formValues.add(new BasicNameValuePair("numDogs", Integer.toString(dogSelectors.size())));
+                    formValues.add(new BasicNameValuePair("numCats", Integer.toString(catSelectors.size())));
 
-                    formValues.put("play", "1"); //Hard coded -- every reservation has this
+                    formValues.add(new BasicNameValuePair("play", "1")); //Hard coded -- every reservation has this
 
                     for(int i = 0; i < dogSelectors.size(); i++) {
                         String name = dogSelectors.get(i).getPetName();
-                        formValues.put("dogName[" + (i + 1) + "]", name);
+                        formValues.add(new BasicNameValuePair("dogName[" + (i + 1) + "]", name));
 
                         PetsDAO db = new PetsDAO(ReservationsScreen.this);
                         String breed = db.getPetBreed(name);
-                        formValues.put("dogBreed[" + (i + 1) + "]", breed);
+                        formValues.add(new BasicNameValuePair("dogBreed[" + (i + 1) + "]", breed));
 
                         boolean doBath = dogSelectors.get(i).doExitBath();
                         String bathString = "";
@@ -530,31 +531,48 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
                         } else {
                             bathString = "No";
                         }
-                        formValues.put("bath[" + (i + 1) + "]", bathString);
+                        formValues.add(new BasicNameValuePair("bath[" + (i + 1) + "]", bathString));
                     }
 
                     for(int i = 0; i < catSelectors.size(); i++) {
                         String name = catSelectors.get(i).getPetName();
-                        formValues.put("catName[" + (i + 1) + "]", name);
+                        formValues.add(new BasicNameValuePair("catName[" + (i + 1) + "]", name));
 
                         PetsDAO db = new PetsDAO(ReservationsScreen.this);
                         String breed = db.getPetBreed(name);
-                        formValues.put("catBreed[" + (i + 1) + "]", breed);
+                        formValues.add(new BasicNameValuePair("catBreed[" + (i + 1) + "]", breed));
                     }
 
-                    formValues.put("price", priceProcessor.getPrice());
+                    formValues.add(new BasicNameValuePair("price", priceProcessor.getPrice()));
 
-                    formValues.put("notes", comments.getText().toString());
+                    formValues.add(new BasicNameValuePair("notes", "From Android App --- " + comments.getText().toString()));
 
-                    //todo
-//                    <input type="hidden" name="bath[1]" value="Yes" />
-//                    <input type="hidden" name="bath[2]" value="No" />
-//                    <input type="hidden" name="catName[1]" value="Kitty" />
-//                    <input type='hidden' name='price' value='475.7' />
-//                    <input type="text" name="notes" value="" size=40 />
+                    ReservationProcessor async = new ReservationProcessor(formValues, new ReservationProcessor.ReservationProcessorListener() {
+                        @Override
+                        public void onSuccess() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ReservationsScreen.this).setCancelable(false);
+                            builder = builder.setTitle(getString(R.string.reservation_success_header));
+                            builder = builder.setMessage(getString(R.string.reservation_success));
+                            builder = builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                    ReservationsScreen.this.finish();
+                                }
+                            });
+                            builder.show();
+                        }
+
+                        @Override
+                        public void onFailure() {
+                            CustomToast toast = new CustomToast(ReservationsScreen.this, getString(R.string.reservation_error));
+                            toast.show();
+                        }
+                    });
+                    async.makeReservation();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    CustomToast toast = new CustomToast(ReservationsScreen.this, getString(R.string.error_info_save));
+                    CustomToast toast = new CustomToast(ReservationsScreen.this, getString(R.string.reservation_error));
                     toast.show();
                 }
             }
