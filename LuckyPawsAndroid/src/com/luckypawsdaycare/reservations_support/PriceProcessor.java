@@ -31,9 +31,8 @@ public class PriceProcessor {
 
     Calendar dropOffDate;
     Calendar pickUpDate;
-    //For drop off and pick up times, 0 refers to morning time frame, 1 refers to afternoon time frame, -1 for unknown
-    int dropOffTime;
-    int pickUpTime;
+    String dropOffTime;
+    String pickUpTime;
 
     int numDogs;
     int numCats;
@@ -66,7 +65,7 @@ public class PriceProcessor {
         figureCost();
     }
 
-    public void setDropOffTime(int time) {
+    public void setDropOffTime(String time) {
         dropOffTime = time;
         figureCost();
     }
@@ -76,7 +75,7 @@ public class PriceProcessor {
         figureCost();
     }
 
-    public void setPickUpTime(int time) {
+    public void setPickUpTime(String time) {
         pickUpTime = time;
         figureCost();
     }
@@ -108,30 +107,14 @@ public class PriceProcessor {
             sb.append("&numDogs=" + numDogs);
             sb.append("&numCats=" + numCats);
 
-            if(dropOffTime >= 0) {
+            if(dropOffTime.length() > 0) {
                 sb.append("&inTime=");
-                switch (dropOffTime) {
-                    case 0:
-                        sb.append("AM.7-11%20AM");
-                        break;
-                    case 1:
-                        sb.append("PM.3-7%20PM");
-                        break;
-                    default:
-                }
+                sb.append(dropOffTime);
             }
 
-            if(pickUpTime >= 0) {
+            if(pickUpTime.length() > 0) {
                 sb.append("&outTime=");
-                switch (pickUpTime) {
-                    case 0:
-                        sb.append("AM.7-11%20AM");
-                        break;
-                    case 1:
-                        sb.append("PM.3-7%20PM");
-                        break;
-                    default:
-                }
+                sb.append(pickUpTime);
             }
 
             priceCheckArgs = sb.toString();

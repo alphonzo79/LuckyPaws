@@ -37,6 +37,9 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
     List<CatSelector> catSelectors;
     PriceProcessor priceProcessor;
 
+    DateTimeHelper inDateChecker;
+    DateTimeHelper outDateChecker;
+
     TextView dropOffDateDisplay;
     TextView pickUpDateDisplay;
     Spinner dropOffTimeDisplay;
@@ -74,6 +77,50 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
         populateElements();
 
         priceProcessor = new PriceProcessor(pricingRoot);
+
+        inDateChecker = new DateTimeHelper(new DateTimeHelper.DateTimeCheckListener() {
+            @Override
+            public void updateStrings(List<String> displayStrings) {
+                ArrayList<String> availableTimes = new ArrayList<String>();
+                availableTimes.add(getString(R.string.time_hint));
+                availableTimes.addAll(displayStrings);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservationsScreen.this, android.R.layout.simple_spinner_item, availableTimes);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dropOffTimeDisplay.setAdapter(adapter);
+                dropOffTimeDisplay.setSelection(0);
+            }
+
+            @Override
+            public void closedDate() {
+                CustomToast toast = new CustomToast(ReservationsScreen.this, String.format("%s %s. \n\n%s", getString(R.string.closed_that_day), getString(R.string.drop_off_string), getString(R.string.please_choose_another_date)));
+                toast.show();
+                dropOffDateDisplay.setText("");
+                dropOffTimeDisplay.setSelection(0);
+            }
+        }, DateTimeHelper.InDateOutDate.IN);
+
+        outDateChecker = new DateTimeHelper(new DateTimeHelper.DateTimeCheckListener() {
+            @Override
+            public void updateStrings(List<String> displayStrings) {
+                ArrayList<String> availableTimes = new ArrayList<String>();
+                availableTimes.add(getString(R.string.time_hint));
+                availableTimes.addAll(displayStrings);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservationsScreen.this, android.R.layout.simple_spinner_item, availableTimes);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                pickupTimeDisplay.setAdapter(adapter);
+                pickupTimeDisplay.setSelection(0);
+            }
+
+            @Override
+            public void closedDate() {
+                CustomToast toast = new CustomToast(ReservationsScreen.this, String.format("%s %s. \n\n%s", getString(R.string.closed_that_day), getString(R.string.pick_up_string), getString(R.string.please_choose_another_date)));
+                toast.show();
+                pickUpDateDisplay.setText("");
+                pickupTimeDisplay.setSelection(0);
+            }
+        }, DateTimeHelper.InDateOutDate.OUT);
     }
 
     private void gatherInfo() {
@@ -231,19 +278,7 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
             dropOffDate.set(year, month, day);
             dropOffDateDisplay.setText(DateUtilities.appDateFormat().format(dropOffDate.getTime()));
 
-            //todo holidays, Thanksgiving and Christmas
-            int dow = dropOffDate.get(Calendar.DAY_OF_WEEK);
-            if(dow == Calendar.SATURDAY || dow == Calendar.SUNDAY) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservationsScreen.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.time_frames_weekend));
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                dropOffTimeDisplay.setAdapter(adapter);
-                dropOffTimeDisplay.setSelection(0);
-            } else {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservationsScreen.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.time_frames));
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                dropOffTimeDisplay.setAdapter(adapter);
-                dropOffTimeDisplay.setSelection(0);
-            }
+            inDateChecker.checkAvailableTimes(dropOffDate);
 
             priceProcessor.setDropOffDate(dropOffDate);
         }
@@ -281,19 +316,7 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
             pickUpDate.set(year, month, day);
             pickUpDateDisplay.setText(DateUtilities.appDateFormat().format(pickUpDate.getTime()));
 
-            //todo holidays, Thanksgiving and Christmas
-            int dow = pickUpDate.get(Calendar.DAY_OF_WEEK);
-            if(dow == Calendar.SATURDAY || dow == Calendar.SUNDAY) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservationsScreen.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.time_frames_weekend));
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                pickupTimeDisplay.setAdapter(adapter);
-                pickupTimeDisplay.setSelection(0);
-            } else {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservationsScreen.this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.time_frames));
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                pickupTimeDisplay.setAdapter(adapter);
-                pickupTimeDisplay.setSelection(0);
-            }
+            outDateChecker.checkAvailableTimes(pickUpDate);
 
             priceProcessor.setPickUpDate(pickUpDate);
         }
@@ -302,16 +325,9 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
     Spinner.OnItemSelectedListener dropOffTimeSet = new Spinner.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-            switch(position) {
-                case 1:
-                    priceProcessor.setDropOffTime(0);
-                    break;
-                case 2:
-                    priceProcessor.setDropOffTime(1);
-                    break;
-                default:
-                    priceProcessor.setDropOffTime(-1);
-            }
+            String selected = (String)adapterView.getAdapter().getItem(position);
+            Log.d("LuckyPaws", "Selected time: " + selected);
+            priceProcessor.setDropOffTime(inDateChecker.getParamString(selected));
         }
 
         @Override
@@ -323,16 +339,9 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
     Spinner.OnItemSelectedListener pickUpTimeSet = new Spinner.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-            switch(position) {
-                case 1:
-                    priceProcessor.setPickUpTime(0);
-                    break;
-                case 2:
-                    priceProcessor.setPickUpTime(1);
-                    break;
-                default:
-                    priceProcessor.setPickUpTime(-1);
-            }
+            String selected = (String)adapterView.getAdapter().getItem(position);
+            Log.d("LuckyPaws", "Selected time: " + selected);
+            priceProcessor.setPickUpTime(outDateChecker.getParamString(selected));
         }
 
         @Override
@@ -442,58 +451,10 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
                     formValues.add(new BasicNameValuePair("inDate", sdf.format(dropOffDate.getTime())));
                     formValues.add(new BasicNameValuePair("outDate", sdf.format(pickUpDate.getTime())));
 
-                    String inTime = "";
-                    int dow = dropOffDate.get(Calendar.DAY_OF_WEEK);
-                    if(dow == Calendar.SATURDAY || dow == Calendar.SUNDAY) {
-                        switch(dropOffTime) {
-                            case 0:
-                                inTime = getResources().getString(R.string.am_weekday_form_data);
-                                break;
-                            case 1:
-                                inTime = getResources().getString(R.string.pm_weekday_form_data);
-                                break;
-                            default:
-                                break;
-                        }
-                    } else {
-                        switch(dropOffTime) {
-                            case 0:
-                                inTime = getResources().getString(R.string.am_weekend_form_data);
-                                break;
-                            case 1:
-                                inTime = getResources().getString(R.string.pm_weekend_form_data);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    String inTime = inDateChecker.getParamString(dropOffTimeDisplay.getSelectedItem().toString());
                     formValues.add(new BasicNameValuePair("inTime", inTime));
 
-                    String outTime = "";
-                    dow = pickUpDate.get(Calendar.DAY_OF_WEEK);
-                    if(dow == Calendar.SATURDAY || dow == Calendar.SUNDAY) {
-                        switch(pickUpTime) {
-                            case 0:
-                                outTime = getResources().getString(R.string.am_weekday_form_data);
-                                break;
-                            case 1:
-                                outTime = getResources().getString(R.string.pm_weekday_form_data);
-                                break;
-                            default:
-                                break;
-                        }
-                    } else {
-                        switch(pickUpTime) {
-                            case 0:
-                                outTime = getResources().getString(R.string.am_weekend_form_data);
-                                break;
-                            case 1:
-                                outTime = getResources().getString(R.string.pm_weekend_form_data);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                    String outTime = outDateChecker.getParamString(pickupTimeDisplay.getSelectedItem().toString());
                     formValues.add(new BasicNameValuePair("outTime", outTime));
 
                     formValues.add(new BasicNameValuePair("firstName", ownerFirstName.getText().toString()));

@@ -5,6 +5,8 @@ import android.net.http.AndroidHttpClient;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -30,7 +32,7 @@ public class PriceCheckAsync implements Runnable {
 
     @TargetApi(Build.VERSION_CODES.FROYO)
     public PriceCheckAsync(String arguments, PriceCheckListener listener) {
-        this.arguments = arguments;
+        this.arguments = StringEscapeUtils.escapeHtml4(arguments);
 
         this.listener = listener;
         userAgent = System.getProperty("http.agent");
@@ -72,6 +74,7 @@ public class PriceCheckAsync implements Runnable {
                     prices.put(secondSplit[0], secondSplit[1]);
                 }
             }
+            Log.d("LuckyPaws", "Price Check Map Return: `" + prices.toString());
             listener.handleFoundPrice(prices);
         }
     }
