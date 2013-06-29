@@ -93,7 +93,7 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
 
             @Override
             public void closedDate() {
-                CustomToast toast = new CustomToast(ReservationsScreen.this, String.format("%s %s. \n\n%s", getString(R.string.closed_that_day), getString(R.string.drop_off_string), getString(R.string.please_choose_another_date)));
+                CustomToast toast = new CustomToast(ReservationsScreen.this, String.format("%s\n\n%s", getString(R.string.closed_that_day), getString(R.string.please_choose_another_date)));
                 toast.show();
                 dropOffDateDisplay.setText("");
                 dropOffTimeDisplay.setSelection(0);
@@ -115,7 +115,7 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
 
             @Override
             public void closedDate() {
-                CustomToast toast = new CustomToast(ReservationsScreen.this, String.format("%s %s. \n\n%s", getString(R.string.closed_that_day), getString(R.string.pick_up_string), getString(R.string.please_choose_another_date)));
+                CustomToast toast = new CustomToast(ReservationsScreen.this, String.format("%s\n\n%s", getString(R.string.closed_that_day), getString(R.string.please_choose_another_date)));
                 toast.show();
                 pickUpDateDisplay.setText("");
                 pickupTimeDisplay.setSelection(0);
@@ -292,13 +292,13 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
             if(pickUpDate == null) {
                 pickUpDate = Calendar.getInstance();
                 //Now, because pickup must be after dropoff, we'll advance it one more day
-                pickUpDate.add(Calendar.DAY_OF_MONTH, 1);
-            }
-            //First, advance Pickup date to match drop-off date if dropoff date has been set
-            if(dropOffDate != null) {
-                pickUpDate.setTime(dropOffDate.getTime());
-                //Now, because pickup must be after dropoff, we'll advance it one more day
-                pickUpDate.add(Calendar.DAY_OF_MONTH, 1);
+                if(dropOffDate != null) {
+                    pickUpDate.setTime(dropOffDate.getTime());
+                    //Now, because pickup must be after dropoff, we'll advance it one more day
+                    pickUpDate.add(Calendar.DAY_OF_MONTH, 1);
+                } else {
+                    pickUpDate.add(Calendar.DAY_OF_MONTH, 1);
+                }
             }
 
             year = pickUpDate.get(Calendar.YEAR);
@@ -483,6 +483,9 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
 
                         PetsDAO db = new PetsDAO(ReservationsScreen.this);
                         String breed = db.getPetBreed(name);
+                        if(TextUtils.isEmpty(breed)) {
+                            breed = "Unknown";
+                        }
                         formValues.add(new BasicNameValuePair("dogBreed[" + (i + 1) + "]", breed));
 
                         boolean doBath = dogSelectors.get(i).doExitBath();
@@ -501,12 +504,18 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
 
                         PetsDAO db = new PetsDAO(ReservationsScreen.this);
                         String breed = db.getPetBreed(name);
+                        if(TextUtils.isEmpty(breed)) {
+                            breed = "Unknown";
+                        }
                         formValues.add(new BasicNameValuePair("catBreed[" + (i + 1) + "]", breed));
                     }
 
                     formValues.add(new BasicNameValuePair("price", priceProcessor.getPrice()));
 
                     formValues.add(new BasicNameValuePair("notes", "From Android App --- " + comments.getText().toString()));
+
+                    //Necessary to make the reservation screen recognize and process this reservation -- Secret Variable!
+                    formValues.add(new BasicNameValuePair("show", "5"));
 
                     ReservationProcessor async = new ReservationProcessor(formValues, new ReservationProcessor.ReservationProcessorListener() {
                         @Override
@@ -529,7 +538,7 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
                             CustomToast toast = new CustomToast(ReservationsScreen.this, getString(R.string.reservation_error));
                             toast.show();
                         }
-                    });
+                    }, ReservationsScreen.this);
                     async.makeReservation();
                 } catch (Exception e) {
                     e.printStackTrace();

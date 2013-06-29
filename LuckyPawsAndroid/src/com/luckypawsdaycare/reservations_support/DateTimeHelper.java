@@ -102,6 +102,10 @@ public class DateTimeHelper {
             HttpResponse response = null;
             String result = "";
             try {
+                if(client == null) {
+                    client = AndroidHttpClient.newInstance(userAgent);
+                }
+
                 response = client.execute(httpHost, request, executionContext);
                 HttpEntity entity = response.getEntity();
                 result = EntityUtils.toString(entity);

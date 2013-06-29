@@ -6,7 +6,6 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -32,7 +31,7 @@ public class PriceCheckAsync implements Runnable {
 
     @TargetApi(Build.VERSION_CODES.FROYO)
     public PriceCheckAsync(String arguments, PriceCheckListener listener) {
-        this.arguments = StringEscapeUtils.escapeHtml4(arguments);
+        this.arguments = arguments;
 
         this.listener = listener;
         userAgent = System.getProperty("http.agent");

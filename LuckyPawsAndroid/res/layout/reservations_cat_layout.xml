@@ -37,6 +37,7 @@
 		android:id="@+id/cat_name_input"
 		style="@style/form_edit_text"
 		android:visibility="gone"
+        android:inputType="textCapWords"
 		/>
 
 </LinearLayout>

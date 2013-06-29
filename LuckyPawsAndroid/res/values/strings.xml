@@ -142,10 +142,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <string name="reservation_success">We\'ll see you soon!\n\nIf you do not receive your confirmation email within 24 hours please check your spam folder.</string>
     <string name="put_reservation_in_calendar">Would you like to make reminder appointments in your calendar?</string>
 
-    <string name="closed_that_day">Uh oh. Lucky Paws will be closed on the date you chose for</string>
+    <string name="closed_that_day">Drop off and pick up are not available that day.</string>
     <string name="drop_off_string">drop off</string>
     <string name="pick_up_string">pick up</string>
     <string name="please_choose_another_date">Please choose another date.</string>
+
+    <string name="reservation_successful_check_text">If you do not receive your confirmation email within 24 hours please check your spam folder.</string>
 
 	<string name="am_weekday">7-11 a.m.</string>
 	<string name="am_weekday_form_data">AM.7-11 AM</string>
