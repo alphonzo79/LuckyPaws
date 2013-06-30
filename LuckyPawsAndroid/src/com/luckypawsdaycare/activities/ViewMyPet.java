@@ -44,6 +44,10 @@ public class ViewMyPet extends Activity {
         setContentView(R.layout.my_pets_display);
 
         id = this.getIntent().getIntExtra("com.luckypawsdaycare.petId", -1);
+    }
+
+    public void onResume() {
+        super.onResume();
 
         PetsDAO db = new PetsDAO(this);
         petData = db.getPetData(id);

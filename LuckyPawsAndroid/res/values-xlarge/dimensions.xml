@@ -4,12 +4,32 @@
   -->
 
 <resources>
-	<dimen name="scalable_5_pix">7dp</dimen>
-	<dimen name="scalable_10_pix">14dp</dimen>
-	<dimen name="scalable_15_pix">19dp</dimen>
-	<dimen name="scalable_25_pix">35dp</dimen>
-	<dimen name="scalable_125_pix">250dp</dimen>
+    <dimen name="scalable_1_pix">3dp</dimen>
+    <dimen name="scalable_2_pix">4dp</dimen>
+    <dimen name="scalable_3_pix">5dp</dimen>
+    <dimen name="scalable_4_pix">6dp</dimen>
+    <dimen name="scalable_5_pix">7dp</dimen>
+    <dimen name="scalable_6_pix">8dp</dimen>
+    <dimen name="scalable_7_pix">9dp</dimen>
+    <dimen name="scalable_8_pix">10dp</dimen>
+    <dimen name="scalable_9_pix">11dp</dimen>
+    <dimen name="scalable_10_pix">12dp</dimen>
+    <dimen name="scalable_12_pix">14dp</dimen>
+    <dimen name="scalable_15_pix">18dp</dimen>
+    <dimen name="scalable_20_pix">24dp</dimen>
+    <dimen name="scalable_22_pix">26dp</dimen>
+    <dimen name="scalable_25_pix">30dp</dimen>
+    <dimen name="scalable_27_pix">32dp</dimen>
+    <dimen name="scalable_30_pix">36dp</dimen>
+    <dimen name="scalable_45_pix">54dp</dimen>
+    <dimen name="scalable_75_pix">90dp</dimen>
+    <dimen name="scalable_125_pix">150dp</dimen>
+    <dimen name="scalable_175_pix">210dp</dimen>
 
-	<dimen name="text_14">22sp</dimen>
-	<dimen name="text_18">28sp</dimen>
+    <dimen name="text_10">12sp</dimen>
+    <dimen name="text_12">14sp</dimen>
+    <dimen name="text_14">17sp</dimen>
+    <dimen name="text_16">19sp</dimen>
+    <dimen name="text_18">21sp</dimen>
+    <dimen name="text_24">28sp</dimen>
 </resources>

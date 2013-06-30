@@ -47,7 +47,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			<Button
 				android:id="@+id/web_cam_button"
 				style="@style/homescreen_button"
-				android:background="@drawable/home_button_web_cam_land_state"
+				android:background="@drawable/home_button_web_cam_state"
 				android:layout_alignParentTop="true"
 				android:layout_toRightOf="@id/left_buffer"
 				/>
@@ -55,7 +55,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			<Button
 				android:id="@+id/reservations_button"
 				style="@style/homescreen_button"
-				android:background="@drawable/home_button_reservations_land_state"
+				android:background="@drawable/home_button_reservations_state"
 				android:layout_above="@id/bottom_buffer"
 				android:layout_centerHorizontal="true"
 				/>
@@ -63,7 +63,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 			<Button
 				android:id="@+id/settings_button"
 				style="@style/homescreen_button"
-				android:background="@drawable/home_button_prefs_land_state"
+				android:background="@drawable/home_button_prefs_state"
 				android:layout_alignParentTop="true"
 				android:layout_toLeftOf="@id/right_buffer"
 				/>

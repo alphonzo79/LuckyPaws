@@ -93,8 +93,18 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
 
             @Override
             public void closedDate() {
-                CustomToast toast = new CustomToast(ReservationsScreen.this, String.format("%s\n\n%s", getString(R.string.closed_that_day), getString(R.string.please_choose_another_date)));
-                toast.show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ReservationsScreen.this);
+                dialog.setTitle(R.string.error);
+                dialog.setIcon(android.R.drawable.ic_dialog_alert);
+                dialog.setMessage(String.format("%s\n\n%s", getString(R.string.closed_that_day), getString(R.string.please_choose_another_date)));
+                dialog.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                dialog.show();
+
                 dropOffDateDisplay.setText("");
                 dropOffTimeDisplay.setSelection(0);
             }
@@ -115,8 +125,18 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
 
             @Override
             public void closedDate() {
-                CustomToast toast = new CustomToast(ReservationsScreen.this, String.format("%s\n\n%s", getString(R.string.closed_that_day), getString(R.string.please_choose_another_date)));
-                toast.show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ReservationsScreen.this);
+                dialog.setTitle(R.string.error);
+                dialog.setIcon(android.R.drawable.ic_dialog_alert);
+                dialog.setMessage(String.format("%s\n\n%s", getString(R.string.closed_that_day), getString(R.string.please_choose_another_date)));
+                dialog.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                dialog.show();
+
                 pickUpDateDisplay.setText("");
                 pickupTimeDisplay.setSelection(0);
             }

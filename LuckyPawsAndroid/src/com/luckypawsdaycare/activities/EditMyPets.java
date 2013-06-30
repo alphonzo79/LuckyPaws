@@ -101,12 +101,36 @@ public class EditMyPets extends Activity {
         if(id > -1) {
             petData = db.getPetData(id);
             name = petData.get(PetsTableColumnNames.NAME.getString());
-            dogCat = Integer.parseInt(petData.get(PetsTableColumnNames.DOG_CAT.getString()));
-            sex = Integer.parseInt(petData.get(PetsTableColumnNames.SEX.getString()));
+
+            String animal = petData.get(PetsTableColumnNames.DOG_CAT.getString());
+            if(!TextUtils.isEmpty(animal)) {
+                dogCat = Integer.parseInt(animal);
+            } else {
+                dogCat = -1;
+            }
+
+            String sexString = petData.get(PetsTableColumnNames.SEX.getString());
+            if(!TextUtils.isEmpty(sexString)) {
+                sex = Integer.parseInt(sexString);
+            } else {
+                sex = -1;
+            }
             breed = petData.get(PetsTableColumnNames.BREED.getString());
             birthdate = petData.get(PetsTableColumnNames.BIRTHDAY.getString());
-            size = Integer.parseInt(petData.get(PetsTableColumnNames.SIZE.getString()));
-            fixed = Integer.parseInt(petData.get(PetsTableColumnNames.FIXED.getString()));
+
+            String sizeString = petData.get(PetsTableColumnNames.SIZE.getString());
+            if(!TextUtils.isEmpty(sizeString)) {
+                size = Integer.parseInt(sizeString);
+            } else {
+                size = -1;
+            }
+
+            String fixedString = petData.get(PetsTableColumnNames.FIXED.getString());
+            if(!TextUtils.isEmpty(fixedString)) {
+                fixed = Integer.parseInt(fixedString);
+            } else {
+                fixed = -1;
+            }
         }
     }
 
@@ -326,9 +350,6 @@ public class EditMyPets extends Activity {
             if(isEditing) {
                 if(db.updatePetData(id, updateArgs)) {
                     showSuccessToast();
-                    Intent display = new Intent(EditMyPets.this, ViewMyPet.class);
-                    display.putExtra("com.luckypawsdaycare.petId", id);
-                    startActivity(display);
                     EditMyPets.this.finish();
                 } else {
                     showErrorToast();
