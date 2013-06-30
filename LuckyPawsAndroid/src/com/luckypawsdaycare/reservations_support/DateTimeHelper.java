@@ -113,10 +113,13 @@ public class DateTimeHelper {
             } catch (IOException e) {
                 Log.e("LuckyPaws", "Caught IOException while trying to get Date/Time info");
                 e.printStackTrace();
+            } finally {
+                if(client != null) {
+                    client.getConnectionManager().shutdown();
+                    client.close();
+                    client = null;
+                }
             }
-            client.getConnectionManager().shutdown();
-            client.close();
-            client = null;
 
             if(!TextUtils.isEmpty(result)){
                 boolean success = true;
