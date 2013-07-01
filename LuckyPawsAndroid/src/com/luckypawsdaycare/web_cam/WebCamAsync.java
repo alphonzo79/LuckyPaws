@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Base64;
-import android.util.Log;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -88,7 +87,6 @@ public class WebCamAsync implements Runnable{
 
     @Override
     public void run() {
-        Log.d(TAG, "Starting the runnable");
         HttpGet request = new HttpGet(imageUrl);
         request.addHeader("Authorization", "Basic " + Base64.encodeToString((username+":"+password).getBytes(),Base64.NO_WRAP));
         setRunning(true);
@@ -117,15 +115,12 @@ public class WebCamAsync implements Runnable{
                 bis.close();
                 is.close();
 
-                Log.d(TAG, "Built the bitmap, sending the update message");
-
                 Bundle messageData = new Bundle();
                 messageData.putBoolean("success", true);
                 Message message = new Message();
                 message.setData(messageData);
                 updateHandler.sendMessage(message);
             } catch (IOException e) {
-                Log.d(TAG, "Caught an IO Exception");
                 e.printStackTrace();
 
                 Bundle messageData = new Bundle();

@@ -8,7 +8,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
 import com.luckypawsdaycare.R;
 
 import java.sql.SQLException;
@@ -31,19 +30,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        Log.d(TAG, "onCreate. Start populating tables");
         //create tables
         sqLiteDatabase.beginTransaction();
         try {
             createTables(sqLiteDatabase);
             sqLiteDatabase.setTransactionSuccessful();
         } catch (SQLException e) {
-            Log.e(TAG, "Error creating tables and debug data: " + e.toString());
+            e.printStackTrace();
         } finally {
             sqLiteDatabase.endTransaction();
         }
 
-        Log.d(TAG, "onCreate. Tables successfully created. Populating them now");
         //populate tables
         sqLiteDatabase.beginTransaction();
         try
@@ -54,17 +51,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         catch (SQLException e)
         {
-            Log.e(TAG, "Error populating tables" + e.toString());
+            e.printStackTrace();
         }
         catch (IllegalStateException e)
         {
-            Log.e(TAG, "Error populating tables" + e.toString());
+            e.printStackTrace();
         }
         finally
         {
             sqLiteDatabase.endTransaction();
         }
-        Log.d(TAG, "Finished onCreate");
     }
 
     @Override
@@ -89,7 +85,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     private void populatePersistentSettings(SQLiteDatabase db) throws IllegalStateException, SQLException
     {
-        Log.d(TAG, "Starting populatePersistentSettings");
         SQLiteStatement sqlStatement;
 
         //First, get the values and parse them into individual lines, then parse the values,
@@ -116,7 +111,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
             else
             {
-                Log.d(TAG, "Error in populatePersistentSettings");
                 throw new IllegalStateException("There were not 3 values to populate the settings table with. Values were" + rowData.toString());
             }
         }
@@ -128,7 +122,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     private void populatePersonalInfo(SQLiteDatabase db) throws SQLException
     {
-        Log.d(TAG, "Starting populatePersonalInfo");
         SQLiteStatement sqlStatement;
 //firstName TEXT, lastName TEXT, eMail TEXT, phone1 TEXT, phone2 TEXT, phone3 TEXT, addressStreet TEXT, addressCity TEXT, addressState TEXT, addressZip INTEGER,
 // referral TEXT, agreed INTEGER, signed TEXT

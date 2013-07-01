@@ -8,7 +8,6 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -102,7 +101,6 @@ public class SettingsScreen extends ListActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "onActivityResult called");
 
         if(requestCode == SCREEN_LOCK_REQUEST && resultCode == RESULT_OK) {
             String selected = data.getStringExtra("selectedValue");

@@ -6,7 +6,6 @@ package com.luckypawsdaycare.reservations_support;
 
 import android.app.Activity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -37,7 +36,7 @@ public abstract class PetSelector {
         if(activity instanceof PetSelectorListener) {
             listener = (PetSelectorListener)activity;
         } else {
-            Log.e("LuckyPaws", "The activity that hosts this pet selector must implement the PestSelectorListener Interface");
+            throw new IllegalStateException("The activity that hosts this pet selector must implement the PestSelectorListener Interface");
         }
 
         animalRoot = rootLayout;
@@ -69,7 +68,6 @@ public abstract class PetSelector {
     public void removePetName(String petName) {
         if(!petName.equals(currentSelected)) { //This way we don't remove it from the one that triggered the removal
             if(animalNames.remove(petName)){
-                Log.d("LuckyPaws", "PetSelector removing " + currentSelected + " From this selector");
                 adapter.notifyDataSetChanged();
                 //Reset the selected index to take into account the removed name
                 int index = adapter.getPosition(currentSelected);
@@ -83,7 +81,6 @@ public abstract class PetSelector {
 
     public void addPetName(String petName, int index) {
         if(!animalNames.contains(petName)) {
-            Log.d("LuckyPaws", "PetSelector adding " + currentSelected + " to this selector");
             animalNames.add(index + 1, petName);
             //Reset the selected index to take into account the removed name
             int currIndex = adapter.getPosition(currentSelected);
@@ -97,7 +94,6 @@ public abstract class PetSelector {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
             if(!TextUtils.isEmpty(currentSelected) && !currentSelected.equals("custom") && !currentSelected.equals("choose")) {
-                Log.d("LuckyPaws", "PetSelector adding " + currentSelected + " back into other selectors");
                 listener.addPetToSelectors(currentSelected);
             }
 
@@ -119,7 +115,6 @@ public abstract class PetSelector {
             }
 
             if(!currentSelected.equals("custom") && !currentSelected.equals("choose")) {
-                Log.d("LuckyPaws", "PetSelector removing " + currentSelected + " from other selectors");
                 listener.removePetFromSelectors(currentSelected);
             }
         }

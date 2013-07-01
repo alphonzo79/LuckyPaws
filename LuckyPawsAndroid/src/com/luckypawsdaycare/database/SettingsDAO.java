@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
 
 public class SettingsDAO extends DatabaseHelper {
     Context mContext;
@@ -60,7 +59,6 @@ public class SettingsDAO extends DatabaseHelper {
         db.beginTransaction();
         try
         {
-            Log.d(TAG, "SqlStatement is " + stmt.toString());
             stmt.execute();
             db.setTransactionSuccessful();
             success = true;

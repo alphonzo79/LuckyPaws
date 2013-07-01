@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.luckypawsdaycare.R;
 

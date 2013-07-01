@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.net.http.AndroidHttpClient;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -55,9 +54,7 @@ public class PriceCheckAsync implements Runnable {
             response = client.execute(httpHost, request, executionContext);
             HttpEntity entity = response.getEntity();
             result = EntityUtils.toString(entity);
-            Log.d("LuckyPaws", "Price Check Result: " + result);
         } catch (IOException e) {
-            Log.e("LuckyPaws", "Caught IOException while trying to get pricing");
             e.printStackTrace();
         }
         client.getConnectionManager().shutdown();
@@ -73,7 +70,6 @@ public class PriceCheckAsync implements Runnable {
                     prices.put(secondSplit[0], secondSplit[1]);
                 }
             }
-            Log.d("LuckyPaws", "Price Check Map Return: `" + prices.toString());
             listener.handleFoundPrice(prices);
         }
     }

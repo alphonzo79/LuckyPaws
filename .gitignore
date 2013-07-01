@@ -22,3 +22,6 @@ local.properties
 *.iml
 idea/
 project.properties
+
+*/keystoreInfo.txt
+

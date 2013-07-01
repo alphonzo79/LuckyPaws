@@ -5,7 +5,6 @@
 package com.luckypawsdaycare.support;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ public class SimpleSpinnerAdapter extends ArrayAdapter<SimpleSpinnerValue> {
     {
 //        super(context, context.getResources().getInteger(R.id.value_label), options);
         super(context, R.id.value_label, options);
-        Log.d(TAG, "Constructor, made it past setting R.id.value_label");
         this.context = context;
         this.options = options;
     }
@@ -38,16 +36,13 @@ public class SimpleSpinnerAdapter extends ArrayAdapter<SimpleSpinnerValue> {
         if(row == null)
         {
             LayoutInflater inflater = context.getLayoutInflater();
-            Log.d(TAG, "getDropDownView: Going to set the row");
             row = inflater.inflate(R.layout.value_selector_list_layout, parent, false);
-            Log.d(TAG, "getDropDownView: Done setting the row");
         }
 
         SimpleSpinnerValue item = options.get(position);
 
         if(item != null)
         {   // Parse the data from each object and set it.
-            Log.d(TAG, "getDropDownView: Going to set the row data");
             ImageView checkbox = (ImageView) row.findViewById(R.id.value_checkbox);
             TextView optionLabel = (TextView) row.findViewById(R.id.value_label);
             if(checkbox != null)
@@ -61,8 +56,6 @@ public class SimpleSpinnerAdapter extends ArrayAdapter<SimpleSpinnerValue> {
 
             if(optionLabel != null)
                 optionLabel.setText(item.getName());
-
-            Log.d(TAG, "getDropDownView: Done setting the row");
         }
 
         return row;

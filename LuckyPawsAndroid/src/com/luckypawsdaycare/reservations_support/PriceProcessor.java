@@ -7,7 +7,6 @@ package com.luckypawsdaycare.reservations_support;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -92,7 +91,6 @@ public class PriceProcessor {
 
     public void changeNumBaths(int diff){
         numBaths += diff;
-        Log.d("LuckyPaws", "NumBaths: " + numBaths);
         figureCost();
     }
 

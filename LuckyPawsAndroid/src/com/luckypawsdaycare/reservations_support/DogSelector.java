@@ -5,7 +5,6 @@
 package com.luckypawsdaycare.reservations_support;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.*;
 import com.luckypawsdaycare.R;
@@ -33,7 +32,6 @@ public class DogSelector extends PetSelector {
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                Log.d("LuckyPaws", "Check box clicked");
                 if(checked) {
                     priceProcessor.changeNumBaths(1);
                 } else {
@@ -57,7 +55,6 @@ public class DogSelector extends PetSelector {
 
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-            Log.d("LuckyPaws", "Check box clicked");
             if(checked) {
                 priceProcessor.changeNumBaths(1);
             } else {

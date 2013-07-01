@@ -9,10 +9,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.luckypawsdaycare.R;
@@ -346,7 +343,6 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
             String selected = (String)adapterView.getAdapter().getItem(position);
-            Log.d("LuckyPaws", "Selected time: " + selected);
             priceProcessor.setDropOffTime(inDateChecker.getParamString(selected));
         }
 
@@ -360,7 +356,6 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
             String selected = (String)adapterView.getAdapter().getItem(position);
-            Log.d("LuckyPaws", "Selected time: " + selected);
             priceProcessor.setPickUpTime(outDateChecker.getParamString(selected));
         }
 
@@ -464,7 +459,6 @@ public class ReservationsScreen extends Activity implements PetSelector.PetSelec
     Button.OnClickListener submitReservation = new Button.OnClickListener() {
         public void onClick(View v) {
             if(validateInputs()) {
-                Log.d("LuckyPaws", "Passed validation");
                 try {
                     List<NameValuePair> formValues = new ArrayList<NameValuePair>();
                     SimpleDateFormat sdf = DateUtilities.reservationRequestDateFormat();

@@ -4,7 +4,6 @@ import android.net.http.AndroidHttpClient;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -19,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,9 +107,7 @@ public class DateTimeHelper {
                 response = client.execute(httpHost, request, executionContext);
                 HttpEntity entity = response.getEntity();
                 result = EntityUtils.toString(entity);
-                Log.d("LuckyPaws", "DateTimeCheck Result: " + result);
             } catch (IOException e) {
-                Log.e("LuckyPaws", "Caught IOException while trying to get Date/Time info");
                 e.printStackTrace();
             } finally {
                 if(client != null) {
@@ -149,8 +145,6 @@ public class DateTimeHelper {
                         break;
                     }
                 }
-
-                Log.d("LuckyPaws", "Times Map Return: " + times.toString());
 
                 if(success == true) {
                     if(times instanceof Serializable){

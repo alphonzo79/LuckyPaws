@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +73,6 @@ public class MainScreen extends Activity {
             width = (int) ((windowWidth / 3) * 0.95);
             height = (int) (width / 1.5);
         }
-        Log.i(TAG, String.format("Button Size is %d by %d", width, height));
         Button[] buttons = new Button[]{webCamButton, reservationsButton, settingsButton};
         for(Button button : buttons) {
             ViewGroup.LayoutParams params = (ViewGroup.LayoutParams)button.getLayoutParams();

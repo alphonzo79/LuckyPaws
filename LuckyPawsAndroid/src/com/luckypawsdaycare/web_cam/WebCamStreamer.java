@@ -11,7 +11,6 @@ import android.net.http.AndroidHttpClient;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import com.luckypawsdaycare.R;
 import com.luckypawsdaycare.activities.WebCamViewScreen;
 
@@ -35,7 +34,6 @@ public class WebCamStreamer {
 
     @TargetApi(Build.VERSION_CODES.FROYO)
     public void beginStream() {
-        Log.d(TAG, "Begin Stream called");
         if(checkWorkingHours()) {
             userAgent = System.getProperty( "http.agent" );
             if(client == null) {
@@ -51,7 +49,6 @@ public class WebCamStreamer {
     }
 
     public void pauseStream() {
-        Log.d(TAG, "pauseStream called");
         if(asyncRunning) {
             asyncTask.setKeepGoing(false);
         } //Otherwise do nothing

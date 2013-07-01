@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.luckypawsdaycare.R;
@@ -175,7 +174,7 @@ public class EditMyPets extends Activity {
                     month = cal.get(Calendar.MONTH);
                     day = cal.get(Calendar.DAY_OF_MONTH);
                 } catch (ParseException e) {
-                    Log.d(TAG, "Caught ParseException while parsing the birthdate " + birthdate);
+                    e.printStackTrace();
                 }
             } else {
                 Calendar cal = Calendar.getInstance();
