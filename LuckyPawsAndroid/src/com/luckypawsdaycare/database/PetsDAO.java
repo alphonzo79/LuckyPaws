@@ -47,10 +47,11 @@ public class PetsDAO extends DatabaseHelper {
         Cursor rs = db.rawQuery(stmt, new String[]{Integer.toString(id)});
         Map<String, String> result = new HashMap<String, String>();
         try {
-            rs.moveToFirst();
-            int columns = rs.getColumnCount();
-            for(int i = 0; i < columns; i++) {
-                result.put(rs.getColumnName(i), rs.getString(i));
+            if(rs.moveToFirst()) {
+                int columns = rs.getColumnCount();
+                for(int i = 0; i < columns; i++) {
+                    result.put(rs.getColumnName(i), rs.getString(i));
+                }
             }
         } catch(SQLiteException e) {
             e.printStackTrace();
@@ -69,10 +70,11 @@ public class PetsDAO extends DatabaseHelper {
         Cursor rs = db.rawQuery(stmt, null);
         Map<String, Integer> result = new HashMap<String, Integer>();
         try {
-            rs.moveToFirst();
-            do{
-                result.put(rs.getString(0), rs.getInt(1));
-            } while(rs.moveToNext());
+            if(rs.moveToFirst()) {
+                do{
+                    result.put(rs.getString(0), rs.getInt(1));
+                } while(rs.moveToNext());
+            }
         } catch(SQLiteException e) {
             e.printStackTrace();
         } finally {

@@ -32,6 +32,7 @@ public class WebCamAsync implements Runnable{
     BasicHttpContext executionContext;
 
     private volatile Bitmap image;
+    private Bitmap defaultImage;
 
     private final String host = "luckypaws.lorexddns.net";
     private final String username = "luckypaws";
@@ -43,18 +44,19 @@ public class WebCamAsync implements Runnable{
     public WebCamAsync(Handler updateHandler, Bitmap defaultImage) {
         this.updateHandler = updateHandler;
         keepGoing = false;
+        this.defaultImage = defaultImage;
         image = defaultImage;
         running = false;
     }
 
     public void setKeepGoing(boolean keepOnGoin) {
-       synchronized (keepGoing) {
+       synchronized (this) {
             keepGoing = keepOnGoin;
        }
     }
 
     public boolean isKeepGoing() {
-        synchronized (keepGoing) {
+        synchronized (this) {
             return keepGoing;
         }
     }
@@ -68,19 +70,19 @@ public class WebCamAsync implements Runnable{
     }
 
     public Bitmap getImage() {
-        synchronized (image) {
+        synchronized (this) {
             return image;
         }
     }
 
     private void setRunning(boolean isRunning) {
-        synchronized (running) {
+        synchronized (this) {
             running = isRunning;
         }
     }
 
     public boolean isRunning() {
-        synchronized (running) {
+        synchronized (this) {
             return running;
         }
     }
@@ -107,9 +109,13 @@ public class WebCamAsync implements Runnable{
 
                 byte[] data = buf.toByteArray();
 
-                synchronized (image) {
+                synchronized (this) {
                     image.recycle();
-                    image = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    if(data.length > 0) {
+                        image = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    } else {
+                        image = defaultImage;
+                    }
                 }
 
                 bis.close();
