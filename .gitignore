@@ -27,3 +27,5 @@ project.properties
 
 build/
 .gradle/
+
+crashlytics-build.properties

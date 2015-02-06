@@ -7,13 +7,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.luckypawsdaycare"
-    android:installLocation="auto"
-    android:versionCode="2"
-    android:versionName="1.1">
-
-    <uses-sdk android:minSdkVersion="8"
-        android:targetSdkVersion="17"
-        />
+    android:installLocation="auto">
 
 	<uses-permission android:name="android.permission.INTERNET"/>
 
@@ -103,5 +97,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                   android:windowSoftInputMode="stateHidden"
 				  >
 	  	</activity>
+
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="dfcd4c422df48c5649067feadbbfe219906d2698"/>
     </application>
 </manifest>

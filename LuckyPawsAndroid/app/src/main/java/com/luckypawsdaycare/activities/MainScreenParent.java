@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import com.luckypawsdaycare.R;
 
-public class MainScreen extends Activity {
+public class MainScreenParent extends Activity {
     Button webCamButton;
     Button reservationsButton;
     Button settingsButton;
@@ -84,21 +84,21 @@ public class MainScreen extends Activity {
 
     protected final Button.OnClickListener launchWebCam = new Button.OnClickListener(){
         public void onClick(View view){
-            Intent intent = new Intent(MainScreen.this, WebCamViewScreen.class);
+            Intent intent = new Intent(MainScreenParent.this, WebCamViewScreen.class);
             startActivity(intent);
         }
     };
 
     protected final Button.OnClickListener launchReservations = new Button.OnClickListener(){
         public void onClick(View view){
-            Intent intent = new Intent(MainScreen.this, ReservationsScreen.class);
+            Intent intent = new Intent(MainScreenParent.this, ReservationsScreen.class);
             startActivity(intent);
         }
     };
 
     protected final Button.OnClickListener launchSettings = new Button.OnClickListener(){
         public void onClick(View view){
-            Intent intent = new Intent(MainScreen.this, SettingsScreen.class);
+            Intent intent = new Intent(MainScreenParent.this, SettingsScreen.class);
             startActivity(intent);
         }
     };
