@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Base64;
+import android.util.Log;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -19,8 +21,10 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.util.ByteArrayBuffer;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class WebCamAsync implements Runnable{
     private Handler updateHandler;
@@ -37,7 +41,8 @@ public class WebCamAsync implements Runnable{
     private final String host = "luckypaws.lorexddns.net";
     private final String username = "luckypaws";
     private final String password = "1234";
-    private final String imageUrl = "http://luckypaws.lorexddns.net/jpg/image.jpg";
+//    private final String imageUrl = "http://luckypaws.lorexddns.net";
+    private final String imageUrl = "http://luckypaws.lorexddns.net/c.cam?cid=228285271&nocache=";
 
     private final String TAG = "WebCamAsync";
 
@@ -89,7 +94,7 @@ public class WebCamAsync implements Runnable{
 
     @Override
     public void run() {
-        HttpGet request = new HttpGet(imageUrl);
+        HttpGet request = new HttpGet(imageUrl + System.currentTimeMillis());
         request.addHeader("Authorization", "Basic " + Base64.encodeToString((username+":"+password).getBytes(),Base64.NO_WRAP));
         setRunning(true);
         while(isKeepGoing()) {
@@ -101,6 +106,14 @@ public class WebCamAsync implements Runnable{
                 BufferedInputStream bis = new BufferedInputStream(is);
 
                 //Read in the remote file until we hit a -1 bit
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                StringBuilder builder = new StringBuilder();
+                String line = reader.readLine();
+                while(line != null) {
+                    builder.append(line);
+                    line = reader.readLine();
+                }
+                Log.d("JAR", builder.toString());
                 ByteArrayBuffer buf = new ByteArrayBuffer(50);
                 int current = 0;
                 while ((current = bis.read()) != -1){
